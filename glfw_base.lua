@@ -10,11 +10,12 @@ local gl, glu, glfw
 if ffi.os == "Windows" then
 	gl = ffi.load("opengl32")
 	glu = ffi.load("glu32")
+	glfw = ffi.load("glfw3")
 else
 	gl = ffi.load("GL")
 	glu = ffi.load("GLU")
+	glfw = ffi.load("glfw.so.3")
 end
-glfw = ffi.load("glfw3")
 
 Lib.gl = gl
 Lib.glc = glc
