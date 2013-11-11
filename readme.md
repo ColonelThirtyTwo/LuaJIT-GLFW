@@ -22,15 +22,21 @@ Usage
 To load the library, use the `require` function:
 
 ```lua
-local glfw = require "glfw"
+local luajit_glfw = require "glfw"
 ```
 
 LuaJIT-GLFW loads the following libraries:
 
-* `glfw.gl`: OpenGL
-* `glfw.glu`: GLU
-* `glfw.glfw`: GLFW
-* `glfw.glext`: A table that, when indexed, loads and returns the specified extension function. Ex. `glext.glMyExtFuncARB(p1, p2)`
-* `glfw.glc`: `#define`d values for OpenGL and GLFW (this must be a Lua table instead of `static const` values, because OpenGL uses `longs` in a couple of places)
+* `luajit_glfw.gl`: OpenGL
+* `luajit_glfw.glc`: `#define`d values for OpenGL and GLFW (this must be a Lua table instead of `static const` values, because OpenGL uses `longs` in a couple of places)
+* `luajit_glfw.glu`: GLU
+* `luajit_glfw.glfw`: GLFW
+* `luajit_glfw.glext`: A table that, when indexed, loads and returns the specified extension function. Ex. `glext.glMyExtFuncARB(p1, p2)`
+
+You can also use the following snippet to concisely localize the libraries.
+
+```lua
+local gl, glc, glu, glfw, glext = luajit_glfw.libraries()
+```
 
 Additionally, LuaJIT-GLFW wraps GLFW functions and sets metatypes for GLFW structs for convenience. See `glfw_base.lua`

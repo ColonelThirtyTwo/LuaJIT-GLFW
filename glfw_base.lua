@@ -64,9 +64,14 @@ Lib.joystickPresent    = wrap(glfw, "glfwJoystickPresent")
 
 -- Functions with special Lua code
 
+-- Shortcut for localizing libraries
+function Lib.libraries()
+	return gl, glc, glu, glfw, glext
+end
+
 -- Throws an error on failure
 function Lib.init()
-	if glfw.glfwInit() ~= 0 then
+	if glfw.glfwInit() == 0 then
 		error("glfwInit failed",0)
 	end
 end
@@ -131,6 +136,14 @@ function Lib.getPrimaryMonitor()
 	return monitor
 end
 
+-- These functions can't be jit compiled, because they may call callbacks.
+-- Don't use wrap because jit.off affects the prototype, which will affect other functions too.
+Lib.pollEvents = function() return glfw.glfwPollEvents() end
+jit.off(Lib.pollEvents)
+
+Lib.waitEvents = function() return glfw.glfwWaitEvents() end
+jit.off(Lib.waitEvents)
+
 ---------------------------------------------------------------------------------------------------------------------
 -- Window
 
@@ -146,7 +159,6 @@ function Window:__new(w, h, title, monitor, share)
 end
 
 -- C functions that don't need special handling
-Window.destroy                    = wrap(glfw, "glfwDestroyWindow")
 Window.getAttrib                  = wrap(glfw, "glfwGetWindowAttrib")
 Window.getMonitor                 = wrap(glfw, "glfwGetWindowMonitor")
 Window.hide                       = wrap(glfw, "glfwHideWindow")
@@ -158,7 +170,6 @@ Window.setSize                    = wrap(glfw, "glfwSetWindowSize")
 Window.setTitle                   = wrap(glfw, "glfwSetWindowTitle")
 Window.show                       = wrap(glfw, "glfwShowWindow")
 Window.hint                       = wrap(glfw, "glfwWindowHint")
-Window.shouldClose                = wrap(glfw, "glfwWindowShouldClose")
 Window.makeContextCurrent         = wrap(glfw, "glfwMakeContextCurrent")
 Window.swapBuffers                = wrap(glfw, "glfwSwapBuffers")
 Window.setClipboardString         = wrap(glfw, "glfwSetClipboardString")
@@ -180,14 +191,6 @@ Window.setMouseButtonCallback     = wrap(glfw, "glfwSetMouseButtonCallback")
 Window.setCursorPosCallback       = wrap(glfw, "glfwSetCursorPosCallback")
 Window.setCursorEnterCallback     = wrap(glfw, "glfwSetCursorEnterCallback")
 Window.setScrollCallback          = wrap(glfw, "glfwSetScrollCallback")
-
--- These functions can't be jit compiled, because they may call callbacks.
--- Don't use wrap because jit.off affects the prototype, which will affect other functions too.
-Window.pollEvents = function(self) return glfw.glfwPollEvents(self) end
-jit.off(Window.pollEvents)
-
-Window.waitEvents = function(self) return glfw.glfwWaitEvents(self) end
-jit.off(Window.waitEvents)
 
 -- Functions with special Lua code
 
@@ -218,6 +221,18 @@ end
 function Window:getCursorPos()
 	glfw.glfwGetCursorPos(self, double_buffer, double_buffer+1)
 	return double_buffer[0], double_buffer[1]
+end
+
+function Window:shouldClose()
+	return glfw.glfwWindowShouldClose(self) ~= 0
+end
+
+function Window:destroy()
+	glfw.glfwDestroyWindow(ffi.gc(self, nil))
+end
+
+function Window:__gc()
+	glfw.glfwDestroyWindow(self)
 end
 
 ffi.metatype(Window_t, Window)
