@@ -37,6 +37,8 @@ You can also use the following snippet to concisely localize the libraries.
 
 ```lua
 local gl, glc, glu, glfw, glext = luajit_glfw.libraries()
+-- Or if you just need the libraries:
+local gl, glc, glu, glfw, glext = require('glfw').libraries()
 ```
 
 Additionally, LuaJIT-GLFW wraps GLFW functions and sets metatypes for GLFW structs for convenience. See `glfw_base.lua`
