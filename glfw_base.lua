@@ -79,7 +79,7 @@ Lib.terminate          = wrap(glfw, "glfwTerminate")
 
 -- Shortcut for localizing libraries
 function Lib.libraries()
-	return gl, glc, glu, glfw, glext
+	return Lib.gl, Lib.glc, Lib.glu, Lib.glfw, Lib.glext
 end
 
 -- Throws an error on failure
