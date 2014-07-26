@@ -5,6 +5,8 @@ local jit = require "jit"
 
 local Lib = {}
 
+setmetatable(glc, {__index=function(self, k) error("Unknown GL constant: "..k) end})
+
 -- Load and export libraries
 local gl, glu, glfw
 if ffi.os == "Windows" then

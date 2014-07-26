@@ -6,6 +6,8 @@ local bit = require "bit"
 -- Localize the FFI libraries
 local gl, glc, glu, glfw, glext = lj_glfw.libraries()
 
+assert(pcall(function() local _ = glc.this_doesnt_exist end) == false)
+
 -- Define vertex arrays for the model we will draw
 local CubeVerticies = {}
 CubeVerticies.v = ffi.new("const float[8][3]", {
