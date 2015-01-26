@@ -14,7 +14,7 @@ if ffi.os == "Windows" then
 	glu = ffi.load("glu32")
 	glfw = ffi.load("glfw3")
 else
-	gl = ffi.load("GL")
+	gl = ffi.load("GL.so.1")
 	glu = ffi.load("GLU")
 	glfw = ffi.load("glfw.so.3")
 end
