@@ -18,7 +18,7 @@ number_re = "^-?[0-9]+$"
 hex_re = "0x[0-9a-fA-F]+$"
 
 -- Set of known #defines that we don't need to include
-INVALID_DEFINES = {GLAPI=1, APIENTRY=1, GLU_TESS_MAX_COORD=1, gluErrorStringWIN=1, WINGDIAPI=1, CALLBACK=1}
+INVALID_DEFINES = {GLAPI=1, APIENTRY=1, GLU_TESS_MAX_COORD=1, gluErrorStringWIN=1, WINGDIAPI=1, CALLBACK=1, GLAPIENTRY=1}
 
 local in_gl = false
 for line in io.lines() do
@@ -56,7 +56,8 @@ repeat -- simulate continue with break
 					defines[name] = "0xFFFFFFFF"
 				elseif not INVALID_DEFINES[name] then
 					-- Incompatible define
-					print("xxxxxxxxxInvalid define:", name)
+					print("xxxxxxxxx Invalid define:", name)
+					error"  "
 				end
 				break
 			end
@@ -67,9 +68,11 @@ repeat -- simulate continue with break
 		-- However, it is needed for callbacks in windows.
 		--if line:find("typedef") >= 0  and line.find(" PFNGL") < 0:
 		if line:find("typedef") and not line:find(" PFNGL") then
-			line = line:gsub("__attribute__%(%(__stdcall__%)%) ", 'WINDOWS_STDCALL ')
+			--line = line:gsub("__attribute__%(%(__stdcall__%)%) ", 'WINDOWS_STDCALL ')
+			line = line:gsub('GL_APIENTRY ' , 'WINDOWS_STDCALL ')
 		else
-			line = line:gsub("__attribute__%(%(__stdcall__%)%) ", '')
+			--line = line:gsub("__attribute__%(%(__stdcall__%)%) ", '')
+			line = line:gsub('GL_APIENTRY ', '')
 		end
 		-- While linux likes to add __attribute__((visibility("default"))) 
 		line = line:gsub('__attribute__%(%(visibility%("default"%)%)%) ', '')
