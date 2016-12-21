@@ -1,3 +1,12 @@
+Fork [LuaJIT-GLFW](https://github.com/ColonelThirtyTwo/LuaJIT-GLFW) 
+
+
+## What changed
+
+- Provide Lua genetator (instead of only Phyton3)
+- Provide generated glfw.lua (in case you dont want to generate)
+- GLFW added as submodule to get the headers for Lua generator and have the sources to build binary GLFW module
+
 
 LuaJIT-GLFW
 ===========
@@ -10,7 +19,7 @@ Building
 --------
 
 LuaJIT-GLFW builds bindings from the systems OpenGL and GLFW headers, as well as an included `glext.h` file.
-To build the bindings, you need to have a C preprocessor (only GCC is supported at the moment), headers for OpenGL and GLFW 3, and Lua , though the resulting
+To build the bindings, you need to have a C preprocessor (only GCC is supported at the moment), headers for OpenGL and GLFW 3, and Lua (or Python3) , though the resulting
 file should be cross-platform compatible.
 
 To build with GCC, just run `build.sh` or build.bat in the repository directory. This will create a `glfw.lua` file, which is the only file
