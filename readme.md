@@ -10,10 +10,10 @@ Building
 --------
 
 LuaJIT-GLFW builds bindings from the systems OpenGL and GLFW headers, as well as an included `glext.h` file.
-To build the bindings, you need to have a C preprocessor (only GCC is supported at the moment), headers for OpenGL and GLFW 3, and Python 3 installed, though the resulting
+To build the bindings, you need to have a C preprocessor (only GCC is supported at the moment), headers for OpenGL and GLFW 3, and Lua , though the resulting
 file should be cross-platform compatible.
 
-To build with GCC, just run `build.sh` in the repository directory. This will create a `glfw.lua` file, which is the only file
+To build with GCC, just run `build.sh` or build.bat in the repository directory. This will create a `glfw.lua` file, which is the only file
 you need to install.
 
 Usage
