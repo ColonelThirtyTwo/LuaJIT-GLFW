@@ -204,10 +204,11 @@ Window.swapBuffers                = wrap(glfw, "glfwSwapBuffers")
 
 -- Functions with special Lua code
 
--- Errors on zero
+-- Returns attrib value as an int
 function Window:getAttrib(attrib)
 	local v = glfw.glfwGetWindowAttrib(self, attrib)
-	if v == 0 then error("glfwGetWindowAttrib failed", 2) end
+	--if v == 0 then error("glfwGetWindowAttrib failed", 2) end
+	-- 0 is a valid return for certain attribs
 	return v
 end
 
