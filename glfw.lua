@@ -8375,7 +8375,7 @@ local Window_t = ffi.typeof("GLFWwindow")
 Lib.Window = Window_t
 
 function Window:__new(w, h, title, monitor, share)
-	local window = glfw.glfwCreateWindow(w,h,title,monitor,share)
+	local window = glfw.glfwCreateWindow(w,h,title or "",monitor,share)
 	if window == nil then error("glfwCreateWindow failed", 2) end
 	return window
 end
@@ -8415,10 +8415,11 @@ Window.swapBuffers                = wrap(glfw, "glfwSwapBuffers")
 
 -- Functions with special Lua code
 
--- Errors on zero
+-- Returns attrib value as an int
 function Window:getAttrib(attrib)
 	local v = glfw.glfwGetWindowAttrib(self, attrib)
-	if v == 0 then error("glfwGetWindowAttrib failed", 2) end
+	--if v == 0 then error("glfwGetWindowAttrib failed", 2) end
+	-- 0 is a valid return for certain attribs
 	return v
 end
 

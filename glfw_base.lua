@@ -164,7 +164,7 @@ local Window_t = ffi.typeof("GLFWwindow")
 Lib.Window = Window_t
 
 function Window:__new(w, h, title, monitor, share)
-	local window = glfw.glfwCreateWindow(w,h,title,monitor,share)
+	local window = glfw.glfwCreateWindow(w,h,title or "",monitor,share)
 	if window == nil then error("glfwCreateWindow failed", 2) end
 	return window
 end
