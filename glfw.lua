@@ -455,6 +455,7 @@ local glc; do local cdecl = [[
 	typedef void (* GLFWwindowiconifyfun)(GLFWwindow*,int);
 	typedef void (* GLFWwindowmaximizefun)(GLFWwindow*,int);
 	typedef void (* GLFWframebuffersizefun)(GLFWwindow*,int,int);
+	typedef void (* GLFWwindowcontentscalefun)(GLFWwindow*,float,float);
 	typedef void (* GLFWmousebuttonfun)(GLFWwindow*,int,int,int);
 	typedef void (* GLFWcursorposfun)(GLFWwindow*,double,double);
 	typedef void (* GLFWcursorenterfun)(GLFWwindow*,int);
@@ -487,16 +488,26 @@ local glc; do local cdecl = [[
 	int height;
 	unsigned char* pixels;
 	} GLFWimage;
+	typedef struct GLFWgamepadstate
+	{
+	unsigned char buttons[15];
+	float axes[6];
+	} GLFWgamepadstate;
 	int glfwInit(void);
 	void glfwTerminate(void);
+	void glfwInitHint(int hint, int value);
 	void glfwGetVersion(int* major, int* minor, int* rev);
 	const char* glfwGetVersionString(void);
+	int glfwGetError(const char** description);
 	GLFWerrorfun glfwSetErrorCallback(GLFWerrorfun cbfun);
 	GLFWmonitor** glfwGetMonitors(int* count);
 	GLFWmonitor* glfwGetPrimaryMonitor(void);
 	void glfwGetMonitorPos(GLFWmonitor* monitor, int* xpos, int* ypos);
 	void glfwGetMonitorPhysicalSize(GLFWmonitor* monitor, int* widthMM, int* heightMM);
+	void glfwGetMonitorContentScale(GLFWmonitor* monitor, float* xscale, float* yscale);
 	const char* glfwGetMonitorName(GLFWmonitor* monitor);
+	void glfwSetMonitorUserPointer(GLFWmonitor* monitor, void* pointer);
+	void* glfwGetMonitorUserPointer(GLFWmonitor* monitor);
 	GLFWmonitorfun glfwSetMonitorCallback(GLFWmonitorfun cbfun);
 	const GLFWvidmode* glfwGetVideoModes(GLFWmonitor* monitor, int* count);
 	const GLFWvidmode* glfwGetVideoMode(GLFWmonitor* monitor);
@@ -505,6 +516,7 @@ local glc; do local cdecl = [[
 	void glfwSetGammaRamp(GLFWmonitor* monitor, const GLFWgammaramp* ramp);
 	void glfwDefaultWindowHints(void);
 	void glfwWindowHint(int hint, int value);
+	void glfwWindowHintString(int hint, const char* value);
 	GLFWwindow* glfwCreateWindow(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share);
 	void glfwDestroyWindow(GLFWwindow* window);
 	int glfwWindowShouldClose(GLFWwindow* window);
@@ -519,12 +531,16 @@ local glc; do local cdecl = [[
 	void glfwSetWindowSize(GLFWwindow* window, int width, int height);
 	void glfwGetFramebufferSize(GLFWwindow* window, int* width, int* height);
 	void glfwGetWindowFrameSize(GLFWwindow* window, int* left, int* top, int* right, int* bottom);
+	void glfwGetWindowContentScale(GLFWwindow* window, float* xscale, float* yscale);
+	float glfwGetWindowOpacity(GLFWwindow* window);
+	void glfwSetWindowOpacity(GLFWwindow* window, float opacity);
 	void glfwIconifyWindow(GLFWwindow* window);
 	void glfwRestoreWindow(GLFWwindow* window);
 	void glfwMaximizeWindow(GLFWwindow* window);
 	void glfwShowWindow(GLFWwindow* window);
 	void glfwHideWindow(GLFWwindow* window);
 	void glfwFocusWindow(GLFWwindow* window);
+	void glfwRequestWindowAttention(GLFWwindow* window);
 	GLFWmonitor* glfwGetWindowMonitor(GLFWwindow* window);
 	void glfwSetWindowMonitor(GLFWwindow* window, GLFWmonitor* monitor, int xpos, int ypos, int width, int height, int refreshRate);
 	int glfwGetWindowAttrib(GLFWwindow* window, int attrib);
@@ -539,6 +555,7 @@ local glc; do local cdecl = [[
 	GLFWwindowiconifyfun glfwSetWindowIconifyCallback(GLFWwindow* window, GLFWwindowiconifyfun cbfun);
 	GLFWwindowmaximizefun glfwSetWindowMaximizeCallback(GLFWwindow* window, GLFWwindowmaximizefun cbfun);
 	GLFWframebuffersizefun glfwSetFramebufferSizeCallback(GLFWwindow* window, GLFWframebuffersizefun cbfun);
+	GLFWwindowcontentscalefun glfwSetWindowContentScaleCallback(GLFWwindow* window, GLFWwindowcontentscalefun cbfun);
 	void glfwPollEvents(void);
 	void glfwWaitEvents(void);
 	void glfwWaitEventsTimeout(double timeout);
@@ -566,8 +583,16 @@ local glc; do local cdecl = [[
 	int glfwJoystickPresent(int jid);
 	const float* glfwGetJoystickAxes(int jid, int* count);
 	const unsigned char* glfwGetJoystickButtons(int jid, int* count);
+	const unsigned char* glfwGetJoystickHats(int jid, int* count);
 	const char* glfwGetJoystickName(int jid);
+	const char* glfwGetJoystickGUID(int jid);
+	void glfwSetJoystickUserPointer(int jid, void* pointer);
+	void* glfwGetJoystickUserPointer(int jid);
+	int glfwJoystickIsGamepad(int jid);
 	GLFWjoystickfun glfwSetJoystickCallback(GLFWjoystickfun cbfun);
+	int glfwUpdateGamepadMappings(const char* string);
+	const char* glfwGetGamepadName(int jid);
+	int glfwGetGamepadState(int jid, GLFWgamepadstate* state);
 	void glfwSetClipboardString(GLFWwindow* window, const char* string);
 	const char* glfwGetClipboardString(GLFWwindow* window);
 	double glfwGetTime(void);
@@ -2890,7 +2915,12 @@ local glc; do local cdecl = [[
 	['GLFW_AUTO_ICONIFY'] = 0x00020006,
 	['GLFW_AUX_BUFFERS'] = 0x0002100B,
 	['GLFW_BLUE_BITS'] = 0x00021003,
+	['GLFW_CENTER_CURSOR'] = 0x00020009,
 	['GLFW_CLIENT_API'] = 0x00022001,
+	['GLFW_COCOA_CHDIR_RESOURCES'] = 0x00051001,
+	['GLFW_COCOA_FRAME_NAME'] = 0x00023002,
+	['GLFW_COCOA_GRAPHICS_SWITCHING'] = 0x00023003,
+	['GLFW_COCOA_MENUBAR'] = 0x00051002,
 	['GLFW_COCOA_RETINA_FRAMEBUFFER'] = 0x00023001,
 	['GLFW_CONNECTED'] = 0x00040001,
 	['GLFW_CONTEXT_CREATION_API'] = 0x0002200B,
@@ -2914,9 +2944,37 @@ local glc; do local cdecl = [[
 	['GLFW_FALSE'] = 0,
 	['GLFW_FLOATING'] = 0x00020007,
 	['GLFW_FOCUSED'] = 0x00020001,
+	['GLFW_FOCUS_ON_SHOW'] = 0x0002000C,
 	['GLFW_FORMAT_UNAVAILABLE'] = 0x00010009,
+	['GLFW_GAMEPAD_AXIS_LEFT_TRIGGER'] = 4,
+	['GLFW_GAMEPAD_AXIS_LEFT_X'] = 0,
+	['GLFW_GAMEPAD_AXIS_LEFT_Y'] = 1,
+	['GLFW_GAMEPAD_AXIS_RIGHT_TRIGGER'] = 5,
+	['GLFW_GAMEPAD_AXIS_RIGHT_X'] = 2,
+	['GLFW_GAMEPAD_AXIS_RIGHT_Y'] = 3,
+	['GLFW_GAMEPAD_BUTTON_A'] = 0,
+	['GLFW_GAMEPAD_BUTTON_B'] = 1,
+	['GLFW_GAMEPAD_BUTTON_BACK'] = 6,
+	['GLFW_GAMEPAD_BUTTON_DPAD_DOWN'] = 13,
+	['GLFW_GAMEPAD_BUTTON_DPAD_LEFT'] = 14,
+	['GLFW_GAMEPAD_BUTTON_DPAD_RIGHT'] = 12,
+	['GLFW_GAMEPAD_BUTTON_DPAD_UP'] = 11,
+	['GLFW_GAMEPAD_BUTTON_GUIDE'] = 8,
+	['GLFW_GAMEPAD_BUTTON_LEFT_BUMPER'] = 4,
+	['GLFW_GAMEPAD_BUTTON_LEFT_THUMB'] = 9,
+	['GLFW_GAMEPAD_BUTTON_RIGHT_BUMPER'] = 5,
+	['GLFW_GAMEPAD_BUTTON_RIGHT_THUMB'] = 10,
+	['GLFW_GAMEPAD_BUTTON_START'] = 7,
+	['GLFW_GAMEPAD_BUTTON_X'] = 2,
+	['GLFW_GAMEPAD_BUTTON_Y'] = 3,
 	['GLFW_GREEN_BITS'] = 0x00021002,
 	['GLFW_HAND_CURSOR'] = 0x00036004,
+	['GLFW_HAT_CENTERED'] = 0,
+	['GLFW_HAT_DOWN'] = 4,
+	['GLFW_HAT_LEFT'] = 8,
+	['GLFW_HAT_RIGHT'] = 2,
+	['GLFW_HAT_UP'] = 1,
+	['GLFW_HOVERED'] = 0x0002000B,
 	['GLFW_HRESIZE_CURSOR'] = 0x00036005,
 	['GLFW_IBEAM_CURSOR'] = 0x00036002,
 	['GLFW_ICONIFIED'] = 0x00020002,
@@ -2938,6 +2996,7 @@ local glc; do local cdecl = [[
 	['GLFW_JOYSTICK_7'] = 6,
 	['GLFW_JOYSTICK_8'] = 7,
 	['GLFW_JOYSTICK_9'] = 8,
+	['GLFW_JOYSTICK_HAT_BUTTONS'] = 0x00050001,
 	['GLFW_KEY_0'] = 48,
 	['GLFW_KEY_1'] = 49,
 	['GLFW_KEY_2'] = 50,
@@ -3059,10 +3118,13 @@ local glc; do local cdecl = [[
 	['GLFW_KEY_X'] = 88,
 	['GLFW_KEY_Y'] = 89,
 	['GLFW_KEY_Z'] = 90,
+	['GLFW_LOCK_KEY_MODS'] = 0x00033004,
 	['GLFW_LOSE_CONTEXT_ON_RESET'] = 0x00031002,
 	['GLFW_MAXIMIZED'] = 0x00020008,
 	['GLFW_MOD_ALT'] = 0x0004,
+	['GLFW_MOD_CAPS_LOCK'] = 0x0010,
 	['GLFW_MOD_CONTROL'] = 0x0002,
+	['GLFW_MOD_NUM_LOCK'] = 0x0020,
 	['GLFW_MOD_SHIFT'] = 0x0001,
 	['GLFW_MOD_SUPER'] = 0x0008,
 	['GLFW_MOUSE_BUTTON_1'] = 0,
@@ -3077,6 +3139,7 @@ local glc; do local cdecl = [[
 	['GLFW_NOT_INITIALIZED'] = 0x00010001,
 	['GLFW_NO_API'] = 0,
 	['GLFW_NO_CURRENT_CONTEXT'] = 0x00010002,
+	['GLFW_NO_ERROR'] = 0,
 	['GLFW_NO_RESET_NOTIFICATION'] = 0x00031001,
 	['GLFW_NO_ROBUSTNESS'] = 0,
 	['GLFW_NO_WINDOW_CONTEXT'] = 0x0001000A,
@@ -3088,6 +3151,7 @@ local glc; do local cdecl = [[
 	['GLFW_OPENGL_ES_API'] = 0x00030002,
 	['GLFW_OPENGL_FORWARD_COMPAT'] = 0x00022006,
 	['GLFW_OPENGL_PROFILE'] = 0x00022008,
+	['GLFW_OSMESA_CONTEXT_API'] = 0x00036003,
 	['GLFW_OUT_OF_MEMORY'] = 0x00010005,
 	['GLFW_PLATFORM_ERROR'] = 0x00010008,
 	['GLFW_PRESS'] = 1,
@@ -3104,6 +3168,7 @@ local glc; do local cdecl = [[
 	['GLFW_STEREO'] = 0x0002100C,
 	['GLFW_STICKY_KEYS'] = 0x00033002,
 	['GLFW_STICKY_MOUSE_BUTTONS'] = 0x00033003,
+	['GLFW_TRANSPARENT_FRAMEBUFFER'] = 0x0002000A,
 	['GLFW_TRUE'] = 1,
 	['GLFW_VERSION_MAJOR'] = 3,
 	['GLFW_VERSION_MINOR'] = 3,
@@ -3111,6 +3176,8 @@ local glc; do local cdecl = [[
 	['GLFW_VERSION_UNAVAILABLE'] = 0x00010007,
 	['GLFW_VISIBLE'] = 0x00020004,
 	['GLFW_VRESIZE_CURSOR'] = 0x00036006,
+	['GLFW_X11_CLASS_NAME'] = 0x00024001,
+	['GLFW_X11_INSTANCE_NAME'] = 0x00024002,
 	['GLU_AUTO_LOAD_MATRIX'] = 100200,
 	['GLU_CCW'] = 100121,
 	['GLU_CULLING'] = 100201,
