@@ -7,6 +7,10 @@ local bit = require "bit"
 -- Localize the FFI libraries
 local gl, glc, glu, glext = gllib.libraries()
 
+lj_glfw.setErrorCallback(function(error,description)
+    print("GLFW error:",error,ffi.string(description or ""));
+end)
+
 assert(pcall(function() local _ = glc.this_doesnt_exist end) == false)
 
 -- Define vertex arrays for the model we will draw
