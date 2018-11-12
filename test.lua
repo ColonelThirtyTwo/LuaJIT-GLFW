@@ -1,10 +1,11 @@
 
 -- Load libraries
 local lj_glfw = require "glfw"
+local gllib = require"gl"(lj_glfw)
 local ffi = require "ffi"
 local bit = require "bit"
 -- Localize the FFI libraries
-local gl, glc, glu, glfw, glext = lj_glfw.libraries()
+local gl, glc, glu, glext = gllib.libraries()
 
 assert(pcall(function() local _ = glc.this_doesnt_exist end) == false)
 
@@ -54,6 +55,7 @@ local boxx, boxy, boxz = -0.5,-0.5,2
 
 -- Main loop
 while not window:shouldClose() do
+	lj_glfw.pollEvents()
 	gl.glClear(bit.bor(glc.GL_COLOR_BUFFER_BIT, glc.GL_DEPTH_BUFFER_BIT))
 	
 	gl.glPushMatrix()
@@ -71,7 +73,7 @@ while not window:shouldClose() do
 	gl.glPopMatrix()
 	
 	window:swapBuffers()
-	lj_glfw.pollEvents()
+	
 end
 
 -- Destroy the window and deinitialize GLFW.
