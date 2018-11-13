@@ -7873,7 +7873,7 @@ function Lib.libraries()
 end
 
 ---------------------------------------------------------------------------------------------------------------------
-return function(loader) 
+function Lib.set_loader(loader) 
 -- Export a metatable for automatically loading extension functions
 	if loader.glfw then
 		local glfw = loader.glfw
@@ -7907,5 +7907,6 @@ return function(loader)
 	else
 		error("gl needs glfw or SDL loader.")
 	end
-return Lib
 end
+
+return Lib

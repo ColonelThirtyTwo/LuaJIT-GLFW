@@ -32,7 +32,8 @@ To load the library, use the `require` function:
 
 ```lua
 local luajit_glfw = require "glfw"
-local luajit_gl = require "gl"(luajit_glfw)
+local luajit_gl = require "gl"
+luajit_gl.set_loader(luajit_glfw) -- also can be SDL2 from https://github.com/torch/sdl2-ffi
 ```
 
 LuaJIT-GLFW loads the following libraries:
@@ -48,8 +49,6 @@ You can also use the following snippet to concisely localize the libraries.
 
 ```lua
 local gl, glc, glu, glext = luajit_gl.libraries()
--- Or if you just need the libraries:
-local gl, glc, glu, glext = require('gl')(luajit_glfw).libraries()
 ```
 
 Additionally, LuaJIT-GLFW wraps GLFW functions and sets metatypes for GLFW structs for convenience. See `glfw_base.lua`
