@@ -6,6 +6,7 @@ Fork [LuaJIT-GLFW](https://github.com/ColonelThirtyTwo/LuaJIT-GLFW)
 - Provide Lua genetator (instead of only Phyton3)
 - Provide generated glfw.lua (in case you dont want to generate)
 - GLFW added as submodule to get the headers for Lua generator and have the sources to build binary GLFW module
+- glfw.lua and gl.lua are different files now (for using gl with sdl2 for example)
 
 
 LuaJIT-GLFW
@@ -33,7 +34,7 @@ To load the library, use the `require` function:
 ```lua
 local luajit_glfw = require "glfw"
 local luajit_gl = require "gl"
-luajit_gl.set_loader(luajit_glfw) -- also can be SDL2 from https://github.com/torch/sdl2-ffi
+luajit_gl.set_loader(luajit_glfw) -- also can be SDL2 from https://github.com/sonoro1234/LuaJIT-SDL2
 ```
 
 LuaJIT-GLFW loads the following libraries:
