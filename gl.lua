@@ -7875,7 +7875,9 @@ end
 ---------------------------------------------------------------------------------------------------------------------
 function Lib.set_loader(loader) 
 -- Export a metatable for automatically loading extension functions
-	if loader.glfw then
+	local ok,ret = pcall(function() return loader.glfw end)
+	local isglfw = ok and ret
+	if isglfw then
 		local glfw = loader.glfw
 		Lib.glext = setmetatable({}, {
 			__index = function(self, k)
