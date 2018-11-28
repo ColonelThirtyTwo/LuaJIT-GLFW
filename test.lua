@@ -1,7 +1,8 @@
 
 -- Load libraries
 local lj_glfw = require "glfw"
-local gllib = require"gl"(lj_glfw)
+local gllib = require"gl"
+gllib.set_loader(lj_glfw)
 local ffi = require "ffi"
 local bit = require "bit"
 -- Localize the FFI libraries
