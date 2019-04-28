@@ -7859,8 +7859,8 @@ if ffi.os == "Windows" then
 	gl = ffi.load("opengl32")
 	glu = ffi.load("glu32")
 else
-	gl = ffi.load("GL")
-	glu = ffi.load("GLU")
+	gl = ffi.load("libGL.so.1")
+	glu = ffi.load("libGLU.so.1")
 end
 
 Lib.gl = gl
