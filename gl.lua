@@ -7911,4 +7911,18 @@ function Lib.set_loader(loader)
 	end
 end
 
+-- for following every gl or glext function call with glGetError
+function Lib.glErrorWrap(ll)
+	return setmetatable({glGetError=gl.glGetError},{
+		__index = function(self,k)
+			return function(...)
+				local ret = ll[k](...)
+				local err = gl.glGetError()
+				if(err ~= glc.GL_NO_ERROR) then print(k,...);error("gl error:"..err,2) end
+				return ret
+			end
+		end
+	})
+end
+
 return Lib
