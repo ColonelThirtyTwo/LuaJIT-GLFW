@@ -61,6 +61,7 @@ GLFWerrorfun glfwSetErrorCallback(GLFWerrorfun cbfun);
 GLFWmonitor** glfwGetMonitors(int* count);
 GLFWmonitor* glfwGetPrimaryMonitor(void);
 void glfwGetMonitorPos(GLFWmonitor* monitor, int* xpos, int* ypos);
+void glfwGetMonitorWorkarea(GLFWmonitor* monitor, int* xpos, int* ypos, int* width, int* height);
 void glfwGetMonitorPhysicalSize(GLFWmonitor* monitor, int* widthMM, int* heightMM);
 void glfwGetMonitorContentScale(GLFWmonitor* monitor, float* xscale, float* yscale);
 const char* glfwGetMonitorName(GLFWmonitor* monitor);
@@ -120,6 +121,7 @@ void glfwWaitEventsTimeout(double timeout);
 void glfwPostEmptyEvent(void);
 int glfwGetInputMode(GLFWwindow* window, int mode);
 void glfwSetInputMode(GLFWwindow* window, int mode, int value);
+int glfwRawMouseMotionSupported(void);
 const char* glfwGetKeyName(int key, int scancode);
 int glfwGetKeyScancode(int key);
 int glfwGetKey(GLFWwindow* window, int key);
@@ -429,6 +431,7 @@ local glfwc= {
 	['GLFW_OUT_OF_MEMORY'] = 0x00010005,
 	['GLFW_PLATFORM_ERROR'] = 0x00010008,
 	['GLFW_PRESS'] = 1,
+	['GLFW_RAW_MOUSE_MOTION'] = 0x00033005,
 	['GLFW_RED_BITS'] = 0x00021001,
 	['GLFW_REFRESH_RATE'] = 0x0002100F,
 	['GLFW_RELEASE'] = 0,

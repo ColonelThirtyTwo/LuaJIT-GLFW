@@ -12,7 +12,7 @@ Fork [LuaJIT-GLFW](https://github.com/ColonelThirtyTwo/LuaJIT-GLFW)
 LuaJIT-GLFW
 ===========
 
-LuaJIT FFI bindings for GLFW 3 and OpenGL.
+LuaJIT FFI bindings for GLFW 3.3 and OpenGL.
 
 This library contains everything needed to start a basic OpenGL app in Lua.
 
@@ -25,6 +25,11 @@ file should be cross-platform compatible.
 
 To build with GCC, just run `build.sh` or `build.bat` in the repository directory. This will create a `glfw.lua` and a `gl.lua` files.
 you need to install.
+
+Releases
+--------
+
+Releases can be found on https://github.com/sonoro1234/anima
 
 Usage
 -----

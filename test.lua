@@ -8,6 +8,8 @@ local bit = require "bit"
 -- Localize the FFI libraries
 local gl, glc, glu, glext = gllib.libraries()
 
+print(lj_glfw.glfwVersionString())
+
 lj_glfw.setErrorCallback(function(error,description)
     print("GLFW error:",error,ffi.string(description or ""));
 end)
