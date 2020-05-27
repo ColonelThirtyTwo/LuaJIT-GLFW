@@ -438,7 +438,8 @@ typedef void (*GLUtessCombineDataProc)(GLdouble[3],void*[4],GLfloat[4],void**,vo
 typedef void (*GLUnurbsErrorProc)(GLenum);
 void gluBeginPolygon(GLUtesselator *tess);
 void gluNextContour(GLUtesselator *tess,GLenum type);
-void gluEndPolygon(GLUtesselator *tess);typedef void (* PFNGLDRAWRANGEELEMENTSPROC) (GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const void *indices);
+void gluEndPolygon(GLUtesselator *tess);
+typedef void (* PFNGLDRAWRANGEELEMENTSPROC) (GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const void *indices);
 typedef void (* PFNGLTEXIMAGE3DPROC) (GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const void *pixels);
 typedef void (* PFNGLTEXSUBIMAGE3DPROC) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *pixels);
 typedef void (* PFNGLCOPYTEXSUBIMAGE3DPROC) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height);
