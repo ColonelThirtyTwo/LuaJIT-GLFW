@@ -12,7 +12,7 @@ Fork [LuaJIT-GLFW](https://github.com/ColonelThirtyTwo/LuaJIT-GLFW)
 LuaJIT-GLFW
 ===========
 
-LuaJIT FFI bindings for GLFW 3.3 and OpenGL.
+LuaJIT FFI bindings for GLFW 3.3.2+ and OpenGL.
 
 This library contains everything needed to start a basic OpenGL app in Lua.
 
