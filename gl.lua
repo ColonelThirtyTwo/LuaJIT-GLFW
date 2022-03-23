@@ -439,7 +439,26 @@ typedef void (*GLUnurbsErrorProc)(GLenum);
 void gluBeginPolygon(GLUtesselator *tess);
 void gluNextContour(GLUtesselator *tess,GLenum type);
 void gluEndPolygon(GLUtesselator *tess);
-typedef void (* PFNGLDRAWRANGEELEMENTSPROC) (GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const void *indices);
+typedef int32_t khronos_int32_t;
+typedef uint32_t khronos_uint32_t;
+typedef int64_t khronos_int64_t;
+typedef uint64_t khronos_uint64_t;
+typedef signed char khronos_int8_t;
+typedef unsigned char khronos_uint8_t;
+typedef signed short int khronos_int16_t;
+typedef unsigned short int khronos_uint16_t;
+typedef intptr_t khronos_intptr_t;
+typedef uintptr_t khronos_uintptr_t;
+typedef signed long int khronos_ssize_t;
+typedef unsigned long int khronos_usize_t;
+typedef float khronos_float_t;
+typedef khronos_uint64_t khronos_utime_nanoseconds_t;
+typedef khronos_int64_t khronos_stime_nanoseconds_t;
+typedef enum {
+KHRONOS_FALSE = 0,
+KHRONOS_TRUE = 1,
+KHRONOS_BOOLEAN_ENUM_FORCE_SIZE = 0x7FFFFFFF
+} khronos_boolean_enum_t;typedef void (* PFNGLDRAWRANGEELEMENTSPROC) (GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const void *indices);
 typedef void (* PFNGLTEXIMAGE3DPROC) (GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const void *pixels);
 typedef void (* PFNGLTEXSUBIMAGE3DPROC) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *pixels);
 typedef void (* PFNGLCOPYTEXSUBIMAGE3DPROC) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height);
@@ -536,8 +555,8 @@ typedef void (* PFNGLWINDOWPOS3SPROC) (GLshort x, GLshort y, GLshort z);
 typedef void (* PFNGLWINDOWPOS3SVPROC) (const GLshort *v);
 typedef void (* PFNGLBLENDCOLORPROC) (GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha);
 typedef void (* PFNGLBLENDEQUATIONPROC) (GLenum mode);
-typedef ptrdiff_t GLsizeiptr;
-typedef ptrdiff_t GLintptr;
+typedef ssize_t GLsizeiptr;
+typedef khronos_intptr_t GLintptr;
 typedef void (* PFNGLGENQUERIESPROC) (GLsizei n, GLuint *ids);
 typedef void (* PFNGLDELETEQUERIESPROC) (GLsizei n, const GLuint *ids);
 typedef GLboolean (* PFNGLISQUERYPROC) (GLuint id);
@@ -657,7 +676,7 @@ typedef void (* PFNGLUNIFORMMATRIX2X4FVPROC) (GLint location, GLsizei count, GLb
 typedef void (* PFNGLUNIFORMMATRIX4X2FVPROC) (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
 typedef void (* PFNGLUNIFORMMATRIX3X4FVPROC) (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
 typedef void (* PFNGLUNIFORMMATRIX4X3FVPROC) (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
-typedef unsigned short GLhalf;
+typedef khronos_uint16_t GLhalf;
 typedef void (* PFNGLCOLORMASKIPROC) (GLuint index, GLboolean r, GLboolean g, GLboolean b, GLboolean a);
 typedef void (* PFNGLGETBOOLEANI_VPROC) (GLenum target, GLuint index, GLboolean *data);
 typedef void (* PFNGLGETINTEGERI_VPROC) (GLenum target, GLuint index, GLint *data);
@@ -755,8 +774,8 @@ typedef void (* PFNGLGETACTIVEUNIFORMBLOCKIVPROC) (GLuint program, GLuint unifor
 typedef void (* PFNGLGETACTIVEUNIFORMBLOCKNAMEPROC) (GLuint program, GLuint uniformBlockIndex, GLsizei bufSize, GLsizei *length, GLchar *uniformBlockName);
 typedef void (* PFNGLUNIFORMBLOCKBINDINGPROC) (GLuint program, GLuint uniformBlockIndex, GLuint uniformBlockBinding);
 typedef struct __GLsync *GLsync;
-typedef uint64_t GLuint64;
-typedef int64_t GLint64;
+typedef khronos_uint64_t GLuint64;
+typedef khronos_int64_t GLint64;
 typedef void (* PFNGLDRAWELEMENTSBASEVERTEXPROC) (GLenum mode, GLsizei count, GLenum type, const void *indices, GLint basevertex);
 typedef void (* PFNGLDRAWRANGEELEMENTSBASEVERTEXPROC) (GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const void *indices, GLint basevertex);
 typedef void (* PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXPROC) (GLenum mode, GLsizei count, GLenum type, const void *indices, GLsizei instancecount, GLint basevertex);
@@ -768,14 +787,14 @@ typedef void (* PFNGLDELETESYNCPROC) (GLsync sync);
 typedef GLenum (* PFNGLCLIENTWAITSYNCPROC) (GLsync sync, GLbitfield flags, GLuint64 timeout);
 typedef void (* PFNGLWAITSYNCPROC) (GLsync sync, GLbitfield flags, GLuint64 timeout);
 typedef void (* PFNGLGETINTEGER64VPROC) (GLenum pname, GLint64 *data);
-typedef void (* PFNGLGETSYNCIVPROC) (GLsync sync, GLenum pname, GLsizei bufSize, GLsizei *length, GLint *values);
+typedef void (* PFNGLGETSYNCIVPROC) (GLsync sync, GLenum pname, GLsizei count, GLsizei *length, GLint *values);
 typedef void (* PFNGLGETINTEGER64I_VPROC) (GLenum target, GLuint index, GLint64 *data);
 typedef void (* PFNGLGETBUFFERPARAMETERI64VPROC) (GLenum target, GLenum pname, GLint64 *params);
 typedef void (* PFNGLFRAMEBUFFERTEXTUREPROC) (GLenum target, GLenum attachment, GLuint texture, GLint level);
 typedef void (* PFNGLTEXIMAGE2DMULTISAMPLEPROC) (GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations);
 typedef void (* PFNGLTEXIMAGE3DMULTISAMPLEPROC) (GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations);
 typedef void (* PFNGLGETMULTISAMPLEFVPROC) (GLenum pname, GLuint index, GLfloat *val);
-typedef void (* PFNGLSAMPLEMASKIPROC) (GLuint index, GLbitfield mask);
+typedef void (* PFNGLSAMPLEMASKIPROC) (GLuint maskNumber, GLbitfield mask);
 typedef void (* PFNGLBINDFRAGDATALOCATIONINDEXEDPROC) (GLuint program, GLuint colorNumber, GLuint index, const GLchar *name);
 typedef GLint (* PFNGLGETFRAGDATAINDEXPROC) (GLuint program, const GLchar *name);
 typedef void (* PFNGLGENSAMPLERSPROC) (GLsizei count, GLuint *samplers);
@@ -862,8 +881,8 @@ typedef void (* PFNGLGETUNIFORMDVPROC) (GLuint program, GLint location, GLdouble
 typedef GLint (* PFNGLGETSUBROUTINEUNIFORMLOCATIONPROC) (GLuint program, GLenum shadertype, const GLchar *name);
 typedef GLuint (* PFNGLGETSUBROUTINEINDEXPROC) (GLuint program, GLenum shadertype, const GLchar *name);
 typedef void (* PFNGLGETACTIVESUBROUTINEUNIFORMIVPROC) (GLuint program, GLenum shadertype, GLuint index, GLenum pname, GLint *values);
-typedef void (* PFNGLGETACTIVESUBROUTINEUNIFORMNAMEPROC) (GLuint program, GLenum shadertype, GLuint index, GLsizei bufsize, GLsizei *length, GLchar *name);
-typedef void (* PFNGLGETACTIVESUBROUTINENAMEPROC) (GLuint program, GLenum shadertype, GLuint index, GLsizei bufsize, GLsizei *length, GLchar *name);
+typedef void (* PFNGLGETACTIVESUBROUTINEUNIFORMNAMEPROC) (GLuint program, GLenum shadertype, GLuint index, GLsizei bufSize, GLsizei *length, GLchar *name);
+typedef void (* PFNGLGETACTIVESUBROUTINENAMEPROC) (GLuint program, GLenum shadertype, GLuint index, GLsizei bufSize, GLsizei *length, GLchar *name);
 typedef void (* PFNGLUNIFORMSUBROUTINESUIVPROC) (GLenum shadertype, GLsizei count, const GLuint *indices);
 typedef void (* PFNGLGETUNIFORMSUBROUTINEUIVPROC) (GLenum shadertype, GLint location, GLuint *params);
 typedef void (* PFNGLGETPROGRAMSTAGEIVPROC) (GLuint program, GLenum shadertype, GLenum pname, GLint *values);
@@ -881,7 +900,7 @@ typedef void (* PFNGLBEGINQUERYINDEXEDPROC) (GLenum target, GLuint index, GLuint
 typedef void (* PFNGLENDQUERYINDEXEDPROC) (GLenum target, GLuint index);
 typedef void (* PFNGLGETQUERYINDEXEDIVPROC) (GLenum target, GLuint index, GLenum pname, GLint *params);
 typedef void (* PFNGLRELEASESHADERCOMPILERPROC) (void);
-typedef void (* PFNGLSHADERBINARYPROC) (GLsizei count, const GLuint *shaders, GLenum binaryformat, const void *binary, GLsizei length);
+typedef void (* PFNGLSHADERBINARYPROC) (GLsizei count, const GLuint *shaders, GLenum binaryFormat, const void *binary, GLsizei length);
 typedef void (* PFNGLGETSHADERPRECISIONFORMATPROC) (GLenum shadertype, GLenum precisiontype, GLint *range, GLint *precision);
 typedef void (* PFNGLDEPTHRANGEFPROC) (GLfloat n, GLfloat f);
 typedef void (* PFNGLCLEARDEPTHFPROC) (GLfloat d);
@@ -971,7 +990,7 @@ typedef void (* PFNGLGETDOUBLEI_VPROC) (GLenum target, GLuint index, GLdouble *d
 typedef void (* PFNGLDRAWARRAYSINSTANCEDBASEINSTANCEPROC) (GLenum mode, GLint first, GLsizei count, GLsizei instancecount, GLuint baseinstance);
 typedef void (* PFNGLDRAWELEMENTSINSTANCEDBASEINSTANCEPROC) (GLenum mode, GLsizei count, GLenum type, const void *indices, GLsizei instancecount, GLuint baseinstance);
 typedef void (* PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXBASEINSTANCEPROC) (GLenum mode, GLsizei count, GLenum type, const void *indices, GLsizei instancecount, GLint basevertex, GLuint baseinstance);
-typedef void (* PFNGLGETINTERNALFORMATIVPROC) (GLenum target, GLenum internalformat, GLenum pname, GLsizei bufSize, GLint *params);
+typedef void (* PFNGLGETINTERNALFORMATIVPROC) (GLenum target, GLenum internalformat, GLenum pname, GLsizei count, GLint *params);
 typedef void (* PFNGLGETACTIVEATOMICCOUNTERBUFFERIVPROC) (GLuint program, GLuint bufferIndex, GLenum pname, GLint *params);
 typedef void (* PFNGLBINDIMAGETEXTUREPROC) (GLuint unit, GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum access, GLenum format);
 typedef void (* PFNGLMEMORYBARRIERPROC) (GLbitfield barriers);
@@ -988,7 +1007,7 @@ typedef void (* PFNGLDISPATCHCOMPUTEINDIRECTPROC) (GLintptr indirect);
 typedef void (* PFNGLCOPYIMAGESUBDATAPROC) (GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei srcWidth, GLsizei srcHeight, GLsizei srcDepth);
 typedef void (* PFNGLFRAMEBUFFERPARAMETERIPROC) (GLenum target, GLenum pname, GLint param);
 typedef void (* PFNGLGETFRAMEBUFFERPARAMETERIVPROC) (GLenum target, GLenum pname, GLint *params);
-typedef void (* PFNGLGETINTERNALFORMATI64VPROC) (GLenum target, GLenum internalformat, GLenum pname, GLsizei bufSize, GLint64 *params);
+typedef void (* PFNGLGETINTERNALFORMATI64VPROC) (GLenum target, GLenum internalformat, GLenum pname, GLsizei count, GLint64 *params);
 typedef void (* PFNGLINVALIDATETEXSUBIMAGEPROC) (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth);
 typedef void (* PFNGLINVALIDATETEXIMAGEPROC) (GLuint texture, GLint level);
 typedef void (* PFNGLINVALIDATEBUFFERSUBDATAPROC) (GLuint buffer, GLintptr offset, GLsizeiptr length);
@@ -1000,7 +1019,7 @@ typedef void (* PFNGLMULTIDRAWELEMENTSINDIRECTPROC) (GLenum mode, GLenum type, c
 typedef void (* PFNGLGETPROGRAMINTERFACEIVPROC) (GLuint program, GLenum programInterface, GLenum pname, GLint *params);
 typedef GLuint (* PFNGLGETPROGRAMRESOURCEINDEXPROC) (GLuint program, GLenum programInterface, const GLchar *name);
 typedef void (* PFNGLGETPROGRAMRESOURCENAMEPROC) (GLuint program, GLenum programInterface, GLuint index, GLsizei bufSize, GLsizei *length, GLchar *name);
-typedef void (* PFNGLGETPROGRAMRESOURCEIVPROC) (GLuint program, GLenum programInterface, GLuint index, GLsizei propCount, const GLenum *props, GLsizei bufSize, GLsizei *length, GLint *params);
+typedef void (* PFNGLGETPROGRAMRESOURCEIVPROC) (GLuint program, GLenum programInterface, GLuint index, GLsizei propCount, const GLenum *props, GLsizei count, GLsizei *length, GLint *params);
 typedef GLint (* PFNGLGETPROGRAMRESOURCELOCATIONPROC) (GLuint program, GLenum programInterface, const GLchar *name);
 typedef GLint (* PFNGLGETPROGRAMRESOURCELOCATIONINDEXPROC) (GLuint program, GLenum programInterface, const GLchar *name);
 typedef void (* PFNGLSHADERSTORAGEBLOCKBINDINGPROC) (GLuint program, GLuint storageBlockIndex, GLuint storageBlockBinding);
@@ -1033,7 +1052,134 @@ typedef void (* PFNGLBINDTEXTURESPROC) (GLuint first, GLsizei count, const GLuin
 typedef void (* PFNGLBINDSAMPLERSPROC) (GLuint first, GLsizei count, const GLuint *samplers);
 typedef void (* PFNGLBINDIMAGETEXTURESPROC) (GLuint first, GLsizei count, const GLuint *textures);
 typedef void (* PFNGLBINDVERTEXBUFFERSPROC) (GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizei *strides);
-typedef uint64_t GLuint64EXT;
+typedef void (* PFNGLCLIPCONTROLPROC) (GLenum origin, GLenum depth);
+typedef void (* PFNGLCREATETRANSFORMFEEDBACKSPROC) (GLsizei n, GLuint *ids);
+typedef void (* PFNGLTRANSFORMFEEDBACKBUFFERBASEPROC) (GLuint xfb, GLuint index, GLuint buffer);
+typedef void (* PFNGLTRANSFORMFEEDBACKBUFFERRANGEPROC) (GLuint xfb, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size);
+typedef void (* PFNGLGETTRANSFORMFEEDBACKIVPROC) (GLuint xfb, GLenum pname, GLint *param);
+typedef void (* PFNGLGETTRANSFORMFEEDBACKI_VPROC) (GLuint xfb, GLenum pname, GLuint index, GLint *param);
+typedef void (* PFNGLGETTRANSFORMFEEDBACKI64_VPROC) (GLuint xfb, GLenum pname, GLuint index, GLint64 *param);
+typedef void (* PFNGLCREATEBUFFERSPROC) (GLsizei n, GLuint *buffers);
+typedef void (* PFNGLNAMEDBUFFERSTORAGEPROC) (GLuint buffer, GLsizeiptr size, const void *data, GLbitfield flags);
+typedef void (* PFNGLNAMEDBUFFERDATAPROC) (GLuint buffer, GLsizeiptr size, const void *data, GLenum usage);
+typedef void (* PFNGLNAMEDBUFFERSUBDATAPROC) (GLuint buffer, GLintptr offset, GLsizeiptr size, const void *data);
+typedef void (* PFNGLCOPYNAMEDBUFFERSUBDATAPROC) (GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size);
+typedef void (* PFNGLCLEARNAMEDBUFFERDATAPROC) (GLuint buffer, GLenum internalformat, GLenum format, GLenum type, const void *data);
+typedef void (* PFNGLCLEARNAMEDBUFFERSUBDATAPROC) (GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const void *data);
+typedef void *(* PFNGLMAPNAMEDBUFFERPROC) (GLuint buffer, GLenum access);
+typedef void *(* PFNGLMAPNAMEDBUFFERRANGEPROC) (GLuint buffer, GLintptr offset, GLsizeiptr length, GLbitfield access);
+typedef GLboolean (* PFNGLUNMAPNAMEDBUFFERPROC) (GLuint buffer);
+typedef void (* PFNGLFLUSHMAPPEDNAMEDBUFFERRANGEPROC) (GLuint buffer, GLintptr offset, GLsizeiptr length);
+typedef void (* PFNGLGETNAMEDBUFFERPARAMETERIVPROC) (GLuint buffer, GLenum pname, GLint *params);
+typedef void (* PFNGLGETNAMEDBUFFERPARAMETERI64VPROC) (GLuint buffer, GLenum pname, GLint64 *params);
+typedef void (* PFNGLGETNAMEDBUFFERPOINTERVPROC) (GLuint buffer, GLenum pname, void **params);
+typedef void (* PFNGLGETNAMEDBUFFERSUBDATAPROC) (GLuint buffer, GLintptr offset, GLsizeiptr size, void *data);
+typedef void (* PFNGLCREATEFRAMEBUFFERSPROC) (GLsizei n, GLuint *framebuffers);
+typedef void (* PFNGLNAMEDFRAMEBUFFERRENDERBUFFERPROC) (GLuint framebuffer, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer);
+typedef void (* PFNGLNAMEDFRAMEBUFFERPARAMETERIPROC) (GLuint framebuffer, GLenum pname, GLint param);
+typedef void (* PFNGLNAMEDFRAMEBUFFERTEXTUREPROC) (GLuint framebuffer, GLenum attachment, GLuint texture, GLint level);
+typedef void (* PFNGLNAMEDFRAMEBUFFERTEXTURELAYERPROC) (GLuint framebuffer, GLenum attachment, GLuint texture, GLint level, GLint layer);
+typedef void (* PFNGLNAMEDFRAMEBUFFERDRAWBUFFERPROC) (GLuint framebuffer, GLenum buf);
+typedef void (* PFNGLNAMEDFRAMEBUFFERDRAWBUFFERSPROC) (GLuint framebuffer, GLsizei n, const GLenum *bufs);
+typedef void (* PFNGLNAMEDFRAMEBUFFERREADBUFFERPROC) (GLuint framebuffer, GLenum src);
+typedef void (* PFNGLINVALIDATENAMEDFRAMEBUFFERDATAPROC) (GLuint framebuffer, GLsizei numAttachments, const GLenum *attachments);
+typedef void (* PFNGLINVALIDATENAMEDFRAMEBUFFERSUBDATAPROC) (GLuint framebuffer, GLsizei numAttachments, const GLenum *attachments, GLint x, GLint y, GLsizei width, GLsizei height);
+typedef void (* PFNGLCLEARNAMEDFRAMEBUFFERIVPROC) (GLuint framebuffer, GLenum buffer, GLint drawbuffer, const GLint *value);
+typedef void (* PFNGLCLEARNAMEDFRAMEBUFFERUIVPROC) (GLuint framebuffer, GLenum buffer, GLint drawbuffer, const GLuint *value);
+typedef void (* PFNGLCLEARNAMEDFRAMEBUFFERFVPROC) (GLuint framebuffer, GLenum buffer, GLint drawbuffer, const GLfloat *value);
+typedef void (* PFNGLCLEARNAMEDFRAMEBUFFERFIPROC) (GLuint framebuffer, GLenum buffer, GLint drawbuffer, GLfloat depth, GLint stencil);
+typedef void (* PFNGLBLITNAMEDFRAMEBUFFERPROC) (GLuint readFramebuffer, GLuint drawFramebuffer, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter);
+typedef GLenum (* PFNGLCHECKNAMEDFRAMEBUFFERSTATUSPROC) (GLuint framebuffer, GLenum target);
+typedef void (* PFNGLGETNAMEDFRAMEBUFFERPARAMETERIVPROC) (GLuint framebuffer, GLenum pname, GLint *param);
+typedef void (* PFNGLGETNAMEDFRAMEBUFFERATTACHMENTPARAMETERIVPROC) (GLuint framebuffer, GLenum attachment, GLenum pname, GLint *params);
+typedef void (* PFNGLCREATERENDERBUFFERSPROC) (GLsizei n, GLuint *renderbuffers);
+typedef void (* PFNGLNAMEDRENDERBUFFERSTORAGEPROC) (GLuint renderbuffer, GLenum internalformat, GLsizei width, GLsizei height);
+typedef void (* PFNGLNAMEDRENDERBUFFERSTORAGEMULTISAMPLEPROC) (GLuint renderbuffer, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height);
+typedef void (* PFNGLGETNAMEDRENDERBUFFERPARAMETERIVPROC) (GLuint renderbuffer, GLenum pname, GLint *params);
+typedef void (* PFNGLCREATETEXTURESPROC) (GLenum target, GLsizei n, GLuint *textures);
+typedef void (* PFNGLTEXTUREBUFFERPROC) (GLuint texture, GLenum internalformat, GLuint buffer);
+typedef void (* PFNGLTEXTUREBUFFERRANGEPROC) (GLuint texture, GLenum internalformat, GLuint buffer, GLintptr offset, GLsizeiptr size);
+typedef void (* PFNGLTEXTURESTORAGE1DPROC) (GLuint texture, GLsizei levels, GLenum internalformat, GLsizei width);
+typedef void (* PFNGLTEXTURESTORAGE2DPROC) (GLuint texture, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height);
+typedef void (* PFNGLTEXTURESTORAGE3DPROC) (GLuint texture, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth);
+typedef void (* PFNGLTEXTURESTORAGE2DMULTISAMPLEPROC) (GLuint texture, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations);
+typedef void (* PFNGLTEXTURESTORAGE3DMULTISAMPLEPROC) (GLuint texture, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations);
+typedef void (* PFNGLTEXTURESUBIMAGE1DPROC) (GLuint texture, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void *pixels);
+typedef void (* PFNGLTEXTURESUBIMAGE2DPROC) (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void *pixels);
+typedef void (* PFNGLTEXTURESUBIMAGE3DPROC) (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *pixels);
+typedef void (* PFNGLCOMPRESSEDTEXTURESUBIMAGE1DPROC) (GLuint texture, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void *data);
+typedef void (* PFNGLCOMPRESSEDTEXTURESUBIMAGE2DPROC) (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void *data);
+typedef void (* PFNGLCOMPRESSEDTEXTURESUBIMAGE3DPROC) (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void *data);
+typedef void (* PFNGLCOPYTEXTURESUBIMAGE1DPROC) (GLuint texture, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width);
+typedef void (* PFNGLCOPYTEXTURESUBIMAGE2DPROC) (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height);
+typedef void (* PFNGLCOPYTEXTURESUBIMAGE3DPROC) (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height);
+typedef void (* PFNGLTEXTUREPARAMETERFPROC) (GLuint texture, GLenum pname, GLfloat param);
+typedef void (* PFNGLTEXTUREPARAMETERFVPROC) (GLuint texture, GLenum pname, const GLfloat *param);
+typedef void (* PFNGLTEXTUREPARAMETERIPROC) (GLuint texture, GLenum pname, GLint param);
+typedef void (* PFNGLTEXTUREPARAMETERIIVPROC) (GLuint texture, GLenum pname, const GLint *params);
+typedef void (* PFNGLTEXTUREPARAMETERIUIVPROC) (GLuint texture, GLenum pname, const GLuint *params);
+typedef void (* PFNGLTEXTUREPARAMETERIVPROC) (GLuint texture, GLenum pname, const GLint *param);
+typedef void (* PFNGLGENERATETEXTUREMIPMAPPROC) (GLuint texture);
+typedef void (* PFNGLBINDTEXTUREUNITPROC) (GLuint unit, GLuint texture);
+typedef void (* PFNGLGETTEXTUREIMAGEPROC) (GLuint texture, GLint level, GLenum format, GLenum type, GLsizei bufSize, void *pixels);
+typedef void (* PFNGLGETCOMPRESSEDTEXTUREIMAGEPROC) (GLuint texture, GLint level, GLsizei bufSize, void *pixels);
+typedef void (* PFNGLGETTEXTURELEVELPARAMETERFVPROC) (GLuint texture, GLint level, GLenum pname, GLfloat *params);
+typedef void (* PFNGLGETTEXTURELEVELPARAMETERIVPROC) (GLuint texture, GLint level, GLenum pname, GLint *params);
+typedef void (* PFNGLGETTEXTUREPARAMETERFVPROC) (GLuint texture, GLenum pname, GLfloat *params);
+typedef void (* PFNGLGETTEXTUREPARAMETERIIVPROC) (GLuint texture, GLenum pname, GLint *params);
+typedef void (* PFNGLGETTEXTUREPARAMETERIUIVPROC) (GLuint texture, GLenum pname, GLuint *params);
+typedef void (* PFNGLGETTEXTUREPARAMETERIVPROC) (GLuint texture, GLenum pname, GLint *params);
+typedef void (* PFNGLCREATEVERTEXARRAYSPROC) (GLsizei n, GLuint *arrays);
+typedef void (* PFNGLDISABLEVERTEXARRAYATTRIBPROC) (GLuint vaobj, GLuint index);
+typedef void (* PFNGLENABLEVERTEXARRAYATTRIBPROC) (GLuint vaobj, GLuint index);
+typedef void (* PFNGLVERTEXARRAYELEMENTBUFFERPROC) (GLuint vaobj, GLuint buffer);
+typedef void (* PFNGLVERTEXARRAYVERTEXBUFFERPROC) (GLuint vaobj, GLuint bindingindex, GLuint buffer, GLintptr offset, GLsizei stride);
+typedef void (* PFNGLVERTEXARRAYVERTEXBUFFERSPROC) (GLuint vaobj, GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizei *strides);
+typedef void (* PFNGLVERTEXARRAYATTRIBBINDINGPROC) (GLuint vaobj, GLuint attribindex, GLuint bindingindex);
+typedef void (* PFNGLVERTEXARRAYATTRIBFORMATPROC) (GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLboolean normalized, GLuint relativeoffset);
+typedef void (* PFNGLVERTEXARRAYATTRIBIFORMATPROC) (GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset);
+typedef void (* PFNGLVERTEXARRAYATTRIBLFORMATPROC) (GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset);
+typedef void (* PFNGLVERTEXARRAYBINDINGDIVISORPROC) (GLuint vaobj, GLuint bindingindex, GLuint divisor);
+typedef void (* PFNGLGETVERTEXARRAYIVPROC) (GLuint vaobj, GLenum pname, GLint *param);
+typedef void (* PFNGLGETVERTEXARRAYINDEXEDIVPROC) (GLuint vaobj, GLuint index, GLenum pname, GLint *param);
+typedef void (* PFNGLGETVERTEXARRAYINDEXED64IVPROC) (GLuint vaobj, GLuint index, GLenum pname, GLint64 *param);
+typedef void (* PFNGLCREATESAMPLERSPROC) (GLsizei n, GLuint *samplers);
+typedef void (* PFNGLCREATEPROGRAMPIPELINESPROC) (GLsizei n, GLuint *pipelines);
+typedef void (* PFNGLCREATEQUERIESPROC) (GLenum target, GLsizei n, GLuint *ids);
+typedef void (* PFNGLGETQUERYBUFFEROBJECTI64VPROC) (GLuint id, GLuint buffer, GLenum pname, GLintptr offset);
+typedef void (* PFNGLGETQUERYBUFFEROBJECTIVPROC) (GLuint id, GLuint buffer, GLenum pname, GLintptr offset);
+typedef void (* PFNGLGETQUERYBUFFEROBJECTUI64VPROC) (GLuint id, GLuint buffer, GLenum pname, GLintptr offset);
+typedef void (* PFNGLGETQUERYBUFFEROBJECTUIVPROC) (GLuint id, GLuint buffer, GLenum pname, GLintptr offset);
+typedef void (* PFNGLMEMORYBARRIERBYREGIONPROC) (GLbitfield barriers);
+typedef void (* PFNGLGETTEXTURESUBIMAGEPROC) (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, GLsizei bufSize, void *pixels);
+typedef void (* PFNGLGETCOMPRESSEDTEXTURESUBIMAGEPROC) (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLsizei bufSize, void *pixels);
+typedef GLenum (* PFNGLGETGRAPHICSRESETSTATUSPROC) (void);
+typedef void (* PFNGLGETNCOMPRESSEDTEXIMAGEPROC) (GLenum target, GLint lod, GLsizei bufSize, void *pixels);
+typedef void (* PFNGLGETNTEXIMAGEPROC) (GLenum target, GLint level, GLenum format, GLenum type, GLsizei bufSize, void *pixels);
+typedef void (* PFNGLGETNUNIFORMDVPROC) (GLuint program, GLint location, GLsizei bufSize, GLdouble *params);
+typedef void (* PFNGLGETNUNIFORMFVPROC) (GLuint program, GLint location, GLsizei bufSize, GLfloat *params);
+typedef void (* PFNGLGETNUNIFORMIVPROC) (GLuint program, GLint location, GLsizei bufSize, GLint *params);
+typedef void (* PFNGLGETNUNIFORMUIVPROC) (GLuint program, GLint location, GLsizei bufSize, GLuint *params);
+typedef void (* PFNGLREADNPIXELSPROC) (GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLsizei bufSize, void *data);
+typedef void (* PFNGLGETNMAPDVPROC) (GLenum target, GLenum query, GLsizei bufSize, GLdouble *v);
+typedef void (* PFNGLGETNMAPFVPROC) (GLenum target, GLenum query, GLsizei bufSize, GLfloat *v);
+typedef void (* PFNGLGETNMAPIVPROC) (GLenum target, GLenum query, GLsizei bufSize, GLint *v);
+typedef void (* PFNGLGETNPIXELMAPFVPROC) (GLenum map, GLsizei bufSize, GLfloat *values);
+typedef void (* PFNGLGETNPIXELMAPUIVPROC) (GLenum map, GLsizei bufSize, GLuint *values);
+typedef void (* PFNGLGETNPIXELMAPUSVPROC) (GLenum map, GLsizei bufSize, GLushort *values);
+typedef void (* PFNGLGETNPOLYGONSTIPPLEPROC) (GLsizei bufSize, GLubyte *pattern);
+typedef void (* PFNGLGETNCOLORTABLEPROC) (GLenum target, GLenum format, GLenum type, GLsizei bufSize, void *table);
+typedef void (* PFNGLGETNCONVOLUTIONFILTERPROC) (GLenum target, GLenum format, GLenum type, GLsizei bufSize, void *image);
+typedef void (* PFNGLGETNSEPARABLEFILTERPROC) (GLenum target, GLenum format, GLenum type, GLsizei rowBufSize, void *row, GLsizei columnBufSize, void *column, void *span);
+typedef void (* PFNGLGETNHISTOGRAMPROC) (GLenum target, GLboolean reset, GLenum format, GLenum type, GLsizei bufSize, void *values);
+typedef void (* PFNGLGETNMINMAXPROC) (GLenum target, GLboolean reset, GLenum format, GLenum type, GLsizei bufSize, void *values);
+typedef void (* PFNGLTEXTUREBARRIERPROC) (void);
+typedef void (* PFNGLSPECIALIZESHADERPROC) (GLuint shader, const GLchar *pEntryPoint, GLuint numSpecializationConstants, const GLuint *pConstantIndex, const GLuint *pConstantValue);
+typedef void (* PFNGLMULTIDRAWARRAYSINDIRECTCOUNTPROC) (GLenum mode, const void *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride);
+typedef void (* PFNGLMULTIDRAWELEMENTSINDIRECTCOUNTPROC) (GLenum mode, GLenum type, const void *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride);
+typedef void (* PFNGLPOLYGONOFFSETCLAMPPROC) (GLfloat factor, GLfloat units, GLfloat clamp);
+typedef void (* PFNGLPRIMITIVEBOUNDINGBOXARBPROC) (GLfloat minX, GLfloat minY, GLfloat minZ, GLfloat minW, GLfloat maxX, GLfloat maxY, GLfloat maxZ, GLfloat maxW);
+typedef khronos_uint64_t GLuint64EXT;
 typedef GLuint64 (* PFNGLGETTEXTUREHANDLEARBPROC) (GLuint texture);
 typedef GLuint64 (* PFNGLGETTEXTURESAMPLERHANDLEARBPROC) (GLuint texture, GLuint sampler);
 typedef void (* PFNGLMAKETEXTUREHANDLERESIDENTARBPROC) (GLuint64 handle);
@@ -1090,7 +1236,44 @@ typedef void (* PFNGLPROGRAMPARAMETERIARBPROC) (GLuint program, GLenum pname, GL
 typedef void (* PFNGLFRAMEBUFFERTEXTUREARBPROC) (GLenum target, GLenum attachment, GLuint texture, GLint level);
 typedef void (* PFNGLFRAMEBUFFERTEXTURELAYERARBPROC) (GLenum target, GLenum attachment, GLuint texture, GLint level, GLint layer);
 typedef void (* PFNGLFRAMEBUFFERTEXTUREFACEARBPROC) (GLenum target, GLenum attachment, GLuint texture, GLint level, GLenum face);
-typedef unsigned short GLhalfARB;
+typedef void (* PFNGLSPECIALIZESHADERARBPROC) (GLuint shader, const GLchar *pEntryPoint, GLuint numSpecializationConstants, const GLuint *pConstantIndex, const GLuint *pConstantValue);
+typedef void (* PFNGLUNIFORM1I64ARBPROC) (GLint location, GLint64 x);
+typedef void (* PFNGLUNIFORM2I64ARBPROC) (GLint location, GLint64 x, GLint64 y);
+typedef void (* PFNGLUNIFORM3I64ARBPROC) (GLint location, GLint64 x, GLint64 y, GLint64 z);
+typedef void (* PFNGLUNIFORM4I64ARBPROC) (GLint location, GLint64 x, GLint64 y, GLint64 z, GLint64 w);
+typedef void (* PFNGLUNIFORM1I64VARBPROC) (GLint location, GLsizei count, const GLint64 *value);
+typedef void (* PFNGLUNIFORM2I64VARBPROC) (GLint location, GLsizei count, const GLint64 *value);
+typedef void (* PFNGLUNIFORM3I64VARBPROC) (GLint location, GLsizei count, const GLint64 *value);
+typedef void (* PFNGLUNIFORM4I64VARBPROC) (GLint location, GLsizei count, const GLint64 *value);
+typedef void (* PFNGLUNIFORM1UI64ARBPROC) (GLint location, GLuint64 x);
+typedef void (* PFNGLUNIFORM2UI64ARBPROC) (GLint location, GLuint64 x, GLuint64 y);
+typedef void (* PFNGLUNIFORM3UI64ARBPROC) (GLint location, GLuint64 x, GLuint64 y, GLuint64 z);
+typedef void (* PFNGLUNIFORM4UI64ARBPROC) (GLint location, GLuint64 x, GLuint64 y, GLuint64 z, GLuint64 w);
+typedef void (* PFNGLUNIFORM1UI64VARBPROC) (GLint location, GLsizei count, const GLuint64 *value);
+typedef void (* PFNGLUNIFORM2UI64VARBPROC) (GLint location, GLsizei count, const GLuint64 *value);
+typedef void (* PFNGLUNIFORM3UI64VARBPROC) (GLint location, GLsizei count, const GLuint64 *value);
+typedef void (* PFNGLUNIFORM4UI64VARBPROC) (GLint location, GLsizei count, const GLuint64 *value);
+typedef void (* PFNGLGETUNIFORMI64VARBPROC) (GLuint program, GLint location, GLint64 *params);
+typedef void (* PFNGLGETUNIFORMUI64VARBPROC) (GLuint program, GLint location, GLuint64 *params);
+typedef void (* PFNGLGETNUNIFORMI64VARBPROC) (GLuint program, GLint location, GLsizei bufSize, GLint64 *params);
+typedef void (* PFNGLGETNUNIFORMUI64VARBPROC) (GLuint program, GLint location, GLsizei bufSize, GLuint64 *params);
+typedef void (* PFNGLPROGRAMUNIFORM1I64ARBPROC) (GLuint program, GLint location, GLint64 x);
+typedef void (* PFNGLPROGRAMUNIFORM2I64ARBPROC) (GLuint program, GLint location, GLint64 x, GLint64 y);
+typedef void (* PFNGLPROGRAMUNIFORM3I64ARBPROC) (GLuint program, GLint location, GLint64 x, GLint64 y, GLint64 z);
+typedef void (* PFNGLPROGRAMUNIFORM4I64ARBPROC) (GLuint program, GLint location, GLint64 x, GLint64 y, GLint64 z, GLint64 w);
+typedef void (* PFNGLPROGRAMUNIFORM1I64VARBPROC) (GLuint program, GLint location, GLsizei count, const GLint64 *value);
+typedef void (* PFNGLPROGRAMUNIFORM2I64VARBPROC) (GLuint program, GLint location, GLsizei count, const GLint64 *value);
+typedef void (* PFNGLPROGRAMUNIFORM3I64VARBPROC) (GLuint program, GLint location, GLsizei count, const GLint64 *value);
+typedef void (* PFNGLPROGRAMUNIFORM4I64VARBPROC) (GLuint program, GLint location, GLsizei count, const GLint64 *value);
+typedef void (* PFNGLPROGRAMUNIFORM1UI64ARBPROC) (GLuint program, GLint location, GLuint64 x);
+typedef void (* PFNGLPROGRAMUNIFORM2UI64ARBPROC) (GLuint program, GLint location, GLuint64 x, GLuint64 y);
+typedef void (* PFNGLPROGRAMUNIFORM3UI64ARBPROC) (GLuint program, GLint location, GLuint64 x, GLuint64 y, GLuint64 z);
+typedef void (* PFNGLPROGRAMUNIFORM4UI64ARBPROC) (GLuint program, GLint location, GLuint64 x, GLuint64 y, GLuint64 z, GLuint64 w);
+typedef void (* PFNGLPROGRAMUNIFORM1UI64VARBPROC) (GLuint program, GLint location, GLsizei count, const GLuint64 *value);
+typedef void (* PFNGLPROGRAMUNIFORM2UI64VARBPROC) (GLuint program, GLint location, GLsizei count, const GLuint64 *value);
+typedef void (* PFNGLPROGRAMUNIFORM3UI64VARBPROC) (GLuint program, GLint location, GLsizei count, const GLuint64 *value);
+typedef void (* PFNGLPROGRAMUNIFORM4UI64VARBPROC) (GLuint program, GLint location, GLsizei count, const GLuint64 *value);
+typedef khronos_uint16_t GLhalfARB;
 typedef void (* PFNGLCOLORTABLEPROC) (GLenum target, GLenum internalformat, GLsizei width, GLenum format, GLenum type, const void *table);
 typedef void (* PFNGLCOLORTABLEPARAMETERFVPROC) (GLenum target, GLenum pname, const GLfloat *params);
 typedef void (* PFNGLCOLORTABLEPARAMETERIVPROC) (GLenum target, GLenum pname, const GLint *params);
@@ -1123,8 +1306,8 @@ typedef void (* PFNGLHISTOGRAMPROC) (GLenum target, GLsizei width, GLenum intern
 typedef void (* PFNGLMINMAXPROC) (GLenum target, GLenum internalformat, GLboolean sink);
 typedef void (* PFNGLRESETHISTOGRAMPROC) (GLenum target);
 typedef void (* PFNGLRESETMINMAXPROC) (GLenum target);
-typedef void (* PFNGLMULTIDRAWARRAYSINDIRECTCOUNTARBPROC) (GLenum mode, GLintptr indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride);
-typedef void (* PFNGLMULTIDRAWELEMENTSINDIRECTCOUNTARBPROC) (GLenum mode, GLenum type, GLintptr indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride);
+typedef void (* PFNGLMULTIDRAWARRAYSINDIRECTCOUNTARBPROC) (GLenum mode, const void *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride);
+typedef void (* PFNGLMULTIDRAWELEMENTSINDIRECTCOUNTARBPROC) (GLenum mode, GLenum type, const void *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride);
 typedef void (* PFNGLVERTEXATTRIBDIVISORARBPROC) (GLuint index, GLuint divisor);
 typedef void (* PFNGLCURRENTPALETTEMATRIXARBPROC) (GLint index);
 typedef void (* PFNGLMATRIXINDEXUBVARBPROC) (GLint size, const GLubyte *indices);
@@ -1174,6 +1357,7 @@ typedef void (* PFNGLENDQUERYARBPROC) (GLenum target);
 typedef void (* PFNGLGETQUERYIVARBPROC) (GLenum target, GLenum pname, GLint *params);
 typedef void (* PFNGLGETQUERYOBJECTIVARBPROC) (GLuint id, GLenum pname, GLint *params);
 typedef void (* PFNGLGETQUERYOBJECTUIVARBPROC) (GLuint id, GLenum pname, GLuint *params);
+typedef void (* PFNGLMAXSHADERCOMPILERTHREADSARBPROC) (GLuint count);
 typedef void (* PFNGLPOINTPARAMETERFARBPROC) (GLenum pname, GLfloat param);
 typedef void (* PFNGLPOINTPARAMETERFVARBPROC) (GLenum pname, const GLfloat *params);
 typedef GLenum (* PFNGLGETGRAPHICSRESETSTATUSARBPROC) (void);
@@ -1196,6 +1380,9 @@ typedef void (* PFNGLGETNCONVOLUTIONFILTERARBPROC) (GLenum target, GLenum format
 typedef void (* PFNGLGETNSEPARABLEFILTERARBPROC) (GLenum target, GLenum format, GLenum type, GLsizei rowBufSize, void *row, GLsizei columnBufSize, void *column, void *span);
 typedef void (* PFNGLGETNHISTOGRAMARBPROC) (GLenum target, GLboolean reset, GLenum format, GLenum type, GLsizei bufSize, void *values);
 typedef void (* PFNGLGETNMINMAXARBPROC) (GLenum target, GLboolean reset, GLenum format, GLenum type, GLsizei bufSize, void *values);
+typedef void (* PFNGLFRAMEBUFFERSAMPLELOCATIONSFVARBPROC) (GLenum target, GLuint start, GLsizei count, const GLfloat *v);
+typedef void (* PFNGLNAMEDFRAMEBUFFERSAMPLELOCATIONSFVARBPROC) (GLuint framebuffer, GLuint start, GLsizei count, const GLfloat *v);
+typedef void (* PFNGLEVALUATEDEPTHVALUESARBPROC) (void);
 typedef void (* PFNGLMINSAMPLESHADINGARBPROC) (GLfloat value);
 typedef unsigned int GLhandleARB;
 typedef char GLcharARB;
@@ -1244,7 +1431,10 @@ typedef void (* PFNGLCOMPILESHADERINCLUDEARBPROC) (GLuint shader, GLsizei count,
 typedef GLboolean (* PFNGLISNAMEDSTRINGARBPROC) (GLint namelen, const GLchar *name);
 typedef void (* PFNGLGETNAMEDSTRINGARBPROC) (GLint namelen, const GLchar *name, GLsizei bufSize, GLint *stringlen, GLchar *string);
 typedef void (* PFNGLGETNAMEDSTRINGIVARBPROC) (GLint namelen, const GLchar *name, GLenum pname, GLint *params);
-typedef void (* PFNGLTEXPAGECOMMITMENTARBPROC) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean resident);
+typedef void (* PFNGLBUFFERPAGECOMMITMENTARBPROC) (GLenum target, GLintptr offset, GLsizeiptr size, GLboolean commit);
+typedef void (* PFNGLNAMEDBUFFERPAGECOMMITMENTEXTPROC) (GLuint buffer, GLintptr offset, GLsizeiptr size, GLboolean commit);
+typedef void (* PFNGLNAMEDBUFFERPAGECOMMITMENTARBPROC) (GLuint buffer, GLintptr offset, GLsizeiptr size, GLboolean commit);
+typedef void (* PFNGLTEXPAGECOMMITMENTARBPROC) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean commit);
 typedef void (* PFNGLTEXBUFFERARBPROC) (GLenum target, GLenum internalformat, GLuint buffer);
 typedef void (* PFNGLCOMPRESSEDTEXIMAGE3DARBPROC) (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const void *data);
 typedef void (* PFNGLCOMPRESSEDTEXIMAGE2DARBPROC) (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const void *data);
@@ -1267,8 +1457,8 @@ typedef void (* PFNGLWEIGHTUSVARBPROC) (GLint size, const GLushort *weights);
 typedef void (* PFNGLWEIGHTUIVARBPROC) (GLint size, const GLuint *weights);
 typedef void (* PFNGLWEIGHTPOINTERARBPROC) (GLint size, GLenum type, GLsizei stride, const void *pointer);
 typedef void (* PFNGLVERTEXBLENDARBPROC) (GLint count);
-typedef ptrdiff_t GLsizeiptrARB;
-typedef ptrdiff_t GLintptrARB;
+typedef ssize_t GLsizeiptrARB;
+typedef khronos_intptr_t GLintptrARB;
 typedef void (* PFNGLBINDBUFFERARBPROC) (GLenum target, GLuint buffer);
 typedef void (* PFNGLDELETEBUFFERSARBPROC) (GLsizei n, const GLuint *buffers);
 typedef void (* PFNGLGENBUFFERSARBPROC) (GLsizei n, GLuint *buffers);
@@ -1326,6 +1516,8 @@ typedef void (* PFNGLGETVERTEXATTRIBPOINTERVARBPROC) (GLuint index, GLenum pname
 typedef void (* PFNGLBINDATTRIBLOCATIONARBPROC) (GLhandleARB programObj, GLuint index, const GLcharARB *name);
 typedef void (* PFNGLGETACTIVEATTRIBARBPROC) (GLhandleARB programObj, GLuint index, GLsizei maxLength, GLsizei *length, GLint *size, GLenum *type, GLcharARB *name);
 typedef GLint (* PFNGLGETATTRIBLOCATIONARBPROC) (GLhandleARB programObj, const GLcharARB *name);
+typedef void (* PFNGLDEPTHRANGEARRAYDVNVPROC) (GLuint first, GLsizei count, const GLdouble *v);
+typedef void (* PFNGLDEPTHRANGEINDEXEDDNVPROC) (GLuint index, GLdouble n, GLdouble f);
 typedef void (* PFNGLWINDOWPOS2DARBPROC) (GLdouble x, GLdouble y);
 typedef void (* PFNGLWINDOWPOS2DVARBPROC) (const GLdouble *v);
 typedef void (* PFNGLWINDOWPOS2FARBPROC) (GLfloat x, GLfloat y);
@@ -1342,6 +1534,8 @@ typedef void (* PFNGLWINDOWPOS3IARBPROC) (GLint x, GLint y, GLint z);
 typedef void (* PFNGLWINDOWPOS3IVARBPROC) (const GLint *v);
 typedef void (* PFNGLWINDOWPOS3SARBPROC) (GLshort x, GLshort y, GLshort z);
 typedef void (* PFNGLWINDOWPOS3SVARBPROC) (const GLshort *v);
+typedef void (* PFNGLBLENDBARRIERKHRPROC) (void);
+typedef void (* PFNGLMAXSHADERCOMPILERTHREADSKHRPROC) (GLuint count);
 typedef void (* PFNGLMULTITEXCOORD1BOESPROC) (GLenum texture, GLbyte s);
 typedef void (* PFNGLMULTITEXCOORD1BVOESPROC) (GLenum texture, const GLbyte *coords);
 typedef void (* PFNGLMULTITEXCOORD2BOESPROC) (GLenum texture, GLbyte s, GLbyte t);
@@ -1358,13 +1552,13 @@ typedef void (* PFNGLTEXCOORD3BOESPROC) (GLbyte s, GLbyte t, GLbyte r);
 typedef void (* PFNGLTEXCOORD3BVOESPROC) (const GLbyte *coords);
 typedef void (* PFNGLTEXCOORD4BOESPROC) (GLbyte s, GLbyte t, GLbyte r, GLbyte q);
 typedef void (* PFNGLTEXCOORD4BVOESPROC) (const GLbyte *coords);
-typedef void (* PFNGLVERTEX2BOESPROC) (GLbyte x);
+typedef void (* PFNGLVERTEX2BOESPROC) (GLbyte x, GLbyte y);
 typedef void (* PFNGLVERTEX2BVOESPROC) (const GLbyte *coords);
-typedef void (* PFNGLVERTEX3BOESPROC) (GLbyte x, GLbyte y);
+typedef void (* PFNGLVERTEX3BOESPROC) (GLbyte x, GLbyte y, GLbyte z);
 typedef void (* PFNGLVERTEX3BVOESPROC) (const GLbyte *coords);
-typedef void (* PFNGLVERTEX4BOESPROC) (GLbyte x, GLbyte y, GLbyte z);
+typedef void (* PFNGLVERTEX4BOESPROC) (GLbyte x, GLbyte y, GLbyte z, GLbyte w);
 typedef void (* PFNGLVERTEX4BVOESPROC) (const GLbyte *coords);
-typedef GLint GLfixed;
+typedef khronos_int32_t GLfixed;
 typedef void (* PFNGLALPHAFUNCXOESPROC) (GLenum func, GLfixed ref);
 typedef void (* PFNGLCLEARCOLORXOESPROC) (GLfixed red, GLfixed green, GLfixed blue, GLfixed alpha);
 typedef void (* PFNGLCLEARDEPTHXOESPROC) (GLfixed depth);
@@ -1394,7 +1588,6 @@ typedef void (* PFNGLPOINTPARAMETERXVOESPROC) (GLenum pname, const GLfixed *para
 typedef void (* PFNGLPOINTSIZEXOESPROC) (GLfixed size);
 typedef void (* PFNGLPOLYGONOFFSETXOESPROC) (GLfixed factor, GLfixed units);
 typedef void (* PFNGLROTATEXOESPROC) (GLfixed angle, GLfixed x, GLfixed y, GLfixed z);
-typedef void (* PFNGLSAMPLECOVERAGEOESPROC) (GLfixed value, GLboolean invert);
 typedef void (* PFNGLSCALEXOESPROC) (GLfixed x, GLfixed y, GLfixed z);
 typedef void (* PFNGLTEXENVXOESPROC) (GLenum target, GLenum pname, GLfixed param);
 typedef void (* PFNGLTEXENVXVOESPROC) (GLenum target, GLenum pname, const GLfixed *params);
@@ -1481,17 +1674,59 @@ typedef void (*GLDEBUGPROCAMD)(GLuint id,GLenum category,GLenum severity,GLsizei
 typedef void (* PFNGLDEBUGMESSAGEENABLEAMDPROC) (GLenum category, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled);
 typedef void (* PFNGLDEBUGMESSAGEINSERTAMDPROC) (GLenum category, GLenum severity, GLuint id, GLsizei length, const GLchar *buf);
 typedef void (* PFNGLDEBUGMESSAGECALLBACKAMDPROC) (GLDEBUGPROCAMD callback, void *userParam);
-typedef GLuint (* PFNGLGETDEBUGMESSAGELOGAMDPROC) (GLuint count, GLsizei bufsize, GLenum *categories, GLuint *severities, GLuint *ids, GLsizei *lengths, GLchar *message);
+typedef GLuint (* PFNGLGETDEBUGMESSAGELOGAMDPROC) (GLuint count, GLsizei bufSize, GLenum *categories, GLuint *severities, GLuint *ids, GLsizei *lengths, GLchar *message);
 typedef void (* PFNGLBLENDFUNCINDEXEDAMDPROC) (GLuint buf, GLenum src, GLenum dst);
 typedef void (* PFNGLBLENDFUNCSEPARATEINDEXEDAMDPROC) (GLuint buf, GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha);
 typedef void (* PFNGLBLENDEQUATIONINDEXEDAMDPROC) (GLuint buf, GLenum mode);
 typedef void (* PFNGLBLENDEQUATIONSEPARATEINDEXEDAMDPROC) (GLuint buf, GLenum modeRGB, GLenum modeAlpha);
+typedef void (* PFNGLRENDERBUFFERSTORAGEMULTISAMPLEADVANCEDAMDPROC) (GLenum target, GLsizei samples, GLsizei storageSamples, GLenum internalformat, GLsizei width, GLsizei height);
+typedef void (* PFNGLNAMEDRENDERBUFFERSTORAGEMULTISAMPLEADVANCEDAMDPROC) (GLuint renderbuffer, GLsizei samples, GLsizei storageSamples, GLenum internalformat, GLsizei width, GLsizei height);
+typedef void (* PFNGLFRAMEBUFFERSAMPLEPOSITIONSFVAMDPROC) (GLenum target, GLuint numsamples, GLuint pixelindex, const GLfloat *values);
+typedef void (* PFNGLNAMEDFRAMEBUFFERSAMPLEPOSITIONSFVAMDPROC) (GLuint framebuffer, GLuint numsamples, GLuint pixelindex, const GLfloat *values);
+typedef void (* PFNGLGETFRAMEBUFFERPARAMETERFVAMDPROC) (GLenum target, GLenum pname, GLuint numsamples, GLuint pixelindex, GLsizei size, GLfloat *values);
+typedef void (* PFNGLGETNAMEDFRAMEBUFFERPARAMETERFVAMDPROC) (GLuint framebuffer, GLenum pname, GLuint numsamples, GLuint pixelindex, GLsizei size, GLfloat *values);
+typedef khronos_int64_t GLint64EXT;
+typedef void (* PFNGLUNIFORM1I64NVPROC) (GLint location, GLint64EXT x);
+typedef void (* PFNGLUNIFORM2I64NVPROC) (GLint location, GLint64EXT x, GLint64EXT y);
+typedef void (* PFNGLUNIFORM3I64NVPROC) (GLint location, GLint64EXT x, GLint64EXT y, GLint64EXT z);
+typedef void (* PFNGLUNIFORM4I64NVPROC) (GLint location, GLint64EXT x, GLint64EXT y, GLint64EXT z, GLint64EXT w);
+typedef void (* PFNGLUNIFORM1I64VNVPROC) (GLint location, GLsizei count, const GLint64EXT *value);
+typedef void (* PFNGLUNIFORM2I64VNVPROC) (GLint location, GLsizei count, const GLint64EXT *value);
+typedef void (* PFNGLUNIFORM3I64VNVPROC) (GLint location, GLsizei count, const GLint64EXT *value);
+typedef void (* PFNGLUNIFORM4I64VNVPROC) (GLint location, GLsizei count, const GLint64EXT *value);
+typedef void (* PFNGLUNIFORM1UI64NVPROC) (GLint location, GLuint64EXT x);
+typedef void (* PFNGLUNIFORM2UI64NVPROC) (GLint location, GLuint64EXT x, GLuint64EXT y);
+typedef void (* PFNGLUNIFORM3UI64NVPROC) (GLint location, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z);
+typedef void (* PFNGLUNIFORM4UI64NVPROC) (GLint location, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z, GLuint64EXT w);
+typedef void (* PFNGLUNIFORM1UI64VNVPROC) (GLint location, GLsizei count, const GLuint64EXT *value);
+typedef void (* PFNGLUNIFORM2UI64VNVPROC) (GLint location, GLsizei count, const GLuint64EXT *value);
+typedef void (* PFNGLUNIFORM3UI64VNVPROC) (GLint location, GLsizei count, const GLuint64EXT *value);
+typedef void (* PFNGLUNIFORM4UI64VNVPROC) (GLint location, GLsizei count, const GLuint64EXT *value);
+typedef void (* PFNGLGETUNIFORMI64VNVPROC) (GLuint program, GLint location, GLint64EXT *params);
+typedef void (* PFNGLGETUNIFORMUI64VNVPROC) (GLuint program, GLint location, GLuint64EXT *params);
+typedef void (* PFNGLPROGRAMUNIFORM1I64NVPROC) (GLuint program, GLint location, GLint64EXT x);
+typedef void (* PFNGLPROGRAMUNIFORM2I64NVPROC) (GLuint program, GLint location, GLint64EXT x, GLint64EXT y);
+typedef void (* PFNGLPROGRAMUNIFORM3I64NVPROC) (GLuint program, GLint location, GLint64EXT x, GLint64EXT y, GLint64EXT z);
+typedef void (* PFNGLPROGRAMUNIFORM4I64NVPROC) (GLuint program, GLint location, GLint64EXT x, GLint64EXT y, GLint64EXT z, GLint64EXT w);
+typedef void (* PFNGLPROGRAMUNIFORM1I64VNVPROC) (GLuint program, GLint location, GLsizei count, const GLint64EXT *value);
+typedef void (* PFNGLPROGRAMUNIFORM2I64VNVPROC) (GLuint program, GLint location, GLsizei count, const GLint64EXT *value);
+typedef void (* PFNGLPROGRAMUNIFORM3I64VNVPROC) (GLuint program, GLint location, GLsizei count, const GLint64EXT *value);
+typedef void (* PFNGLPROGRAMUNIFORM4I64VNVPROC) (GLuint program, GLint location, GLsizei count, const GLint64EXT *value);
+typedef void (* PFNGLPROGRAMUNIFORM1UI64NVPROC) (GLuint program, GLint location, GLuint64EXT x);
+typedef void (* PFNGLPROGRAMUNIFORM2UI64NVPROC) (GLuint program, GLint location, GLuint64EXT x, GLuint64EXT y);
+typedef void (* PFNGLPROGRAMUNIFORM3UI64NVPROC) (GLuint program, GLint location, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z);
+typedef void (* PFNGLPROGRAMUNIFORM4UI64NVPROC) (GLuint program, GLint location, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z, GLuint64EXT w);
+typedef void (* PFNGLPROGRAMUNIFORM1UI64VNVPROC) (GLuint program, GLint location, GLsizei count, const GLuint64EXT *value);
+typedef void (* PFNGLPROGRAMUNIFORM2UI64VNVPROC) (GLuint program, GLint location, GLsizei count, const GLuint64EXT *value);
+typedef void (* PFNGLPROGRAMUNIFORM3UI64VNVPROC) (GLuint program, GLint location, GLsizei count, const GLuint64EXT *value);
+typedef void (* PFNGLPROGRAMUNIFORM4UI64VNVPROC) (GLuint program, GLint location, GLsizei count, const GLuint64EXT *value);
 typedef void (* PFNGLVERTEXATTRIBPARAMETERIAMDPROC) (GLuint index, GLenum pname, GLint param);
 typedef void (* PFNGLMULTIDRAWARRAYSINDIRECTAMDPROC) (GLenum mode, const void *indirect, GLsizei primcount, GLsizei stride);
 typedef void (* PFNGLMULTIDRAWELEMENTSINDIRECTAMDPROC) (GLenum mode, GLenum type, const void *indirect, GLsizei primcount, GLsizei stride);
 typedef void (* PFNGLGENNAMESAMDPROC) (GLenum identifier, GLuint num, GLuint *names);
 typedef void (* PFNGLDELETENAMESAMDPROC) (GLenum identifier, GLuint num, const GLuint *names);
 typedef GLboolean (* PFNGLISNAMEAMDPROC) (GLenum identifier, GLuint name);
+typedef void (* PFNGLQUERYOBJECTPARAMETERUIAMDPROC) (GLenum target, GLuint id, GLenum pname, GLuint param);
 typedef void (* PFNGLGETPERFMONITORGROUPSAMDPROC) (GLint *numGroups, GLsizei groupsSize, GLuint *groups);
 typedef void (* PFNGLGETPERFMONITORCOUNTERSAMDPROC) (GLuint group, GLint *numCounters, GLint *maxActiveCounters, GLsizei counterSize, GLuint *counters);
 typedef void (* PFNGLGETPERFMONITORGROUPSTRINGAMDPROC) (GLuint group, GLsizei bufSize, GLsizei *length, GLchar *groupString);
@@ -1631,6 +1866,9 @@ typedef void (* PFNGLNORMALSTREAM3DVATIPROC) (GLenum stream, const GLdouble *coo
 typedef void (* PFNGLCLIENTACTIVEVERTEXSTREAMATIPROC) (GLenum stream);
 typedef void (* PFNGLVERTEXBLENDENVIATIPROC) (GLenum pname, GLint param);
 typedef void (* PFNGLVERTEXBLENDENVFATIPROC) (GLenum pname, GLfloat param);
+typedef void *GLeglImageOES;
+typedef void (* PFNGLEGLIMAGETARGETTEXSTORAGEEXTPROC) (GLenum target, GLeglImageOES image, const GLint* attrib_list);
+typedef void (* PFNGLEGLIMAGETARGETTEXTURESTORAGEEXTPROC) (GLuint texture, GLeglImageOES image, const GLint* attrib_list);
 typedef void (* PFNGLUNIFORMBUFFEREXTPROC) (GLuint program, GLint location, GLuint buffer);
 typedef GLint (* PFNGLGETUNIFORMBUFFERSIZEEXTPROC) (GLuint program, GLint location);
 typedef GLintptr (* PFNGLGETUNIFORMOFFSETEXTPROC) (GLuint program, GLint location);
@@ -1910,7 +2148,7 @@ typedef void *(* PFNGLMAPNAMEDBUFFERRANGEEXTPROC) (GLuint buffer, GLintptr offse
 typedef void (* PFNGLFLUSHMAPPEDNAMEDBUFFERRANGEEXTPROC) (GLuint buffer, GLintptr offset, GLsizeiptr length);
 typedef void (* PFNGLNAMEDBUFFERSTORAGEEXTPROC) (GLuint buffer, GLsizeiptr size, const void *data, GLbitfield flags);
 typedef void (* PFNGLCLEARNAMEDBUFFERDATAEXTPROC) (GLuint buffer, GLenum internalformat, GLenum format, GLenum type, const void *data);
-typedef void (* PFNGLCLEARNAMEDBUFFERSUBDATAEXTPROC) (GLuint buffer, GLenum internalformat, GLenum format, GLenum type, GLsizeiptr offset, GLsizeiptr size, const void *data);
+typedef void (* PFNGLCLEARNAMEDBUFFERSUBDATAEXTPROC) (GLuint buffer, GLenum internalformat, GLsizeiptr offset, GLsizeiptr size, GLenum format, GLenum type, const void *data);
 typedef void (* PFNGLNAMEDFRAMEBUFFERPARAMETERIEXTPROC) (GLuint framebuffer, GLenum pname, GLint param);
 typedef void (* PFNGLGETNAMEDFRAMEBUFFERPARAMETERIVEXTPROC) (GLuint framebuffer, GLenum pname, GLint *params);
 typedef void (* PFNGLPROGRAMUNIFORM1DEXTPROC) (GLuint program, GLint location, GLdouble x);
@@ -1943,12 +2181,15 @@ typedef void (* PFNGLVERTEXARRAYVERTEXATTRIBLFORMATEXTPROC) (GLuint vaobj, GLuin
 typedef void (* PFNGLVERTEXARRAYVERTEXATTRIBBINDINGEXTPROC) (GLuint vaobj, GLuint attribindex, GLuint bindingindex);
 typedef void (* PFNGLVERTEXARRAYVERTEXBINDINGDIVISOREXTPROC) (GLuint vaobj, GLuint bindingindex, GLuint divisor);
 typedef void (* PFNGLVERTEXARRAYVERTEXATTRIBLOFFSETEXTPROC) (GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLsizei stride, GLintptr offset);
-typedef void (* PFNGLTEXTUREPAGECOMMITMENTEXTPROC) (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean resident);
+typedef void (* PFNGLTEXTUREPAGECOMMITMENTEXTPROC) (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean commit);
 typedef void (* PFNGLVERTEXARRAYVERTEXATTRIBDIVISOREXTPROC) (GLuint vaobj, GLuint index, GLuint divisor);
 typedef void (* PFNGLCOLORMASKINDEXEDEXTPROC) (GLuint index, GLboolean r, GLboolean g, GLboolean b, GLboolean a);
 typedef void (* PFNGLDRAWARRAYSINSTANCEDEXTPROC) (GLenum mode, GLint start, GLsizei count, GLsizei primcount);
 typedef void (* PFNGLDRAWELEMENTSINSTANCEDEXTPROC) (GLenum mode, GLsizei count, GLenum type, const void *indices, GLsizei primcount);
 typedef void (* PFNGLDRAWRANGEELEMENTSEXTPROC) (GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const void *indices);
+typedef void *GLeglClientBufferEXT;
+typedef void (* PFNGLBUFFERSTORAGEEXTERNALEXTPROC) (GLenum target, GLintptr offset, GLsizeiptr size, GLeglClientBufferEXT clientBuffer, GLbitfield flags);
+typedef void (* PFNGLNAMEDBUFFERSTORAGEEXTERNALEXTPROC) (GLuint buffer, GLintptr offset, GLsizeiptr size, GLeglClientBufferEXT clientBuffer, GLbitfield flags);
 typedef void (* PFNGLFOGCOORDFEXTPROC) (GLfloat coord);
 typedef void (* PFNGLFOGCOORDFVEXTPROC) (const GLfloat *coord);
 typedef void (* PFNGLFOGCOORDDEXTPROC) (GLdouble coord);
@@ -1987,6 +2228,29 @@ typedef void (* PFNGLUNIFORM1UIVEXTPROC) (GLint location, GLsizei count, const G
 typedef void (* PFNGLUNIFORM2UIVEXTPROC) (GLint location, GLsizei count, const GLuint *value);
 typedef void (* PFNGLUNIFORM3UIVEXTPROC) (GLint location, GLsizei count, const GLuint *value);
 typedef void (* PFNGLUNIFORM4UIVEXTPROC) (GLint location, GLsizei count, const GLuint *value);
+typedef void (* PFNGLVERTEXATTRIBI1IEXTPROC) (GLuint index, GLint x);
+typedef void (* PFNGLVERTEXATTRIBI2IEXTPROC) (GLuint index, GLint x, GLint y);
+typedef void (* PFNGLVERTEXATTRIBI3IEXTPROC) (GLuint index, GLint x, GLint y, GLint z);
+typedef void (* PFNGLVERTEXATTRIBI4IEXTPROC) (GLuint index, GLint x, GLint y, GLint z, GLint w);
+typedef void (* PFNGLVERTEXATTRIBI1UIEXTPROC) (GLuint index, GLuint x);
+typedef void (* PFNGLVERTEXATTRIBI2UIEXTPROC) (GLuint index, GLuint x, GLuint y);
+typedef void (* PFNGLVERTEXATTRIBI3UIEXTPROC) (GLuint index, GLuint x, GLuint y, GLuint z);
+typedef void (* PFNGLVERTEXATTRIBI4UIEXTPROC) (GLuint index, GLuint x, GLuint y, GLuint z, GLuint w);
+typedef void (* PFNGLVERTEXATTRIBI1IVEXTPROC) (GLuint index, const GLint *v);
+typedef void (* PFNGLVERTEXATTRIBI2IVEXTPROC) (GLuint index, const GLint *v);
+typedef void (* PFNGLVERTEXATTRIBI3IVEXTPROC) (GLuint index, const GLint *v);
+typedef void (* PFNGLVERTEXATTRIBI4IVEXTPROC) (GLuint index, const GLint *v);
+typedef void (* PFNGLVERTEXATTRIBI1UIVEXTPROC) (GLuint index, const GLuint *v);
+typedef void (* PFNGLVERTEXATTRIBI2UIVEXTPROC) (GLuint index, const GLuint *v);
+typedef void (* PFNGLVERTEXATTRIBI3UIVEXTPROC) (GLuint index, const GLuint *v);
+typedef void (* PFNGLVERTEXATTRIBI4UIVEXTPROC) (GLuint index, const GLuint *v);
+typedef void (* PFNGLVERTEXATTRIBI4BVEXTPROC) (GLuint index, const GLbyte *v);
+typedef void (* PFNGLVERTEXATTRIBI4SVEXTPROC) (GLuint index, const GLshort *v);
+typedef void (* PFNGLVERTEXATTRIBI4UBVEXTPROC) (GLuint index, const GLubyte *v);
+typedef void (* PFNGLVERTEXATTRIBI4USVEXTPROC) (GLuint index, const GLushort *v);
+typedef void (* PFNGLVERTEXATTRIBIPOINTEREXTPROC) (GLuint index, GLint size, GLenum type, GLsizei stride, const void *pointer);
+typedef void (* PFNGLGETVERTEXATTRIBIIVEXTPROC) (GLuint index, GLenum pname, GLint *params);
+typedef void (* PFNGLGETVERTEXATTRIBIUIVEXTPROC) (GLuint index, GLenum pname, GLuint *params);
 typedef void (* PFNGLGETHISTOGRAMEXTPROC) (GLenum target, GLboolean reset, GLenum format, GLenum type, void *values);
 typedef void (* PFNGLGETHISTOGRAMPARAMETERFVEXTPROC) (GLenum target, GLenum pname, GLfloat *params);
 typedef void (* PFNGLGETHISTOGRAMPARAMETERIVEXTPROC) (GLenum target, GLenum pname, GLint *params);
@@ -2002,6 +2266,28 @@ typedef void (* PFNGLINDEXMATERIALEXTPROC) (GLenum face, GLenum mode);
 typedef void (* PFNGLAPPLYTEXTUREEXTPROC) (GLenum mode);
 typedef void (* PFNGLTEXTURELIGHTEXTPROC) (GLenum pname);
 typedef void (* PFNGLTEXTUREMATERIALEXTPROC) (GLenum face, GLenum mode);
+typedef void (* PFNGLGETUNSIGNEDBYTEVEXTPROC) (GLenum pname, GLubyte *data);
+typedef void (* PFNGLGETUNSIGNEDBYTEI_VEXTPROC) (GLenum target, GLuint index, GLubyte *data);
+typedef void (* PFNGLDELETEMEMORYOBJECTSEXTPROC) (GLsizei n, const GLuint *memoryObjects);
+typedef GLboolean (* PFNGLISMEMORYOBJECTEXTPROC) (GLuint memoryObject);
+typedef void (* PFNGLCREATEMEMORYOBJECTSEXTPROC) (GLsizei n, GLuint *memoryObjects);
+typedef void (* PFNGLMEMORYOBJECTPARAMETERIVEXTPROC) (GLuint memoryObject, GLenum pname, const GLint *params);
+typedef void (* PFNGLGETMEMORYOBJECTPARAMETERIVEXTPROC) (GLuint memoryObject, GLenum pname, GLint *params);
+typedef void (* PFNGLTEXSTORAGEMEM2DEXTPROC) (GLenum target, GLsizei levels, GLenum internalFormat, GLsizei width, GLsizei height, GLuint memory, GLuint64 offset);
+typedef void (* PFNGLTEXSTORAGEMEM2DMULTISAMPLEEXTPROC) (GLenum target, GLsizei samples, GLenum internalFormat, GLsizei width, GLsizei height, GLboolean fixedSampleLocations, GLuint memory, GLuint64 offset);
+typedef void (* PFNGLTEXSTORAGEMEM3DEXTPROC) (GLenum target, GLsizei levels, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLuint memory, GLuint64 offset);
+typedef void (* PFNGLTEXSTORAGEMEM3DMULTISAMPLEEXTPROC) (GLenum target, GLsizei samples, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedSampleLocations, GLuint memory, GLuint64 offset);
+typedef void (* PFNGLBUFFERSTORAGEMEMEXTPROC) (GLenum target, GLsizeiptr size, GLuint memory, GLuint64 offset);
+typedef void (* PFNGLTEXTURESTORAGEMEM2DEXTPROC) (GLuint texture, GLsizei levels, GLenum internalFormat, GLsizei width, GLsizei height, GLuint memory, GLuint64 offset);
+typedef void (* PFNGLTEXTURESTORAGEMEM2DMULTISAMPLEEXTPROC) (GLuint texture, GLsizei samples, GLenum internalFormat, GLsizei width, GLsizei height, GLboolean fixedSampleLocations, GLuint memory, GLuint64 offset);
+typedef void (* PFNGLTEXTURESTORAGEMEM3DEXTPROC) (GLuint texture, GLsizei levels, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLuint memory, GLuint64 offset);
+typedef void (* PFNGLTEXTURESTORAGEMEM3DMULTISAMPLEEXTPROC) (GLuint texture, GLsizei samples, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedSampleLocations, GLuint memory, GLuint64 offset);
+typedef void (* PFNGLNAMEDBUFFERSTORAGEMEMEXTPROC) (GLuint buffer, GLsizeiptr size, GLuint memory, GLuint64 offset);
+typedef void (* PFNGLTEXSTORAGEMEM1DEXTPROC) (GLenum target, GLsizei levels, GLenum internalFormat, GLsizei width, GLuint memory, GLuint64 offset);
+typedef void (* PFNGLTEXTURESTORAGEMEM1DEXTPROC) (GLuint texture, GLsizei levels, GLenum internalFormat, GLsizei width, GLuint memory, GLuint64 offset);
+typedef void (* PFNGLIMPORTMEMORYFDEXTPROC) (GLuint memory, GLuint64 size, GLenum handleType, GLint fd);
+typedef void (* PFNGLIMPORTMEMORYWIN32HANDLEEXTPROC) (GLuint memory, GLuint64 size, GLenum handleType, void *handle);
+typedef void (* PFNGLIMPORTMEMORYWIN32NAMEEXTPROC) (GLuint memory, GLuint64 size, GLenum handleType, const void *name);
 typedef void (* PFNGLMULTIDRAWARRAYSEXTPROC) (GLenum mode, const GLint *first, const GLsizei *count, GLsizei primcount);
 typedef void (* PFNGLMULTIDRAWELEMENTSEXTPROC) (GLenum mode, const GLsizei *count, GLenum type, const void *const*indices, GLsizei primcount);
 typedef void (* PFNGLSAMPLEMASKEXTPROC) (GLclampf value, GLboolean invert);
@@ -2015,7 +2301,9 @@ typedef void (* PFNGLGETPIXELTRANSFORMPARAMETERFVEXTPROC) (GLenum target, GLenum
 typedef void (* PFNGLPOINTPARAMETERFEXTPROC) (GLenum pname, GLfloat param);
 typedef void (* PFNGLPOINTPARAMETERFVEXTPROC) (GLenum pname, const GLfloat *params);
 typedef void (* PFNGLPOLYGONOFFSETEXTPROC) (GLfloat factor, GLfloat bias);
+typedef void (* PFNGLPOLYGONOFFSETCLAMPEXTPROC) (GLfloat factor, GLfloat units, GLfloat clamp);
 typedef void (* PFNGLPROVOKINGVERTEXEXTPROC) (GLenum mode);
+typedef void (* PFNGLRASTERSAMPLESEXTPROC) (GLuint samples, GLboolean fixedsamplelocations);
 typedef void (* PFNGLSECONDARYCOLOR3BEXTPROC) (GLbyte red, GLbyte green, GLbyte blue);
 typedef void (* PFNGLSECONDARYCOLOR3BVEXTPROC) (const GLbyte *v);
 typedef void (* PFNGLSECONDARYCOLOR3DEXTPROC) (GLdouble red, GLdouble green, GLdouble blue);
@@ -2033,9 +2321,20 @@ typedef void (* PFNGLSECONDARYCOLOR3UIVEXTPROC) (const GLuint *v);
 typedef void (* PFNGLSECONDARYCOLOR3USEXTPROC) (GLushort red, GLushort green, GLushort blue);
 typedef void (* PFNGLSECONDARYCOLOR3USVEXTPROC) (const GLushort *v);
 typedef void (* PFNGLSECONDARYCOLORPOINTEREXTPROC) (GLint size, GLenum type, GLsizei stride, const void *pointer);
+typedef void (* PFNGLGENSEMAPHORESEXTPROC) (GLsizei n, GLuint *semaphores);
+typedef void (* PFNGLDELETESEMAPHORESEXTPROC) (GLsizei n, const GLuint *semaphores);
+typedef GLboolean (* PFNGLISSEMAPHOREEXTPROC) (GLuint semaphore);
+typedef void (* PFNGLSEMAPHOREPARAMETERUI64VEXTPROC) (GLuint semaphore, GLenum pname, const GLuint64 *params);
+typedef void (* PFNGLGETSEMAPHOREPARAMETERUI64VEXTPROC) (GLuint semaphore, GLenum pname, GLuint64 *params);
+typedef void (* PFNGLWAITSEMAPHOREEXTPROC) (GLuint semaphore, GLuint numBufferBarriers, const GLuint *buffers, GLuint numTextureBarriers, const GLuint *textures, const GLenum *srcLayouts);
+typedef void (* PFNGLSIGNALSEMAPHOREEXTPROC) (GLuint semaphore, GLuint numBufferBarriers, const GLuint *buffers, GLuint numTextureBarriers, const GLuint *textures, const GLenum *dstLayouts);
+typedef void (* PFNGLIMPORTSEMAPHOREFDEXTPROC) (GLuint semaphore, GLenum handleType, GLint fd);
+typedef void (* PFNGLIMPORTSEMAPHOREWIN32HANDLEEXTPROC) (GLuint semaphore, GLenum handleType, void *handle);
+typedef void (* PFNGLIMPORTSEMAPHOREWIN32NAMEEXTPROC) (GLuint semaphore, GLenum handleType, const void *name);
 typedef void (* PFNGLUSESHADERPROGRAMEXTPROC) (GLenum type, GLuint program);
 typedef void (* PFNGLACTIVEPROGRAMEXTPROC) (GLuint program);
 typedef GLuint (* PFNGLCREATESHADERPROGRAMEXTPROC) (GLenum type, const GLchar *string);
+typedef void (* PFNGLFRAMEBUFFERFETCHBARRIEREXTPROC) (void);
 typedef void (* PFNGLBINDIMAGETEXTUREEXTPROC) (GLuint index, GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum access, GLint format);
 typedef void (* PFNGLMEMORYBARRIEREXTPROC) (GLbitfield barriers);
 typedef void (* PFNGLSTENCILCLEARTAGEXTPROC) (GLsizei stencilTagBits, GLuint stencilClearTag);
@@ -2044,6 +2343,7 @@ typedef void (* PFNGLTEXSUBIMAGE1DEXTPROC) (GLenum target, GLint level, GLint xo
 typedef void (* PFNGLTEXSUBIMAGE2DEXTPROC) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void *pixels);
 typedef void (* PFNGLTEXIMAGE3DEXTPROC) (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const void *pixels);
 typedef void (* PFNGLTEXSUBIMAGE3DEXTPROC) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *pixels);
+typedef void (* PFNGLFRAMEBUFFERTEXTURELAYEREXTPROC) (GLenum target, GLenum attachment, GLuint texture, GLint level, GLint layer);
 typedef void (* PFNGLTEXBUFFEREXTPROC) (GLenum target, GLenum internalformat, GLuint buffer);
 typedef void (* PFNGLTEXPARAMETERIIVEXTPROC) (GLenum target, GLenum pname, const GLint *params);
 typedef void (* PFNGLTEXPARAMETERIUIVEXTPROC) (GLenum target, GLenum pname, const GLuint *params);
@@ -2058,6 +2358,9 @@ typedef void (* PFNGLGENTEXTURESEXTPROC) (GLsizei n, GLuint *textures);
 typedef GLboolean (* PFNGLISTEXTUREEXTPROC) (GLuint texture);
 typedef void (* PFNGLPRIORITIZETEXTURESEXTPROC) (GLsizei n, const GLuint *textures, const GLclampf *priorities);
 typedef void (* PFNGLTEXTURENORMALEXTPROC) (GLenum mode);
+typedef void (* PFNGLTEXSTORAGE1DEXTPROC) (GLenum target, GLsizei levels, GLenum internalformat, GLsizei width);
+typedef void (* PFNGLTEXSTORAGE2DEXTPROC) (GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height);
+typedef void (* PFNGLTEXSTORAGE3DEXTPROC) (GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth);
 typedef void (* PFNGLGETQUERYOBJECTI64VEXTPROC) (GLuint id, GLenum pname, GLint64 *params);
 typedef void (* PFNGLGETQUERYOBJECTUI64VEXTPROC) (GLuint id, GLenum pname, GLuint64 *params);
 typedef void (* PFNGLBEGINTRANSFORMFEEDBACKEXTPROC) (GLenum primitiveMode);
@@ -2122,6 +2425,9 @@ typedef void (* PFNGLGETLOCALCONSTANTFLOATVEXTPROC) (GLuint id, GLenum value, GL
 typedef void (* PFNGLVERTEXWEIGHTFEXTPROC) (GLfloat weight);
 typedef void (* PFNGLVERTEXWEIGHTFVEXTPROC) (const GLfloat *weight);
 typedef void (* PFNGLVERTEXWEIGHTPOINTEREXTPROC) (GLint size, GLenum type, GLsizei stride, const void *pointer);
+typedef GLboolean (* PFNGLACQUIREKEYEDMUTEXWIN32EXTPROC) (GLuint memory, GLuint64 key, GLuint timeout);
+typedef GLboolean (* PFNGLRELEASEKEYEDMUTEXWIN32EXTPROC) (GLuint memory, GLuint64 key);
+typedef void (* PFNGLWINDOWRECTANGLESEXTPROC) (GLenum mode, GLsizei count, const GLint *box);
 typedef GLsync (* PFNGLIMPORTSYNCEXTPROC) (GLenum external_sync_type, GLintptr external_sync, GLbitfield flags);
 typedef void (* PFNGLFRAMETERMINATORGREMEDYPROC) (void);
 typedef void (* PFNGLSTRINGMARKERGREMEDYPROC) (GLsizei len, const void *string);
@@ -2143,6 +2449,7 @@ typedef void (* PFNGLNORMALPOINTERLISTIBMPROC) (GLenum type, GLint stride, const
 typedef void (* PFNGLTEXCOORDPOINTERLISTIBMPROC) (GLint size, GLenum type, GLint stride, const void **pointer, GLint ptrstride);
 typedef void (* PFNGLVERTEXPOINTERLISTIBMPROC) (GLint size, GLenum type, GLint stride, const void **pointer, GLint ptrstride);
 typedef void (* PFNGLBLENDFUNCSEPARATEINGRPROC) (GLenum sfactorRGB, GLenum dfactorRGB, GLenum sfactorAlpha, GLenum dfactorAlpha);
+typedef void (* PFNGLAPPLYFRAMEBUFFERATTACHMENTCMAAINTELPROC) (void);
 typedef void (* PFNGLSYNCTEXTUREINTELPROC) (GLuint texture);
 typedef void (* PFNGLUNMAPTEXTURE2DINTELPROC) (GLuint texture, GLint level);
 typedef void *(* PFNGLMAPTEXTURE2DINTELPROC) (GLuint texture, GLint level, GLbitfield access, GLint *stride, GLenum *layout);
@@ -2150,6 +2457,18 @@ typedef void (* PFNGLVERTEXPOINTERVINTELPROC) (GLint size, GLenum type, const vo
 typedef void (* PFNGLNORMALPOINTERVINTELPROC) (GLenum type, const void **pointer);
 typedef void (* PFNGLCOLORPOINTERVINTELPROC) (GLint size, GLenum type, const void **pointer);
 typedef void (* PFNGLTEXCOORDPOINTERVINTELPROC) (GLint size, GLenum type, const void **pointer);
+typedef void (* PFNGLBEGINPERFQUERYINTELPROC) (GLuint queryHandle);
+typedef void (* PFNGLCREATEPERFQUERYINTELPROC) (GLuint queryId, GLuint *queryHandle);
+typedef void (* PFNGLDELETEPERFQUERYINTELPROC) (GLuint queryHandle);
+typedef void (* PFNGLENDPERFQUERYINTELPROC) (GLuint queryHandle);
+typedef void (* PFNGLGETFIRSTPERFQUERYIDINTELPROC) (GLuint *queryId);
+typedef void (* PFNGLGETNEXTPERFQUERYIDINTELPROC) (GLuint queryId, GLuint *nextQueryId);
+typedef void (* PFNGLGETPERFCOUNTERINFOINTELPROC) (GLuint queryId, GLuint counterId, GLuint counterNameLength, GLchar *counterName, GLuint counterDescLength, GLchar *counterDesc, GLuint *counterOffset, GLuint *counterDataSize, GLuint *counterTypeEnum, GLuint *counterDataTypeEnum, GLuint64 *rawCounterMaxValue);
+typedef void (* PFNGLGETPERFQUERYDATAINTELPROC) (GLuint queryHandle, GLuint flags, GLsizei dataSize, void *data, GLuint *bytesWritten);
+typedef void (* PFNGLGETPERFQUERYIDBYNAMEINTELPROC) (GLchar *queryName, GLuint *queryId);
+typedef void (* PFNGLGETPERFQUERYINFOINTELPROC) (GLuint queryId, GLuint queryNameLength, GLchar *queryName, GLuint *dataSize, GLuint *noCounters, GLuint *noInstances, GLuint *capsMask);
+typedef void (* PFNGLFRAMEBUFFERPARAMETERIMESAPROC) (GLenum target, GLenum pname, GLint param);
+typedef void (* PFNGLGETFRAMEBUFFERPARAMETERIVMESAPROC) (GLenum target, GLenum pname, GLint *params);
 typedef void (* PFNGLRESIZEBUFFERSMESAPROC) (void);
 typedef void (* PFNGLWINDOWPOS2DMESAPROC) (GLdouble x, GLdouble y);
 typedef void (* PFNGLWINDOWPOS2DVMESAPROC) (const GLdouble *v);
@@ -2177,8 +2496,24 @@ typedef void (* PFNGLWINDOWPOS4SMESAPROC) (GLshort x, GLshort y, GLshort z, GLsh
 typedef void (* PFNGLWINDOWPOS4SVMESAPROC) (const GLshort *v);
 typedef void (* PFNGLBEGINCONDITIONALRENDERNVXPROC) (GLuint id);
 typedef void (* PFNGLENDCONDITIONALRENDERNVXPROC) (void);
+typedef void (* PFNGLUPLOADGPUMASKNVXPROC) (GLbitfield mask);
+typedef void (* PFNGLMULTICASTVIEWPORTARRAYVNVXPROC) (GLuint gpu, GLuint first, GLsizei count, const GLfloat *v);
+typedef void (* PFNGLMULTICASTVIEWPORTPOSITIONWSCALENVXPROC) (GLuint gpu, GLuint index, GLfloat xcoeff, GLfloat ycoeff);
+typedef void (* PFNGLMULTICASTSCISSORARRAYVNVXPROC) (GLuint gpu, GLuint first, GLsizei count, const GLint *v);
+typedef GLuint (* PFNGLASYNCCOPYBUFFERSUBDATANVXPROC) (GLsizei waitSemaphoreCount, const GLuint *waitSemaphoreArray, const GLuint64 *fenceValueArray, GLuint readGpu, GLbitfield writeGpuMask, GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size, GLsizei signalSemaphoreCount, const GLuint *signalSemaphoreArray, const GLuint64 *signalValueArray);
+typedef GLuint (* PFNGLASYNCCOPYIMAGESUBDATANVXPROC) (GLsizei waitSemaphoreCount, const GLuint *waitSemaphoreArray, const GLuint64 *waitValueArray, GLuint srcGpu, GLbitfield dstGpuMask, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei srcWidth, GLsizei srcHeight, GLsizei srcDepth, GLsizei signalSemaphoreCount, const GLuint *signalSemaphoreArray, const GLuint64 *signalValueArray);
+typedef void (* PFNGLLGPUNAMEDBUFFERSUBDATANVXPROC) (GLbitfield gpuMask, GLuint buffer, GLintptr offset, GLsizeiptr size, const void *data);
+typedef void (* PFNGLLGPUCOPYIMAGESUBDATANVXPROC) (GLuint sourceGpu, GLbitfield destinationGpuMask, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srxY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth);
+typedef void (* PFNGLLGPUINTERLOCKNVXPROC) (void);
+typedef GLuint (* PFNGLCREATEPROGRESSFENCENVXPROC) (void);
+typedef void (* PFNGLSIGNALSEMAPHOREUI64NVXPROC) (GLuint signalGpu, GLsizei fenceObjectCount, const GLuint *semaphoreArray, const GLuint64 *fenceValueArray);
+typedef void (* PFNGLWAITSEMAPHOREUI64NVXPROC) (GLuint waitGpu, GLsizei fenceObjectCount, const GLuint *semaphoreArray, const GLuint64 *fenceValueArray);
+typedef void (* PFNGLCLIENTWAITSEMAPHOREUI64NVXPROC) (GLsizei fenceObjectCount, const GLuint *semaphoreArray, const GLuint64 *fenceValueArray);
+typedef void (* PFNGLALPHATOCOVERAGEDITHERCONTROLNVPROC) (GLenum mode);
 typedef void (* PFNGLMULTIDRAWARRAYSINDIRECTBINDLESSNVPROC) (GLenum mode, const void *indirect, GLsizei drawCount, GLsizei stride, GLint vertexBufferCount);
 typedef void (* PFNGLMULTIDRAWELEMENTSINDIRECTBINDLESSNVPROC) (GLenum mode, GLenum type, const void *indirect, GLsizei drawCount, GLsizei stride, GLint vertexBufferCount);
+typedef void (* PFNGLMULTIDRAWARRAYSINDIRECTBINDLESSCOUNTNVPROC) (GLenum mode, const void *indirect, GLsizei drawCount, GLsizei maxDrawCount, GLsizei stride, GLint vertexBufferCount);
+typedef void (* PFNGLMULTIDRAWELEMENTSINDIRECTBINDLESSCOUNTNVPROC) (GLenum mode, GLenum type, const void *indirect, GLsizei drawCount, GLsizei maxDrawCount, GLsizei stride, GLint vertexBufferCount);
 typedef GLuint64 (* PFNGLGETTEXTUREHANDLENVPROC) (GLuint texture);
 typedef GLuint64 (* PFNGLGETTEXTURESAMPLERHANDLENVPROC) (GLuint texture, GLuint sampler);
 typedef void (* PFNGLMAKETEXTUREHANDLERESIDENTNVPROC) (GLuint64 handle);
@@ -2194,13 +2529,40 @@ typedef GLboolean (* PFNGLISTEXTUREHANDLERESIDENTNVPROC) (GLuint64 handle);
 typedef GLboolean (* PFNGLISIMAGEHANDLERESIDENTNVPROC) (GLuint64 handle);
 typedef void (* PFNGLBLENDPARAMETERINVPROC) (GLenum pname, GLint value);
 typedef void (* PFNGLBLENDBARRIERNVPROC) (void);
+typedef void (* PFNGLVIEWPORTPOSITIONWSCALENVPROC) (GLuint index, GLfloat xcoeff, GLfloat ycoeff);
+typedef void (* PFNGLCREATESTATESNVPROC) (GLsizei n, GLuint *states);
+typedef void (* PFNGLDELETESTATESNVPROC) (GLsizei n, const GLuint *states);
+typedef GLboolean (* PFNGLISSTATENVPROC) (GLuint state);
+typedef void (* PFNGLSTATECAPTURENVPROC) (GLuint state, GLenum mode);
+typedef GLuint (* PFNGLGETCOMMANDHEADERNVPROC) (GLenum tokenID, GLuint size);
+typedef GLushort (* PFNGLGETSTAGEINDEXNVPROC) (GLenum shadertype);
+typedef void (* PFNGLDRAWCOMMANDSNVPROC) (GLenum primitiveMode, GLuint buffer, const GLintptr *indirects, const GLsizei *sizes, GLuint count);
+typedef void (* PFNGLDRAWCOMMANDSADDRESSNVPROC) (GLenum primitiveMode, const GLuint64 *indirects, const GLsizei *sizes, GLuint count);
+typedef void (* PFNGLDRAWCOMMANDSSTATESNVPROC) (GLuint buffer, const GLintptr *indirects, const GLsizei *sizes, const GLuint *states, const GLuint *fbos, GLuint count);
+typedef void (* PFNGLDRAWCOMMANDSSTATESADDRESSNVPROC) (const GLuint64 *indirects, const GLsizei *sizes, const GLuint *states, const GLuint *fbos, GLuint count);
+typedef void (* PFNGLCREATECOMMANDLISTSNVPROC) (GLsizei n, GLuint *lists);
+typedef void (* PFNGLDELETECOMMANDLISTSNVPROC) (GLsizei n, const GLuint *lists);
+typedef GLboolean (* PFNGLISCOMMANDLISTNVPROC) (GLuint list);
+typedef void (* PFNGLLISTDRAWCOMMANDSSTATESCLIENTNVPROC) (GLuint list, GLuint segment, const void **indirects, const GLsizei *sizes, const GLuint *states, const GLuint *fbos, GLuint count);
+typedef void (* PFNGLCOMMANDLISTSEGMENTSNVPROC) (GLuint list, GLuint segments);
+typedef void (* PFNGLCOMPILECOMMANDLISTNVPROC) (GLuint list);
+typedef void (* PFNGLCALLCOMMANDLISTNVPROC) (GLuint list);
 typedef void (* PFNGLBEGINCONDITIONALRENDERNVPROC) (GLuint id, GLenum mode);
 typedef void (* PFNGLENDCONDITIONALRENDERNVPROC) (void);
+typedef void (* PFNGLSUBPIXELPRECISIONBIASNVPROC) (GLuint xbits, GLuint ybits);
+typedef void (* PFNGLCONSERVATIVERASTERPARAMETERFNVPROC) (GLenum pname, GLfloat value);
+typedef void (* PFNGLCONSERVATIVERASTERPARAMETERINVPROC) (GLenum pname, GLint param);
 typedef void (* PFNGLCOPYIMAGESUBDATANVPROC) (GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth);
 typedef void (* PFNGLDEPTHRANGEDNVPROC) (GLdouble zNear, GLdouble zFar);
 typedef void (* PFNGLCLEARDEPTHDNVPROC) (GLdouble depth);
 typedef void (* PFNGLDEPTHBOUNDSDNVPROC) (GLdouble zmin, GLdouble zmax);
 typedef void (* PFNGLDRAWTEXTURENVPROC) (GLuint texture, GLuint sampler, GLfloat x0, GLfloat y0, GLfloat x1, GLfloat y1, GLfloat z, GLfloat s0, GLfloat t0, GLfloat s1, GLfloat t1);
+typedef void (*GLVULKANPROCNV)(void);
+typedef void (* PFNGLDRAWVKIMAGENVPROC) (GLuint64 vkImage, GLuint sampler, GLfloat x0, GLfloat y0, GLfloat x1, GLfloat y1, GLfloat z, GLfloat s0, GLfloat t0, GLfloat s1, GLfloat t1);
+typedef GLVULKANPROCNV (* PFNGLGETVKPROCADDRNVPROC) (const GLchar *name);
+typedef void (* PFNGLWAITVKSEMAPHORENVPROC) (GLuint64 vkSemaphore);
+typedef void (* PFNGLSIGNALVKSEMAPHORENVPROC) (GLuint64 vkSemaphore);
+typedef void (* PFNGLSIGNALVKFENCENVPROC) (GLuint64 vkFence);
 typedef void (* PFNGLMAPCONTROLPOINTSNVPROC) (GLenum target, GLuint index, GLenum type, GLsizei ustride, GLsizei vstride, GLint uorder, GLint vorder, GLboolean packed, const void *points);
 typedef void (* PFNGLMAPPARAMETERIVNVPROC) (GLenum target, GLenum pname, const GLint *params);
 typedef void (* PFNGLMAPPARAMETERFVNVPROC) (GLenum target, GLenum pname, const GLfloat *params);
@@ -2220,17 +2582,32 @@ typedef GLboolean (* PFNGLTESTFENCENVPROC) (GLuint fence);
 typedef void (* PFNGLGETFENCEIVNVPROC) (GLuint fence, GLenum pname, GLint *params);
 typedef void (* PFNGLFINISHFENCENVPROC) (GLuint fence);
 typedef void (* PFNGLSETFENCENVPROC) (GLuint fence, GLenum condition);
+typedef void (* PFNGLFRAGMENTCOVERAGECOLORNVPROC) (GLuint color);
 typedef void (* PFNGLPROGRAMNAMEDPARAMETER4FNVPROC) (GLuint id, GLsizei len, const GLubyte *name, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
 typedef void (* PFNGLPROGRAMNAMEDPARAMETER4FVNVPROC) (GLuint id, GLsizei len, const GLubyte *name, const GLfloat *v);
 typedef void (* PFNGLPROGRAMNAMEDPARAMETER4DNVPROC) (GLuint id, GLsizei len, const GLubyte *name, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
 typedef void (* PFNGLPROGRAMNAMEDPARAMETER4DVNVPROC) (GLuint id, GLsizei len, const GLubyte *name, const GLdouble *v);
 typedef void (* PFNGLGETPROGRAMNAMEDPARAMETERFVNVPROC) (GLuint id, GLsizei len, const GLubyte *name, GLfloat *params);
 typedef void (* PFNGLGETPROGRAMNAMEDPARAMETERDVNVPROC) (GLuint id, GLsizei len, const GLubyte *name, GLdouble *params);
+typedef void (* PFNGLCOVERAGEMODULATIONTABLENVPROC) (GLsizei n, const GLfloat *v);
+typedef void (* PFNGLGETCOVERAGEMODULATIONTABLENVPROC) (GLsizei bufSize, GLfloat *v);
+typedef void (* PFNGLCOVERAGEMODULATIONNVPROC) (GLenum components);
 typedef void (* PFNGLRENDERBUFFERSTORAGEMULTISAMPLECOVERAGENVPROC) (GLenum target, GLsizei coverageSamples, GLsizei colorSamples, GLenum internalformat, GLsizei width, GLsizei height);
 typedef void (* PFNGLPROGRAMVERTEXLIMITNVPROC) (GLenum target, GLint limit);
 typedef void (* PFNGLFRAMEBUFFERTEXTUREEXTPROC) (GLenum target, GLenum attachment, GLuint texture, GLint level);
-typedef void (* PFNGLFRAMEBUFFERTEXTURELAYEREXTPROC) (GLenum target, GLenum attachment, GLuint texture, GLint level, GLint layer);
 typedef void (* PFNGLFRAMEBUFFERTEXTUREFACEEXTPROC) (GLenum target, GLenum attachment, GLuint texture, GLint level, GLenum face);
+typedef void (* PFNGLRENDERGPUMASKNVPROC) (GLbitfield mask);
+typedef void (* PFNGLMULTICASTBUFFERSUBDATANVPROC) (GLbitfield gpuMask, GLuint buffer, GLintptr offset, GLsizeiptr size, const void *data);
+typedef void (* PFNGLMULTICASTCOPYBUFFERSUBDATANVPROC) (GLuint readGpu, GLbitfield writeGpuMask, GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size);
+typedef void (* PFNGLMULTICASTCOPYIMAGESUBDATANVPROC) (GLuint srcGpu, GLbitfield dstGpuMask, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei srcWidth, GLsizei srcHeight, GLsizei srcDepth);
+typedef void (* PFNGLMULTICASTBLITFRAMEBUFFERNVPROC) (GLuint srcGpu, GLuint dstGpu, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter);
+typedef void (* PFNGLMULTICASTFRAMEBUFFERSAMPLELOCATIONSFVNVPROC) (GLuint gpu, GLuint framebuffer, GLuint start, GLsizei count, const GLfloat *v);
+typedef void (* PFNGLMULTICASTBARRIERNVPROC) (void);
+typedef void (* PFNGLMULTICASTWAITSYNCNVPROC) (GLuint signalGpu, GLbitfield waitGpuMask);
+typedef void (* PFNGLMULTICASTGETQUERYOBJECTIVNVPROC) (GLuint gpu, GLuint id, GLenum pname, GLint *params);
+typedef void (* PFNGLMULTICASTGETQUERYOBJECTUIVNVPROC) (GLuint gpu, GLuint id, GLenum pname, GLuint *params);
+typedef void (* PFNGLMULTICASTGETQUERYOBJECTI64VNVPROC) (GLuint gpu, GLuint id, GLenum pname, GLint64 *params);
+typedef void (* PFNGLMULTICASTGETQUERYOBJECTUI64VNVPROC) (GLuint gpu, GLuint id, GLenum pname, GLuint64 *params);
 typedef void (* PFNGLPROGRAMLOCALPARAMETERI4INVPROC) (GLenum target, GLuint index, GLint x, GLint y, GLint z, GLint w);
 typedef void (* PFNGLPROGRAMLOCALPARAMETERI4IVNVPROC) (GLenum target, GLuint index, const GLint *params);
 typedef void (* PFNGLPROGRAMLOCALPARAMETERSI4IVNVPROC) (GLenum target, GLuint index, GLsizei count, const GLint *params);
@@ -2249,40 +2626,6 @@ typedef void (* PFNGLGETPROGRAMENVPARAMETERIIVNVPROC) (GLenum target, GLuint ind
 typedef void (* PFNGLGETPROGRAMENVPARAMETERIUIVNVPROC) (GLenum target, GLuint index, GLuint *params);
 typedef void (* PFNGLPROGRAMSUBROUTINEPARAMETERSUIVNVPROC) (GLenum target, GLsizei count, const GLuint *params);
 typedef void (* PFNGLGETPROGRAMSUBROUTINEPARAMETERUIVNVPROC) (GLenum target, GLuint index, GLuint *param);
-typedef int64_t GLint64EXT;
-typedef void (* PFNGLUNIFORM1I64NVPROC) (GLint location, GLint64EXT x);
-typedef void (* PFNGLUNIFORM2I64NVPROC) (GLint location, GLint64EXT x, GLint64EXT y);
-typedef void (* PFNGLUNIFORM3I64NVPROC) (GLint location, GLint64EXT x, GLint64EXT y, GLint64EXT z);
-typedef void (* PFNGLUNIFORM4I64NVPROC) (GLint location, GLint64EXT x, GLint64EXT y, GLint64EXT z, GLint64EXT w);
-typedef void (* PFNGLUNIFORM1I64VNVPROC) (GLint location, GLsizei count, const GLint64EXT *value);
-typedef void (* PFNGLUNIFORM2I64VNVPROC) (GLint location, GLsizei count, const GLint64EXT *value);
-typedef void (* PFNGLUNIFORM3I64VNVPROC) (GLint location, GLsizei count, const GLint64EXT *value);
-typedef void (* PFNGLUNIFORM4I64VNVPROC) (GLint location, GLsizei count, const GLint64EXT *value);
-typedef void (* PFNGLUNIFORM1UI64NVPROC) (GLint location, GLuint64EXT x);
-typedef void (* PFNGLUNIFORM2UI64NVPROC) (GLint location, GLuint64EXT x, GLuint64EXT y);
-typedef void (* PFNGLUNIFORM3UI64NVPROC) (GLint location, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z);
-typedef void (* PFNGLUNIFORM4UI64NVPROC) (GLint location, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z, GLuint64EXT w);
-typedef void (* PFNGLUNIFORM1UI64VNVPROC) (GLint location, GLsizei count, const GLuint64EXT *value);
-typedef void (* PFNGLUNIFORM2UI64VNVPROC) (GLint location, GLsizei count, const GLuint64EXT *value);
-typedef void (* PFNGLUNIFORM3UI64VNVPROC) (GLint location, GLsizei count, const GLuint64EXT *value);
-typedef void (* PFNGLUNIFORM4UI64VNVPROC) (GLint location, GLsizei count, const GLuint64EXT *value);
-typedef void (* PFNGLGETUNIFORMI64VNVPROC) (GLuint program, GLint location, GLint64EXT *params);
-typedef void (* PFNGLPROGRAMUNIFORM1I64NVPROC) (GLuint program, GLint location, GLint64EXT x);
-typedef void (* PFNGLPROGRAMUNIFORM2I64NVPROC) (GLuint program, GLint location, GLint64EXT x, GLint64EXT y);
-typedef void (* PFNGLPROGRAMUNIFORM3I64NVPROC) (GLuint program, GLint location, GLint64EXT x, GLint64EXT y, GLint64EXT z);
-typedef void (* PFNGLPROGRAMUNIFORM4I64NVPROC) (GLuint program, GLint location, GLint64EXT x, GLint64EXT y, GLint64EXT z, GLint64EXT w);
-typedef void (* PFNGLPROGRAMUNIFORM1I64VNVPROC) (GLuint program, GLint location, GLsizei count, const GLint64EXT *value);
-typedef void (* PFNGLPROGRAMUNIFORM2I64VNVPROC) (GLuint program, GLint location, GLsizei count, const GLint64EXT *value);
-typedef void (* PFNGLPROGRAMUNIFORM3I64VNVPROC) (GLuint program, GLint location, GLsizei count, const GLint64EXT *value);
-typedef void (* PFNGLPROGRAMUNIFORM4I64VNVPROC) (GLuint program, GLint location, GLsizei count, const GLint64EXT *value);
-typedef void (* PFNGLPROGRAMUNIFORM1UI64NVPROC) (GLuint program, GLint location, GLuint64EXT x);
-typedef void (* PFNGLPROGRAMUNIFORM2UI64NVPROC) (GLuint program, GLint location, GLuint64EXT x, GLuint64EXT y);
-typedef void (* PFNGLPROGRAMUNIFORM3UI64NVPROC) (GLuint program, GLint location, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z);
-typedef void (* PFNGLPROGRAMUNIFORM4UI64NVPROC) (GLuint program, GLint location, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z, GLuint64EXT w);
-typedef void (* PFNGLPROGRAMUNIFORM1UI64VNVPROC) (GLuint program, GLint location, GLsizei count, const GLuint64EXT *value);
-typedef void (* PFNGLPROGRAMUNIFORM2UI64VNVPROC) (GLuint program, GLint location, GLsizei count, const GLuint64EXT *value);
-typedef void (* PFNGLPROGRAMUNIFORM3UI64VNVPROC) (GLuint program, GLint location, GLsizei count, const GLuint64EXT *value);
-typedef void (* PFNGLPROGRAMUNIFORM4UI64VNVPROC) (GLuint program, GLint location, GLsizei count, const GLuint64EXT *value);
 typedef unsigned short GLhalfNV;
 typedef void (* PFNGLVERTEX2HNVPROC) (GLhalfNV x, GLhalfNV y);
 typedef void (* PFNGLVERTEX2HVNVPROC) (const GLhalfNV *v);
@@ -2330,6 +2673,21 @@ typedef void (* PFNGLVERTEXATTRIBS1HVNVPROC) (GLuint index, GLsizei n, const GLh
 typedef void (* PFNGLVERTEXATTRIBS2HVNVPROC) (GLuint index, GLsizei n, const GLhalfNV *v);
 typedef void (* PFNGLVERTEXATTRIBS3HVNVPROC) (GLuint index, GLsizei n, const GLhalfNV *v);
 typedef void (* PFNGLVERTEXATTRIBS4HVNVPROC) (GLuint index, GLsizei n, const GLhalfNV *v);
+typedef void (* PFNGLGETINTERNALFORMATSAMPLEIVNVPROC) (GLenum target, GLenum internalformat, GLsizei samples, GLenum pname, GLsizei count, GLint *params);
+typedef void (* PFNGLGETMEMORYOBJECTDETACHEDRESOURCESUIVNVPROC) (GLuint memory, GLenum pname, GLint first, GLsizei count, GLuint *params);
+typedef void (* PFNGLRESETMEMORYOBJECTPARAMETERNVPROC) (GLuint memory, GLenum pname);
+typedef void (* PFNGLTEXATTACHMEMORYNVPROC) (GLenum target, GLuint memory, GLuint64 offset);
+typedef void (* PFNGLBUFFERATTACHMEMORYNVPROC) (GLenum target, GLuint memory, GLuint64 offset);
+typedef void (* PFNGLTEXTUREATTACHMEMORYNVPROC) (GLuint texture, GLuint memory, GLuint64 offset);
+typedef void (* PFNGLNAMEDBUFFERATTACHMEMORYNVPROC) (GLuint buffer, GLuint memory, GLuint64 offset);
+typedef void (* PFNGLBUFFERPAGECOMMITMENTMEMNVPROC) (GLenum target, GLintptr offset, GLsizeiptr size, GLuint memory, GLuint64 memOffset, GLboolean commit);
+typedef void (* PFNGLTEXPAGECOMMITMENTMEMNVPROC) (GLenum target, GLint layer, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLuint memory, GLuint64 offset, GLboolean commit);
+typedef void (* PFNGLNAMEDBUFFERPAGECOMMITMENTMEMNVPROC) (GLuint buffer, GLintptr offset, GLsizeiptr size, GLuint memory, GLuint64 memOffset, GLboolean commit);
+typedef void (* PFNGLTEXTUREPAGECOMMITMENTMEMNVPROC) (GLuint texture, GLint layer, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLuint memory, GLuint64 offset, GLboolean commit);
+typedef void (* PFNGLDRAWMESHTASKSNVPROC) (GLuint first, GLuint count);
+typedef void (* PFNGLDRAWMESHTASKSINDIRECTNVPROC) (GLintptr indirect);
+typedef void (* PFNGLMULTIDRAWMESHTASKSINDIRECTNVPROC) (GLintptr indirect, GLsizei drawcount, GLsizei stride);
+typedef void (* PFNGLMULTIDRAWMESHTASKSINDIRECTCOUNTNVPROC) (GLintptr indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride);
 typedef void (* PFNGLGENOCCLUSIONQUERIESNVPROC) (GLsizei n, GLuint *ids);
 typedef void (* PFNGLDELETEOCCLUSIONQUERIESNVPROC) (GLsizei n, const GLuint *ids);
 typedef GLboolean (* PFNGLISOCCLUSIONQUERYNVPROC) (GLuint id);
@@ -2366,9 +2724,6 @@ typedef void (* PFNGLSTENCILSTROKEPATHNVPROC) (GLuint path, GLint reference, GLu
 typedef void (* PFNGLSTENCILFILLPATHINSTANCEDNVPROC) (GLsizei numPaths, GLenum pathNameType, const void *paths, GLuint pathBase, GLenum fillMode, GLuint mask, GLenum transformType, const GLfloat *transformValues);
 typedef void (* PFNGLSTENCILSTROKEPATHINSTANCEDNVPROC) (GLsizei numPaths, GLenum pathNameType, const void *paths, GLuint pathBase, GLint reference, GLuint mask, GLenum transformType, const GLfloat *transformValues);
 typedef void (* PFNGLPATHCOVERDEPTHFUNCNVPROC) (GLenum func);
-typedef void (* PFNGLPATHCOLORGENNVPROC) (GLenum color, GLenum genMode, GLenum colorFormat, const GLfloat *coeffs);
-typedef void (* PFNGLPATHTEXGENNVPROC) (GLenum texCoordSet, GLenum genMode, GLint components, const GLfloat *coeffs);
-typedef void (* PFNGLPATHFOGGENNVPROC) (GLenum genMode);
 typedef void (* PFNGLCOVERFILLPATHNVPROC) (GLuint path, GLenum coverMode);
 typedef void (* PFNGLCOVERSTROKEPATHNVPROC) (GLuint path, GLenum coverMode);
 typedef void (* PFNGLCOVERFILLPATHINSTANCEDNVPROC) (GLsizei numPaths, GLenum pathNameType, const void *paths, GLuint pathBase, GLenum coverMode, GLenum transformType, const GLfloat *transformValues);
@@ -2381,14 +2736,32 @@ typedef void (* PFNGLGETPATHDASHARRAYNVPROC) (GLuint path, GLfloat *dashArray);
 typedef void (* PFNGLGETPATHMETRICSNVPROC) (GLbitfield metricQueryMask, GLsizei numPaths, GLenum pathNameType, const void *paths, GLuint pathBase, GLsizei stride, GLfloat *metrics);
 typedef void (* PFNGLGETPATHMETRICRANGENVPROC) (GLbitfield metricQueryMask, GLuint firstPathName, GLsizei numPaths, GLsizei stride, GLfloat *metrics);
 typedef void (* PFNGLGETPATHSPACINGNVPROC) (GLenum pathListMode, GLsizei numPaths, GLenum pathNameType, const void *paths, GLuint pathBase, GLfloat advanceScale, GLfloat kerningScale, GLenum transformType, GLfloat *returnedSpacing);
-typedef void (* PFNGLGETPATHCOLORGENIVNVPROC) (GLenum color, GLenum pname, GLint *value);
-typedef void (* PFNGLGETPATHCOLORGENFVNVPROC) (GLenum color, GLenum pname, GLfloat *value);
-typedef void (* PFNGLGETPATHTEXGENIVNVPROC) (GLenum texCoordSet, GLenum pname, GLint *value);
-typedef void (* PFNGLGETPATHTEXGENFVNVPROC) (GLenum texCoordSet, GLenum pname, GLfloat *value);
 typedef GLboolean (* PFNGLISPOINTINFILLPATHNVPROC) (GLuint path, GLuint mask, GLfloat x, GLfloat y);
 typedef GLboolean (* PFNGLISPOINTINSTROKEPATHNVPROC) (GLuint path, GLfloat x, GLfloat y);
 typedef GLfloat (* PFNGLGETPATHLENGTHNVPROC) (GLuint path, GLsizei startSegment, GLsizei numSegments);
 typedef GLboolean (* PFNGLPOINTALONGPATHNVPROC) (GLuint path, GLsizei startSegment, GLsizei numSegments, GLfloat distance, GLfloat *x, GLfloat *y, GLfloat *tangentX, GLfloat *tangentY);
+typedef void (* PFNGLMATRIXLOAD3X2FNVPROC) (GLenum matrixMode, const GLfloat *m);
+typedef void (* PFNGLMATRIXLOAD3X3FNVPROC) (GLenum matrixMode, const GLfloat *m);
+typedef void (* PFNGLMATRIXLOADTRANSPOSE3X3FNVPROC) (GLenum matrixMode, const GLfloat *m);
+typedef void (* PFNGLMATRIXMULT3X2FNVPROC) (GLenum matrixMode, const GLfloat *m);
+typedef void (* PFNGLMATRIXMULT3X3FNVPROC) (GLenum matrixMode, const GLfloat *m);
+typedef void (* PFNGLMATRIXMULTTRANSPOSE3X3FNVPROC) (GLenum matrixMode, const GLfloat *m);
+typedef void (* PFNGLSTENCILTHENCOVERFILLPATHNVPROC) (GLuint path, GLenum fillMode, GLuint mask, GLenum coverMode);
+typedef void (* PFNGLSTENCILTHENCOVERSTROKEPATHNVPROC) (GLuint path, GLint reference, GLuint mask, GLenum coverMode);
+typedef void (* PFNGLSTENCILTHENCOVERFILLPATHINSTANCEDNVPROC) (GLsizei numPaths, GLenum pathNameType, const void *paths, GLuint pathBase, GLenum fillMode, GLuint mask, GLenum coverMode, GLenum transformType, const GLfloat *transformValues);
+typedef void (* PFNGLSTENCILTHENCOVERSTROKEPATHINSTANCEDNVPROC) (GLsizei numPaths, GLenum pathNameType, const void *paths, GLuint pathBase, GLint reference, GLuint mask, GLenum coverMode, GLenum transformType, const GLfloat *transformValues);
+typedef GLenum (* PFNGLPATHGLYPHINDEXRANGENVPROC) (GLenum fontTarget, const void *fontName, GLbitfield fontStyle, GLuint pathParameterTemplate, GLfloat emScale, GLuint *baseAndCount);
+typedef GLenum (* PFNGLPATHGLYPHINDEXARRAYNVPROC) (GLuint firstPathName, GLenum fontTarget, const void *fontName, GLbitfield fontStyle, GLuint firstGlyphIndex, GLsizei numGlyphs, GLuint pathParameterTemplate, GLfloat emScale);
+typedef GLenum (* PFNGLPATHMEMORYGLYPHINDEXARRAYNVPROC) (GLuint firstPathName, GLenum fontTarget, GLsizeiptr fontSize, const void *fontData, GLsizei faceIndex, GLuint firstGlyphIndex, GLsizei numGlyphs, GLuint pathParameterTemplate, GLfloat emScale);
+typedef void (* PFNGLPROGRAMPATHFRAGMENTINPUTGENNVPROC) (GLuint program, GLint location, GLenum genMode, GLint components, const GLfloat *coeffs);
+typedef void (* PFNGLGETPROGRAMRESOURCEFVNVPROC) (GLuint program, GLenum programInterface, GLuint index, GLsizei propCount, const GLenum *props, GLsizei count, GLsizei *length, GLfloat *params);
+typedef void (* PFNGLPATHCOLORGENNVPROC) (GLenum color, GLenum genMode, GLenum colorFormat, const GLfloat *coeffs);
+typedef void (* PFNGLPATHTEXGENNVPROC) (GLenum texCoordSet, GLenum genMode, GLint components, const GLfloat *coeffs);
+typedef void (* PFNGLPATHFOGGENNVPROC) (GLenum genMode);
+typedef void (* PFNGLGETPATHCOLORGENIVNVPROC) (GLenum color, GLenum pname, GLint *value);
+typedef void (* PFNGLGETPATHCOLORGENFVNVPROC) (GLenum color, GLenum pname, GLfloat *value);
+typedef void (* PFNGLGETPATHTEXGENIVNVPROC) (GLenum texCoordSet, GLenum pname, GLint *value);
+typedef void (* PFNGLGETPATHTEXGENFVNVPROC) (GLenum texCoordSet, GLenum pname, GLfloat *value);
 typedef void (* PFNGLPIXELDATARANGENVPROC) (GLenum target, GLsizei length, const void *pointer);
 typedef void (* PFNGLFLUSHPIXELDATARANGENVPROC) (GLenum target);
 typedef void (* PFNGLPOINTPARAMETERINVPROC) (GLenum pname, GLint param);
@@ -2401,6 +2774,10 @@ typedef void (* PFNGLGETVIDEOI64VNVPROC) (GLuint video_slot, GLenum pname, GLint
 typedef void (* PFNGLGETVIDEOUI64VNVPROC) (GLuint video_slot, GLenum pname, GLuint64EXT *params);
 typedef void (* PFNGLPRIMITIVERESTARTNVPROC) (void);
 typedef void (* PFNGLPRIMITIVERESTARTINDEXNVPROC) (GLuint index);
+typedef GLint (* PFNGLQUERYRESOURCENVPROC) (GLenum queryType, GLint tagId, GLuint count, GLint *buffer);
+typedef void (* PFNGLGENQUERYRESOURCETAGNVPROC) (GLsizei n, GLint *tagIds);
+typedef void (* PFNGLDELETEQUERYRESOURCETAGNVPROC) (GLsizei n, const GLint *tagIds);
+typedef void (* PFNGLQUERYRESOURCETAGNVPROC) (GLint tagId, const GLchar *tagString);
 typedef void (* PFNGLCOMBINERPARAMETERFVNVPROC) (GLenum pname, const GLfloat *params);
 typedef void (* PFNGLCOMBINERPARAMETERFNVPROC) (GLenum pname, GLfloat param);
 typedef void (* PFNGLCOMBINERPARAMETERIVNVPROC) (GLenum pname, const GLint *params);
@@ -2416,6 +2793,11 @@ typedef void (* PFNGLGETFINALCOMBINERINPUTPARAMETERFVNVPROC) (GLenum variable, G
 typedef void (* PFNGLGETFINALCOMBINERINPUTPARAMETERIVNVPROC) (GLenum variable, GLenum pname, GLint *params);
 typedef void (* PFNGLCOMBINERSTAGEPARAMETERFVNVPROC) (GLenum stage, GLenum pname, const GLfloat *params);
 typedef void (* PFNGLGETCOMBINERSTAGEPARAMETERFVNVPROC) (GLenum stage, GLenum pname, GLfloat *params);
+typedef void (* PFNGLFRAMEBUFFERSAMPLELOCATIONSFVNVPROC) (GLenum target, GLuint start, GLsizei count, const GLfloat *v);
+typedef void (* PFNGLNAMEDFRAMEBUFFERSAMPLELOCATIONSFVNVPROC) (GLuint framebuffer, GLuint start, GLsizei count, const GLfloat *v);
+typedef void (* PFNGLRESOLVEDEPTHVALUESNVPROC) (void);
+typedef void (* PFNGLSCISSOREXCLUSIVENVPROC) (GLint x, GLint y, GLsizei width, GLsizei height);
+typedef void (* PFNGLSCISSOREXCLUSIVEARRAYVNVPROC) (GLuint first, GLsizei count, const GLint *v);
 typedef void (* PFNGLMAKEBUFFERRESIDENTNVPROC) (GLenum target, GLenum access);
 typedef void (* PFNGLMAKEBUFFERNONRESIDENTNVPROC) (GLenum target);
 typedef GLboolean (* PFNGLISBUFFERRESIDENTNVPROC) (GLenum target);
@@ -2427,9 +2809,15 @@ typedef void (* PFNGLGETNAMEDBUFFERPARAMETERUI64VNVPROC) (GLuint buffer, GLenum 
 typedef void (* PFNGLGETINTEGERUI64VNVPROC) (GLenum value, GLuint64EXT *result);
 typedef void (* PFNGLUNIFORMUI64NVPROC) (GLint location, GLuint64EXT value);
 typedef void (* PFNGLUNIFORMUI64VNVPROC) (GLint location, GLsizei count, const GLuint64EXT *value);
-typedef void (* PFNGLGETUNIFORMUI64VNVPROC) (GLuint program, GLint location, GLuint64EXT *params);
 typedef void (* PFNGLPROGRAMUNIFORMUI64NVPROC) (GLuint program, GLint location, GLuint64EXT value);
 typedef void (* PFNGLPROGRAMUNIFORMUI64VNVPROC) (GLuint program, GLint location, GLsizei count, const GLuint64EXT *value);
+typedef void (* PFNGLBINDSHADINGRATEIMAGENVPROC) (GLuint texture);
+typedef void (* PFNGLGETSHADINGRATEIMAGEPALETTENVPROC) (GLuint viewport, GLuint entry, GLenum *rate);
+typedef void (* PFNGLGETSHADINGRATESAMPLELOCATIONIVNVPROC) (GLenum rate, GLuint samples, GLuint index, GLint *location);
+typedef void (* PFNGLSHADINGRATEIMAGEBARRIERNVPROC) (GLboolean synchronize);
+typedef void (* PFNGLSHADINGRATEIMAGEPALETTENVPROC) (GLuint viewport, GLuint first, GLsizei count, const GLenum *rates);
+typedef void (* PFNGLSHADINGRATESAMPLEORDERNVPROC) (GLenum order);
+typedef void (* PFNGLSHADINGRATESAMPLEORDERCUSTOMNVPROC) (GLenum rate, GLuint samples, const GLint *locations);
 typedef void (* PFNGLTEXTUREBARRIERNVPROC) (void);
 typedef void (* PFNGLTEXIMAGE2DMULTISAMPLECOVERAGENVPROC) (GLenum target, GLsizei coverageSamples, GLsizei colorSamples, GLint internalFormat, GLsizei width, GLsizei height, GLboolean fixedSampleLocations);
 typedef void (* PFNGLTEXIMAGE3DMULTISAMPLECOVERAGENVPROC) (GLenum target, GLsizei coverageSamples, GLsizei colorSamples, GLint internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedSampleLocations);
@@ -2437,9 +2825,12 @@ typedef void (* PFNGLTEXTUREIMAGE2DMULTISAMPLENVPROC) (GLuint texture, GLenum ta
 typedef void (* PFNGLTEXTUREIMAGE3DMULTISAMPLENVPROC) (GLuint texture, GLenum target, GLsizei samples, GLint internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedSampleLocations);
 typedef void (* PFNGLTEXTUREIMAGE2DMULTISAMPLECOVERAGENVPROC) (GLuint texture, GLenum target, GLsizei coverageSamples, GLsizei colorSamples, GLint internalFormat, GLsizei width, GLsizei height, GLboolean fixedSampleLocations);
 typedef void (* PFNGLTEXTUREIMAGE3DMULTISAMPLECOVERAGENVPROC) (GLuint texture, GLenum target, GLsizei coverageSamples, GLsizei colorSamples, GLint internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedSampleLocations);
+typedef void (* PFNGLCREATESEMAPHORESNVPROC) (GLsizei n, GLuint *semaphores);
+typedef void (* PFNGLSEMAPHOREPARAMETERIVNVPROC) (GLuint semaphore, GLenum pname, const GLint *params);
+typedef void (* PFNGLGETSEMAPHOREPARAMETERIVNVPROC) (GLuint semaphore, GLenum pname, GLint *params);
 typedef void (* PFNGLBEGINTRANSFORMFEEDBACKNVPROC) (GLenum primitiveMode);
 typedef void (* PFNGLENDTRANSFORMFEEDBACKNVPROC) (void);
-typedef void (* PFNGLTRANSFORMFEEDBACKATTRIBSNVPROC) (GLuint count, const GLint *attribs, GLenum bufferMode);
+typedef void (* PFNGLTRANSFORMFEEDBACKATTRIBSNVPROC) (GLsizei count, const GLint *attribs, GLenum bufferMode);
 typedef void (* PFNGLBINDBUFFERRANGENVPROC) (GLenum target, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size);
 typedef void (* PFNGLBINDBUFFEROFFSETNVPROC) (GLenum target, GLuint index, GLuint buffer, GLintptr offset);
 typedef void (* PFNGLBINDBUFFERBASENVPROC) (GLenum target, GLuint index, GLuint buffer);
@@ -2461,12 +2852,13 @@ typedef void (* PFNGLVDPAUINITNVPROC) (const void *vdpDevice, const void *getPro
 typedef void (* PFNGLVDPAUFININVPROC) (void);
 typedef GLvdpauSurfaceNV (* PFNGLVDPAUREGISTERVIDEOSURFACENVPROC) (const void *vdpSurface, GLenum target, GLsizei numTextureNames, const GLuint *textureNames);
 typedef GLvdpauSurfaceNV (* PFNGLVDPAUREGISTEROUTPUTSURFACENVPROC) (const void *vdpSurface, GLenum target, GLsizei numTextureNames, const GLuint *textureNames);
-typedef void (* PFNGLVDPAUISSURFACENVPROC) (GLvdpauSurfaceNV surface);
+typedef GLboolean (* PFNGLVDPAUISSURFACENVPROC) (GLvdpauSurfaceNV surface);
 typedef void (* PFNGLVDPAUUNREGISTERSURFACENVPROC) (GLvdpauSurfaceNV surface);
-typedef void (* PFNGLVDPAUGETSURFACEIVNVPROC) (GLvdpauSurfaceNV surface, GLenum pname, GLsizei bufSize, GLsizei *length, GLint *values);
+typedef void (* PFNGLVDPAUGETSURFACEIVNVPROC) (GLvdpauSurfaceNV surface, GLenum pname, GLsizei count, GLsizei *length, GLint *values);
 typedef void (* PFNGLVDPAUSURFACEACCESSNVPROC) (GLvdpauSurfaceNV surface, GLenum access);
 typedef void (* PFNGLVDPAUMAPSURFACESNVPROC) (GLsizei numSurfaces, const GLvdpauSurfaceNV *surfaces);
 typedef void (* PFNGLVDPAUUNMAPSURFACESNVPROC) (GLsizei numSurface, const GLvdpauSurfaceNV *surfaces);
+typedef GLvdpauSurfaceNV (* PFNGLVDPAUREGISTERVIDEOSURFACEWITHPICTURESTRUCTURENVPROC) (const void *vdpSurface, GLenum target, GLsizei numTextureNames, const GLuint *textureNames, GLboolean isFrameStructure);
 typedef void (* PFNGLFLUSHVERTEXARRAYRANGENVPROC) (void);
 typedef void (* PFNGLVERTEXARRAYRANGENVPROC) (GLsizei length, const void *pointer);
 typedef void (* PFNGLVERTEXATTRIBL1I64NVPROC) (GLuint index, GLint64EXT x);
@@ -2564,29 +2956,6 @@ typedef void (* PFNGLVERTEXATTRIBS4DVNVPROC) (GLuint index, GLsizei count, const
 typedef void (* PFNGLVERTEXATTRIBS4FVNVPROC) (GLuint index, GLsizei count, const GLfloat *v);
 typedef void (* PFNGLVERTEXATTRIBS4SVNVPROC) (GLuint index, GLsizei count, const GLshort *v);
 typedef void (* PFNGLVERTEXATTRIBS4UBVNVPROC) (GLuint index, GLsizei count, const GLubyte *v);
-typedef void (* PFNGLVERTEXATTRIBI1IEXTPROC) (GLuint index, GLint x);
-typedef void (* PFNGLVERTEXATTRIBI2IEXTPROC) (GLuint index, GLint x, GLint y);
-typedef void (* PFNGLVERTEXATTRIBI3IEXTPROC) (GLuint index, GLint x, GLint y, GLint z);
-typedef void (* PFNGLVERTEXATTRIBI4IEXTPROC) (GLuint index, GLint x, GLint y, GLint z, GLint w);
-typedef void (* PFNGLVERTEXATTRIBI1UIEXTPROC) (GLuint index, GLuint x);
-typedef void (* PFNGLVERTEXATTRIBI2UIEXTPROC) (GLuint index, GLuint x, GLuint y);
-typedef void (* PFNGLVERTEXATTRIBI3UIEXTPROC) (GLuint index, GLuint x, GLuint y, GLuint z);
-typedef void (* PFNGLVERTEXATTRIBI4UIEXTPROC) (GLuint index, GLuint x, GLuint y, GLuint z, GLuint w);
-typedef void (* PFNGLVERTEXATTRIBI1IVEXTPROC) (GLuint index, const GLint *v);
-typedef void (* PFNGLVERTEXATTRIBI2IVEXTPROC) (GLuint index, const GLint *v);
-typedef void (* PFNGLVERTEXATTRIBI3IVEXTPROC) (GLuint index, const GLint *v);
-typedef void (* PFNGLVERTEXATTRIBI4IVEXTPROC) (GLuint index, const GLint *v);
-typedef void (* PFNGLVERTEXATTRIBI1UIVEXTPROC) (GLuint index, const GLuint *v);
-typedef void (* PFNGLVERTEXATTRIBI2UIVEXTPROC) (GLuint index, const GLuint *v);
-typedef void (* PFNGLVERTEXATTRIBI3UIVEXTPROC) (GLuint index, const GLuint *v);
-typedef void (* PFNGLVERTEXATTRIBI4UIVEXTPROC) (GLuint index, const GLuint *v);
-typedef void (* PFNGLVERTEXATTRIBI4BVEXTPROC) (GLuint index, const GLbyte *v);
-typedef void (* PFNGLVERTEXATTRIBI4SVEXTPROC) (GLuint index, const GLshort *v);
-typedef void (* PFNGLVERTEXATTRIBI4UBVEXTPROC) (GLuint index, const GLubyte *v);
-typedef void (* PFNGLVERTEXATTRIBI4USVEXTPROC) (GLuint index, const GLushort *v);
-typedef void (* PFNGLVERTEXATTRIBIPOINTEREXTPROC) (GLuint index, GLint size, GLenum type, GLsizei stride, const void *pointer);
-typedef void (* PFNGLGETVERTEXATTRIBIIVEXTPROC) (GLuint index, GLenum pname, GLint *params);
-typedef void (* PFNGLGETVERTEXATTRIBIUIVEXTPROC) (GLuint index, GLenum pname, GLuint *params);
 typedef void (* PFNGLBEGINVIDEOCAPTURENVPROC) (GLuint video_capture_slot);
 typedef void (* PFNGLBINDVIDEOCAPTURESTREAMBUFFERNVPROC) (GLuint video_capture_slot, GLuint stream, GLenum frame_region, GLintptrARB offset);
 typedef void (* PFNGLBINDVIDEOCAPTURESTREAMTEXTURENVPROC) (GLuint video_capture_slot, GLuint stream, GLenum frame_region, GLenum target, GLuint texture);
@@ -2599,6 +2968,8 @@ typedef GLenum (* PFNGLVIDEOCAPTURENVPROC) (GLuint video_capture_slot, GLuint *s
 typedef void (* PFNGLVIDEOCAPTURESTREAMPARAMETERIVNVPROC) (GLuint video_capture_slot, GLuint stream, GLenum pname, const GLint *params);
 typedef void (* PFNGLVIDEOCAPTURESTREAMPARAMETERFVNVPROC) (GLuint video_capture_slot, GLuint stream, GLenum pname, const GLfloat *params);
 typedef void (* PFNGLVIDEOCAPTURESTREAMPARAMETERDVNVPROC) (GLuint video_capture_slot, GLuint stream, GLenum pname, const GLdouble *params);
+typedef void (* PFNGLVIEWPORTSWIZZLENVPROC) (GLuint index, GLenum swizzlex, GLenum swizzley, GLenum swizzlez, GLenum swizzlew);
+typedef void (* PFNGLFRAMEBUFFERTEXTUREMULTIVIEWOVRPROC) (GLenum target, GLenum attachment, GLuint texture, GLint level, GLint baseViewIndex, GLsizei numViews);
 typedef void (* PFNGLHINTPGIPROC) (GLenum target, GLint mode);
 typedef void (* PFNGLDETAILTEXFUNCSGISPROC) (GLenum target, GLsizei n, const GLfloat *points);
 typedef void (* PFNGLGETDETAILTEXFUNCSGISPROC) (GLenum target, GLfloat *points);
@@ -2860,6 +3231,7 @@ local glc= {
 	['GL_2PASS_1_SGIS'] = 0x80A3,
 	['GL_2X_BIT_ATI'] = 0x00000001,
 	['GL_2_BYTES'] = 0x1407,
+	['GL_2_BYTES_NV'] = 0x1407,
 	['GL_3D'] = 0x0601,
 	['GL_3DFX_multisample'] = 1,
 	['GL_3DFX_tbuffer'] = 1,
@@ -2867,6 +3239,7 @@ local glc= {
 	['GL_3D_COLOR'] = 0x0602,
 	['GL_3D_COLOR_TEXTURE'] = 0x0603,
 	['GL_3_BYTES'] = 0x1408,
+	['GL_3_BYTES_NV'] = 0x1408,
 	['GL_422_AVERAGE_EXT'] = 0x80CE,
 	['GL_422_EXT'] = 0x80CC,
 	['GL_422_REV_AVERAGE_EXT'] = 0x80CF,
@@ -2882,6 +3255,7 @@ local glc= {
 	['GL_4PASS_3_SGIS'] = 0x80A7,
 	['GL_4X_BIT_ATI'] = 0x00000002,
 	['GL_4_BYTES'] = 0x1409,
+	['GL_4_BYTES_NV'] = 0x1409,
 	['GL_8X_BIT_ATI'] = 0x00000004,
 	['GL_ABGR_EXT'] = 0x8000,
 	['GL_ACCUM'] = 0x0100,
@@ -2932,6 +3306,7 @@ local glc= {
 	['GL_ALL_BARRIER_BITS'] = 0xFFFFFFFF,
 	['GL_ALL_BARRIER_BITS_EXT'] = 0xFFFFFFFF,
 	['GL_ALL_COMPLETED_NV'] = 0x84F2,
+	['GL_ALL_PIXELS_AMD'] = 0xFFFFFFFF,
 	['GL_ALL_SHADER_BITS'] = 0xFFFFFFFF,
 	['GL_ALL_STATIC_DATA_IBM'] = 103060,
 	['GL_ALPHA'] = 0x1906,
@@ -2939,11 +3314,13 @@ local glc= {
 	['GL_ALPHA12_EXT'] = 0x803D,
 	['GL_ALPHA16'] = 0x803E,
 	['GL_ALPHA16F_ARB'] = 0x881C,
+	['GL_ALPHA16F_EXT'] = 0x881C,
 	['GL_ALPHA16I_EXT'] = 0x8D8A,
 	['GL_ALPHA16UI_EXT'] = 0x8D78,
 	['GL_ALPHA16_EXT'] = 0x803E,
 	['GL_ALPHA16_SNORM'] = 0x9018,
 	['GL_ALPHA32F_ARB'] = 0x8816,
+	['GL_ALPHA32F_EXT'] = 0x8816,
 	['GL_ALPHA32I_EXT'] = 0x8D84,
 	['GL_ALPHA32UI_EXT'] = 0x8D72,
 	['GL_ALPHA4'] = 0x803B,
@@ -2965,11 +3342,16 @@ local glc= {
 	['GL_ALPHA_MAX_SGIX'] = 0x8321,
 	['GL_ALPHA_MIN_CLAMP_INGR'] = 0x8563,
 	['GL_ALPHA_MIN_SGIX'] = 0x8320,
+	['GL_ALPHA_REF_COMMAND_NV'] = 0x000F,
 	['GL_ALPHA_SCALE'] = 0x0D1C,
 	['GL_ALPHA_SNORM'] = 0x9010,
 	['GL_ALPHA_TEST'] = 0x0BC0,
 	['GL_ALPHA_TEST_FUNC'] = 0x0BC1,
 	['GL_ALPHA_TEST_REF'] = 0x0BC2,
+	['GL_ALPHA_TO_COVERAGE_DITHER_DEFAULT_NV'] = 0x934D,
+	['GL_ALPHA_TO_COVERAGE_DITHER_DISABLE_NV'] = 0x934F,
+	['GL_ALPHA_TO_COVERAGE_DITHER_ENABLE_NV'] = 0x934E,
+	['GL_ALPHA_TO_COVERAGE_DITHER_MODE_NV'] = 0x92BF,
 	['GL_ALREADY_SIGNALED'] = 0x911A,
 	['GL_ALWAYS'] = 0x0207,
 	['GL_ALWAYS_FAST_HINT_PGI'] = 0x1A20C,
@@ -2981,21 +3363,34 @@ local glc= {
 	['GL_AMD_debug_output'] = 1,
 	['GL_AMD_depth_clamp_separate'] = 1,
 	['GL_AMD_draw_buffers_blend'] = 1,
+	['GL_AMD_framebuffer_multisample_advanced'] = 1,
+	['GL_AMD_framebuffer_sample_positions'] = 1,
+	['GL_AMD_gcn_shader'] = 1,
+	['GL_AMD_gpu_shader_half_float'] = 1,
+	['GL_AMD_gpu_shader_int16'] = 1,
+	['GL_AMD_gpu_shader_int64'] = 1,
 	['GL_AMD_interleaved_elements'] = 1,
 	['GL_AMD_multi_draw_indirect'] = 1,
 	['GL_AMD_name_gen_delete'] = 1,
+	['GL_AMD_occlusion_query_event'] = 1,
 	['GL_AMD_performance_monitor'] = 1,
 	['GL_AMD_pinned_memory'] = 1,
 	['GL_AMD_query_buffer_object'] = 1,
 	['GL_AMD_sample_positions'] = 1,
 	['GL_AMD_seamless_cubemap_per_texture'] = 1,
 	['GL_AMD_shader_atomic_counter_ops'] = 1,
+	['GL_AMD_shader_ballot'] = 1,
+	['GL_AMD_shader_explicit_vertex_parameter'] = 1,
+	['GL_AMD_shader_gpu_shader_half_float_fetch'] = 1,
+	['GL_AMD_shader_image_load_store_lod'] = 1,
 	['GL_AMD_shader_stencil_export'] = 1,
 	['GL_AMD_shader_trinary_minmax'] = 1,
 	['GL_AMD_sparse_texture'] = 1,
 	['GL_AMD_stencil_operation_extended'] = 1,
+	['GL_AMD_texture_gather_bias_lod'] = 1,
 	['GL_AMD_texture_texture4'] = 1,
 	['GL_AMD_transform_feedback3_lines_triangles'] = 1,
+	['GL_AMD_transform_feedback4'] = 1,
 	['GL_AMD_vertex_shader_layer'] = 1,
 	['GL_AMD_vertex_shader_tessellator'] = 1,
 	['GL_AMD_vertex_shader_viewport_index'] = 1,
@@ -3021,6 +3416,8 @@ local glc= {
 	['GL_APPLE_vertex_program_evaluators'] = 1,
 	['GL_APPLE_ycbcr_422'] = 1,
 	['GL_ARB_ES2_compatibility'] = 1,
+	['GL_ARB_ES3_1_compatibility'] = 1,
+	['GL_ARB_ES3_2_compatibility'] = 1,
 	['GL_ARB_ES3_compatibility'] = 1,
 	['GL_ARB_arrays_of_arrays'] = 1,
 	['GL_ARB_base_instance'] = 1,
@@ -3030,18 +3427,23 @@ local glc= {
 	['GL_ARB_cl_event'] = 1,
 	['GL_ARB_clear_buffer_object'] = 1,
 	['GL_ARB_clear_texture'] = 1,
+	['GL_ARB_clip_control'] = 1,
 	['GL_ARB_color_buffer_float'] = 1,
 	['GL_ARB_compatibility'] = 1,
 	['GL_ARB_compressed_texture_pixel_storage'] = 1,
 	['GL_ARB_compute_shader'] = 1,
 	['GL_ARB_compute_variable_group_size'] = 1,
+	['GL_ARB_conditional_render_inverted'] = 1,
 	['GL_ARB_conservative_depth'] = 1,
 	['GL_ARB_copy_buffer'] = 1,
 	['GL_ARB_copy_image'] = 1,
+	['GL_ARB_cull_distance'] = 1,
 	['GL_ARB_debug_output'] = 1,
 	['GL_ARB_depth_buffer_float'] = 1,
 	['GL_ARB_depth_clamp'] = 1,
 	['GL_ARB_depth_texture'] = 1,
+	['GL_ARB_derivative_control'] = 1,
+	['GL_ARB_direct_state_access'] = 1,
 	['GL_ARB_draw_buffers'] = 1,
 	['GL_ARB_draw_buffers_blend'] = 1,
 	['GL_ARB_draw_elements_base_vertex'] = 1,
@@ -3055,13 +3457,17 @@ local glc= {
 	['GL_ARB_fragment_program'] = 1,
 	['GL_ARB_fragment_program_shadow'] = 1,
 	['GL_ARB_fragment_shader'] = 1,
+	['GL_ARB_fragment_shader_interlock'] = 1,
 	['GL_ARB_framebuffer_no_attachments'] = 1,
 	['GL_ARB_framebuffer_object'] = 1,
 	['GL_ARB_framebuffer_sRGB'] = 1,
 	['GL_ARB_geometry_shader4'] = 1,
 	['GL_ARB_get_program_binary'] = 1,
+	['GL_ARB_get_texture_sub_image'] = 1,
+	['GL_ARB_gl_spirv'] = 1,
 	['GL_ARB_gpu_shader5'] = 1,
 	['GL_ARB_gpu_shader_fp64'] = 1,
+	['GL_ARB_gpu_shader_int64'] = 1,
 	['GL_ARB_half_float_pixel'] = 1,
 	['GL_ARB_half_float_vertex'] = 1,
 	['GL_ARB_imaging'] = 1,
@@ -3079,22 +3485,30 @@ local glc= {
 	['GL_ARB_multitexture'] = 1,
 	['GL_ARB_occlusion_query'] = 1,
 	['GL_ARB_occlusion_query2'] = 1,
+	['GL_ARB_parallel_shader_compile'] = 1,
+	['GL_ARB_pipeline_statistics_query'] = 1,
 	['GL_ARB_pixel_buffer_object'] = 1,
 	['GL_ARB_point_parameters'] = 1,
 	['GL_ARB_point_sprite'] = 1,
+	['GL_ARB_polygon_offset_clamp'] = 1,
+	['GL_ARB_post_depth_coverage'] = 1,
 	['GL_ARB_program_interface_query'] = 1,
 	['GL_ARB_provoking_vertex'] = 1,
 	['GL_ARB_query_buffer_object'] = 1,
 	['GL_ARB_robust_buffer_access_behavior'] = 1,
 	['GL_ARB_robustness'] = 1,
 	['GL_ARB_robustness_isolation'] = 1,
+	['GL_ARB_sample_locations'] = 1,
 	['GL_ARB_sample_shading'] = 1,
 	['GL_ARB_sampler_objects'] = 1,
 	['GL_ARB_seamless_cube_map'] = 1,
 	['GL_ARB_seamless_cubemap_per_texture'] = 1,
 	['GL_ARB_separate_shader_objects'] = 1,
+	['GL_ARB_shader_atomic_counter_ops'] = 1,
 	['GL_ARB_shader_atomic_counters'] = 1,
+	['GL_ARB_shader_ballot'] = 1,
 	['GL_ARB_shader_bit_encoding'] = 1,
+	['GL_ARB_shader_clock'] = 1,
 	['GL_ARB_shader_draw_parameters'] = 1,
 	['GL_ARB_shader_group_vote'] = 1,
 	['GL_ARB_shader_image_load_store'] = 1,
@@ -3104,17 +3518,24 @@ local glc= {
 	['GL_ARB_shader_stencil_export'] = 1,
 	['GL_ARB_shader_storage_buffer_object'] = 1,
 	['GL_ARB_shader_subroutine'] = 1,
+	['GL_ARB_shader_texture_image_samples'] = 1,
 	['GL_ARB_shader_texture_lod'] = 1,
+	['GL_ARB_shader_viewport_layer_array'] = 1,
 	['GL_ARB_shading_language_100'] = 1,
 	['GL_ARB_shading_language_420pack'] = 1,
 	['GL_ARB_shading_language_include'] = 1,
 	['GL_ARB_shading_language_packing'] = 1,
 	['GL_ARB_shadow'] = 1,
 	['GL_ARB_shadow_ambient'] = 1,
+	['GL_ARB_sparse_buffer'] = 1,
 	['GL_ARB_sparse_texture'] = 1,
+	['GL_ARB_sparse_texture2'] = 1,
+	['GL_ARB_sparse_texture_clamp'] = 1,
+	['GL_ARB_spirv_extensions'] = 1,
 	['GL_ARB_stencil_texturing'] = 1,
 	['GL_ARB_sync'] = 1,
 	['GL_ARB_tessellation_shader'] = 1,
+	['GL_ARB_texture_barrier'] = 1,
 	['GL_ARB_texture_border_clamp'] = 1,
 	['GL_ARB_texture_buffer_object'] = 1,
 	['GL_ARB_texture_buffer_object_rgb32'] = 1,
@@ -3128,6 +3549,8 @@ local glc= {
 	['GL_ARB_texture_env_combine'] = 1,
 	['GL_ARB_texture_env_crossbar'] = 1,
 	['GL_ARB_texture_env_dot3'] = 1,
+	['GL_ARB_texture_filter_anisotropic'] = 1,
+	['GL_ARB_texture_filter_minmax'] = 1,
 	['GL_ARB_texture_float'] = 1,
 	['GL_ARB_texture_gather'] = 1,
 	['GL_ARB_texture_mirror_clamp_to_edge'] = 1,
@@ -3148,6 +3571,7 @@ local glc= {
 	['GL_ARB_transform_feedback2'] = 1,
 	['GL_ARB_transform_feedback3'] = 1,
 	['GL_ARB_transform_feedback_instanced'] = 1,
+	['GL_ARB_transform_feedback_overflow_query'] = 1,
 	['GL_ARB_transpose_matrix'] = 1,
 	['GL_ARB_uniform_buffer_object'] = 1,
 	['GL_ARB_vertex_array_bgra'] = 1,
@@ -3205,13 +3629,18 @@ local glc= {
 	['GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_COMPUTE_SHADER'] = 0x90ED,
 	['GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_FRAGMENT_SHADER'] = 0x92CB,
 	['GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_GEOMETRY_SHADER'] = 0x92CA,
+	['GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_MESH_SHADER_NV'] = 0x959E,
+	['GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_TASK_SHADER_NV'] = 0x959F,
 	['GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_TESS_CONTROL_SHADER'] = 0x92C8,
 	['GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_TESS_EVALUATION_SHADER'] = 0x92C9,
 	['GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_VERTEX_SHADER'] = 0x92C7,
 	['GL_ATOMIC_COUNTER_BUFFER_SIZE'] = 0x92C3,
 	['GL_ATOMIC_COUNTER_BUFFER_START'] = 0x92C2,
+	['GL_ATTACHED_MEMORY_OBJECT_NV'] = 0x95A4,
+	['GL_ATTACHED_MEMORY_OFFSET_NV'] = 0x95A5,
 	['GL_ATTACHED_SHADERS'] = 0x8B85,
 	['GL_ATTENUATION_EXT'] = 0x834D,
+	['GL_ATTRIBUTE_ADDRESS_COMMAND_NV'] = 0x0009,
 	['GL_ATTRIB_ARRAY_POINTER_NV'] = 0x8645,
 	['GL_ATTRIB_ARRAY_SIZE_NV'] = 0x8623,
 	['GL_ATTRIB_ARRAY_STRIDE_NV'] = 0x8624,
@@ -3236,6 +3665,7 @@ local glc= {
 	['GL_BEVEL_NV'] = 0x90A6,
 	['GL_BGR'] = 0x80E0,
 	['GL_BGRA'] = 0x80E1,
+	['GL_BGRA8_EXT'] = 0x93A1,
 	['GL_BGRA_EXT'] = 0x80E1,
 	['GL_BGRA_INTEGER'] = 0x8D9B,
 	['GL_BGRA_INTEGER_EXT'] = 0x8D9B,
@@ -3250,9 +3680,12 @@ local glc= {
 	['GL_BINORMAL_ARRAY_TYPE_EXT'] = 0x8440,
 	['GL_BITMAP'] = 0x1A00,
 	['GL_BITMAP_TOKEN'] = 0x0704,
+	['GL_BLACKHOLE_RENDER_INTEL'] = 0x83FC,
 	['GL_BLEND'] = 0x0BE2,
+	['GL_BLEND_ADVANCED_COHERENT_KHR'] = 0x9285,
 	['GL_BLEND_ADVANCED_COHERENT_NV'] = 0x9285,
 	['GL_BLEND_COLOR'] = 0x8005,
+	['GL_BLEND_COLOR_COMMAND_NV'] = 0x000B,
 	['GL_BLEND_COLOR_EXT'] = 0x8005,
 	['GL_BLEND_DST'] = 0x0BE0,
 	['GL_BLEND_DST_ALPHA'] = 0x80CA,
@@ -3281,6 +3714,7 @@ local glc= {
 	['GL_BLUE_INTEGER_EXT'] = 0x8D96,
 	['GL_BLUE_MAX_CLAMP_INGR'] = 0x8566,
 	['GL_BLUE_MIN_CLAMP_INGR'] = 0x8562,
+	['GL_BLUE_NV'] = 0x1905,
 	['GL_BLUE_SCALE'] = 0x0D1A,
 	['GL_BOLD_BIT_NV'] = 0x01,
 	['GL_BOOL'] = 0x8B56,
@@ -3359,6 +3793,11 @@ local glc= {
 	['GL_CLIENT_PIXEL_STORE_BIT'] = 0x00000001,
 	['GL_CLIENT_STORAGE_BIT'] = 0x0200,
 	['GL_CLIENT_VERTEX_ARRAY_BIT'] = 0x00000002,
+	['GL_CLIPPING_INPUT_PRIMITIVES'] = 0x82F6,
+	['GL_CLIPPING_INPUT_PRIMITIVES_ARB'] = 0x82F6,
+	['GL_CLIPPING_OUTPUT_PRIMITIVES'] = 0x82F7,
+	['GL_CLIPPING_OUTPUT_PRIMITIVES_ARB'] = 0x82F7,
+	['GL_CLIP_DEPTH_MODE'] = 0x935D,
 	['GL_CLIP_DISTANCE0'] = 0x3000,
 	['GL_CLIP_DISTANCE1'] = 0x3001,
 	['GL_CLIP_DISTANCE2'] = 0x3002,
@@ -3370,6 +3809,7 @@ local glc= {
 	['GL_CLIP_DISTANCE_NV'] = 0x8C7A,
 	['GL_CLIP_FAR_HINT_PGI'] = 0x1A221,
 	['GL_CLIP_NEAR_HINT_PGI'] = 0x1A220,
+	['GL_CLIP_ORIGIN'] = 0x935C,
 	['GL_CLIP_PLANE0'] = 0x3000,
 	['GL_CLIP_PLANE1'] = 0x3001,
 	['GL_CLIP_PLANE2'] = 0x3002,
@@ -3386,7 +3826,9 @@ local glc= {
 	['GL_COLOR'] = 0x1800,
 	['GL_COLOR3_BIT_PGI'] = 0x00010000,
 	['GL_COLOR4_BIT_PGI'] = 0x00020000,
+	['GL_COLORBURN_KHR'] = 0x929A,
 	['GL_COLORBURN_NV'] = 0x929A,
+	['GL_COLORDODGE_KHR'] = 0x9299,
 	['GL_COLORDODGE_NV'] = 0x9299,
 	['GL_COLOR_ALPHA_PAIRING_ATI'] = 0x8975,
 	['GL_COLOR_ARRAY'] = 0x8076,
@@ -3422,10 +3864,26 @@ local glc= {
 	['GL_COLOR_ATTACHMENT14_EXT'] = 0x8CEE,
 	['GL_COLOR_ATTACHMENT15'] = 0x8CEF,
 	['GL_COLOR_ATTACHMENT15_EXT'] = 0x8CEF,
+	['GL_COLOR_ATTACHMENT16'] = 0x8CF0,
+	['GL_COLOR_ATTACHMENT17'] = 0x8CF1,
+	['GL_COLOR_ATTACHMENT18'] = 0x8CF2,
+	['GL_COLOR_ATTACHMENT19'] = 0x8CF3,
 	['GL_COLOR_ATTACHMENT1_EXT'] = 0x8CE1,
 	['GL_COLOR_ATTACHMENT2'] = 0x8CE2,
+	['GL_COLOR_ATTACHMENT20'] = 0x8CF4,
+	['GL_COLOR_ATTACHMENT21'] = 0x8CF5,
+	['GL_COLOR_ATTACHMENT22'] = 0x8CF6,
+	['GL_COLOR_ATTACHMENT23'] = 0x8CF7,
+	['GL_COLOR_ATTACHMENT24'] = 0x8CF8,
+	['GL_COLOR_ATTACHMENT25'] = 0x8CF9,
+	['GL_COLOR_ATTACHMENT26'] = 0x8CFA,
+	['GL_COLOR_ATTACHMENT27'] = 0x8CFB,
+	['GL_COLOR_ATTACHMENT28'] = 0x8CFC,
+	['GL_COLOR_ATTACHMENT29'] = 0x8CFD,
 	['GL_COLOR_ATTACHMENT2_EXT'] = 0x8CE2,
 	['GL_COLOR_ATTACHMENT3'] = 0x8CE3,
+	['GL_COLOR_ATTACHMENT30'] = 0x8CFE,
+	['GL_COLOR_ATTACHMENT31'] = 0x8CFF,
 	['GL_COLOR_ATTACHMENT3_EXT'] = 0x8CE3,
 	['GL_COLOR_ATTACHMENT4'] = 0x8CE4,
 	['GL_COLOR_ATTACHMENT4_EXT'] = 0x8CE4,
@@ -3537,6 +3995,8 @@ local glc= {
 	['GL_COMPILE'] = 0x1300,
 	['GL_COMPILE_AND_EXECUTE'] = 0x1301,
 	['GL_COMPILE_STATUS'] = 0x8B81,
+	['GL_COMPLETION_STATUS_ARB'] = 0x91B1,
+	['GL_COMPLETION_STATUS_KHR'] = 0x91B1,
 	['GL_COMPRESSED_ALPHA'] = 0x84E9,
 	['GL_COMPRESSED_ALPHA_ARB'] = 0x84E9,
 	['GL_COMPRESSED_INTENSITY'] = 0x84EC,
@@ -3574,13 +4034,16 @@ local glc= {
 	['GL_COMPRESSED_RGBA_ASTC_8x5_KHR'] = 0x93B5,
 	['GL_COMPRESSED_RGBA_ASTC_8x6_KHR'] = 0x93B6,
 	['GL_COMPRESSED_RGBA_ASTC_8x8_KHR'] = 0x93B7,
+	['GL_COMPRESSED_RGBA_BPTC_UNORM'] = 0x8E8C,
 	['GL_COMPRESSED_RGBA_BPTC_UNORM_ARB'] = 0x8E8C,
 	['GL_COMPRESSED_RGBA_FXT1_3DFX'] = 0x86B1,
 	['GL_COMPRESSED_RGBA_S3TC_DXT1_EXT'] = 0x83F1,
 	['GL_COMPRESSED_RGBA_S3TC_DXT3_EXT'] = 0x83F2,
 	['GL_COMPRESSED_RGBA_S3TC_DXT5_EXT'] = 0x83F3,
 	['GL_COMPRESSED_RGB_ARB'] = 0x84ED,
+	['GL_COMPRESSED_RGB_BPTC_SIGNED_FLOAT'] = 0x8E8E,
 	['GL_COMPRESSED_RGB_BPTC_SIGNED_FLOAT_ARB'] = 0x8E8E,
+	['GL_COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT'] = 0x8E8F,
 	['GL_COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT_ARB'] = 0x8E8F,
 	['GL_COMPRESSED_RGB_FXT1_3DFX'] = 0x86B0,
 	['GL_COMPRESSED_RGB_S3TC_DXT1_EXT'] = 0x83F0,
@@ -3616,6 +4079,7 @@ local glc= {
 	['GL_COMPRESSED_SRGB8_ETC2'] = 0x9275,
 	['GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2'] = 0x9277,
 	['GL_COMPRESSED_SRGB_ALPHA'] = 0x8C49,
+	['GL_COMPRESSED_SRGB_ALPHA_BPTC_UNORM'] = 0x8E8D,
 	['GL_COMPRESSED_SRGB_ALPHA_BPTC_UNORM_ARB'] = 0x8E8D,
 	['GL_COMPRESSED_SRGB_ALPHA_EXT'] = 0x8C49,
 	['GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT1_EXT'] = 0x8C4D,
@@ -3629,13 +4093,26 @@ local glc= {
 	['GL_COMPUTE_PROGRAM_PARAMETER_BUFFER_NV'] = 0x90FC,
 	['GL_COMPUTE_SHADER'] = 0x91B9,
 	['GL_COMPUTE_SHADER_BIT'] = 0x00000020,
+	['GL_COMPUTE_SHADER_INVOCATIONS'] = 0x82F5,
+	['GL_COMPUTE_SHADER_INVOCATIONS_ARB'] = 0x82F5,
 	['GL_COMPUTE_SUBROUTINE'] = 0x92ED,
 	['GL_COMPUTE_SUBROUTINE_UNIFORM'] = 0x92F3,
 	['GL_COMPUTE_TEXTURE'] = 0x82A0,
 	['GL_COMPUTE_WORK_GROUP_SIZE'] = 0x8267,
 	['GL_COMP_BIT_ATI'] = 0x00000002,
 	['GL_CONDITION_SATISFIED'] = 0x911C,
+	['GL_CONFORMANT_NV'] = 0x9374,
+	['GL_CONIC_CURVE_TO_NV'] = 0x1A,
 	['GL_CONJOINT_NV'] = 0x9284,
+	['GL_CONSERVATIVE_RASTERIZATION_INTEL'] = 0x83FE,
+	['GL_CONSERVATIVE_RASTERIZATION_NV'] = 0x9346,
+	['GL_CONSERVATIVE_RASTER_DILATE_GRANULARITY_NV'] = 0x937B,
+	['GL_CONSERVATIVE_RASTER_DILATE_NV'] = 0x9379,
+	['GL_CONSERVATIVE_RASTER_DILATE_RANGE_NV'] = 0x937A,
+	['GL_CONSERVATIVE_RASTER_MODE_NV'] = 0x954D,
+	['GL_CONSERVATIVE_RASTER_MODE_POST_SNAP_NV'] = 0x954E,
+	['GL_CONSERVATIVE_RASTER_MODE_PRE_SNAP_NV'] = 0x9550,
+	['GL_CONSERVATIVE_RASTER_MODE_PRE_SNAP_TRIANGLES_NV'] = 0x954F,
 	['GL_CONSERVE_MEMORY_HINT_PGI'] = 0x1A1FD,
 	['GL_CONSTANT'] = 0x8576,
 	['GL_CONSTANT_ALPHA'] = 0x8003,
@@ -3649,14 +4126,22 @@ local glc= {
 	['GL_CONSTANT_COLOR1_NV'] = 0x852B,
 	['GL_CONSTANT_COLOR_EXT'] = 0x8001,
 	['GL_CONSTANT_EXT'] = 0x8576,
+	['GL_CONSTANT_NV'] = 0x8576,
 	['GL_CONST_EYE_NV'] = 0x86E5,
 	['GL_CONTEXT_COMPATIBILITY_PROFILE_BIT'] = 0x00000002,
 	['GL_CONTEXT_CORE_PROFILE_BIT'] = 0x00000001,
 	['GL_CONTEXT_FLAGS'] = 0x821E,
 	['GL_CONTEXT_FLAG_DEBUG_BIT'] = 0x00000002,
 	['GL_CONTEXT_FLAG_FORWARD_COMPATIBLE_BIT'] = 0x00000001,
+	['GL_CONTEXT_FLAG_NO_ERROR_BIT'] = 0x00000008,
+	['GL_CONTEXT_FLAG_NO_ERROR_BIT_KHR'] = 0x00000008,
+	['GL_CONTEXT_FLAG_ROBUST_ACCESS_BIT'] = 0x00000004,
 	['GL_CONTEXT_FLAG_ROBUST_ACCESS_BIT_ARB'] = 0x00000004,
+	['GL_CONTEXT_LOST'] = 0x0507,
 	['GL_CONTEXT_PROFILE_MASK'] = 0x9126,
+	['GL_CONTEXT_RELEASE_BEHAVIOR'] = 0x82FB,
+	['GL_CONTEXT_RELEASE_BEHAVIOR_FLUSH'] = 0x82FC,
+	['GL_CONTEXT_ROBUST_ACCESS'] = 0x90F3,
 	['GL_CONTINUOUS_AMD'] = 0x9007,
 	['GL_CONTRAST_NV'] = 0x92A1,
 	['GL_CONVEX_HULL_NV'] = 0x908B,
@@ -3725,6 +4210,9 @@ local glc= {
 	['GL_COUNTER_TYPE_AMD'] = 0x8BC0,
 	['GL_COUNT_DOWN_NV'] = 0x9089,
 	['GL_COUNT_UP_NV'] = 0x9088,
+	['GL_COVERAGE_MODULATION_NV'] = 0x9332,
+	['GL_COVERAGE_MODULATION_TABLE_NV'] = 0x9331,
+	['GL_COVERAGE_MODULATION_TABLE_SIZE_NV'] = 0x9333,
 	['GL_CUBIC_CURVE_TO_NV'] = 0x0C,
 	['GL_CUBIC_EXT'] = 0x8334,
 	['GL_CUBIC_HP'] = 0x815F,
@@ -3774,6 +4262,8 @@ local glc= {
 	['GL_CURRENT_VERTEX_WEIGHT_EXT'] = 0x850B,
 	['GL_CURRENT_WEIGHT_ARB'] = 0x86A8,
 	['GL_CW'] = 0x0900,
+	['GL_D3D12_FENCE_VALUE_EXT'] = 0x9595,
+	['GL_DARKEN_KHR'] = 0x9297,
 	['GL_DARKEN_NV'] = 0x9297,
 	['GL_DATA_BUFFER_AMD'] = 0x9151,
 	['GL_DEBUG_CALLBACK_FUNCTION'] = 0x8244,
@@ -3839,6 +4329,7 @@ local glc= {
 	['GL_DECR'] = 0x1E03,
 	['GL_DECR_WRAP'] = 0x8508,
 	['GL_DECR_WRAP_EXT'] = 0x8508,
+	['GL_DEDICATED_MEMORY_OBJECT_EXT'] = 0x9581,
 	['GL_DEFORMATIONS_MASK_SGIX'] = 0x8196,
 	['GL_DELETE_STATUS'] = 0x8B80,
 	['GL_DEPENDENT_AR_TEXTURE_2D_NV'] = 0x86E9,
@@ -3880,6 +4371,7 @@ local glc= {
 	['GL_DEPTH_FUNC'] = 0x0B74,
 	['GL_DEPTH_RANGE'] = 0x0B70,
 	['GL_DEPTH_RENDERABLE'] = 0x8287,
+	['GL_DEPTH_SAMPLES_NV'] = 0x932D,
 	['GL_DEPTH_SCALE'] = 0x0D1E,
 	['GL_DEPTH_STENCIL'] = 0x84F9,
 	['GL_DEPTH_STENCIL_ATTACHMENT'] = 0x821A,
@@ -3892,11 +4384,18 @@ local glc= {
 	['GL_DEPTH_TEXTURE_MODE'] = 0x884B,
 	['GL_DEPTH_TEXTURE_MODE_ARB'] = 0x884B,
 	['GL_DEPTH_WRITEMASK'] = 0x0B72,
+	['GL_DETACHED_BUFFERS_NV'] = 0x95AB,
+	['GL_DETACHED_MEMORY_INCARNATION_NV'] = 0x95A9,
+	['GL_DETACHED_TEXTURES_NV'] = 0x95AA,
 	['GL_DETAIL_TEXTURE_2D_BINDING_SGIS'] = 0x8096,
 	['GL_DETAIL_TEXTURE_2D_SGIS'] = 0x8095,
 	['GL_DETAIL_TEXTURE_FUNC_POINTS_SGIS'] = 0x809C,
 	['GL_DETAIL_TEXTURE_LEVEL_SGIS'] = 0x809A,
 	['GL_DETAIL_TEXTURE_MODE_SGIS'] = 0x809B,
+	['GL_DEVICE_LUID_EXT'] = 0x9599,
+	['GL_DEVICE_NODE_MASK_EXT'] = 0x959A,
+	['GL_DEVICE_UUID_EXT'] = 0x9597,
+	['GL_DIFFERENCE_KHR'] = 0x929E,
 	['GL_DIFFERENCE_NV'] = 0x929E,
 	['GL_DIFFUSE'] = 0x1201,
 	['GL_DISCARD_ATI'] = 0x8763,
@@ -3959,6 +4458,9 @@ local glc= {
 	['GL_DOUBLE_VEC3_EXT'] = 0x8FFD,
 	['GL_DOUBLE_VEC4'] = 0x8FFE,
 	['GL_DOUBLE_VEC4_EXT'] = 0x8FFE,
+	['GL_DRAW_ARRAYS_COMMAND_NV'] = 0x0003,
+	['GL_DRAW_ARRAYS_INSTANCED_COMMAND_NV'] = 0x0007,
+	['GL_DRAW_ARRAYS_STRIP_COMMAND_NV'] = 0x0005,
 	['GL_DRAW_BUFFER'] = 0x0C01,
 	['GL_DRAW_BUFFER0'] = 0x8825,
 	['GL_DRAW_BUFFER0_ARB'] = 0x8825,
@@ -4008,6 +4510,9 @@ local glc= {
 	['GL_DRAW_BUFFER9'] = 0x882E,
 	['GL_DRAW_BUFFER9_ARB'] = 0x882E,
 	['GL_DRAW_BUFFER9_ATI'] = 0x882E,
+	['GL_DRAW_ELEMENTS_COMMAND_NV'] = 0x0002,
+	['GL_DRAW_ELEMENTS_INSTANCED_COMMAND_NV'] = 0x0006,
+	['GL_DRAW_ELEMENTS_STRIP_COMMAND_NV'] = 0x0004,
 	['GL_DRAW_FRAMEBUFFER'] = 0x8CA9,
 	['GL_DRAW_FRAMEBUFFER_BINDING'] = 0x8CA6,
 	['GL_DRAW_FRAMEBUFFER_BINDING_EXT'] = 0x8CA6,
@@ -4019,6 +4524,7 @@ local glc= {
 	['GL_DRAW_INDIRECT_UNIFIED_NV'] = 0x8F40,
 	['GL_DRAW_PIXELS_APPLE'] = 0x8A0A,
 	['GL_DRAW_PIXEL_TOKEN'] = 0x0705,
+	['GL_DRIVER_UUID_EXT'] = 0x9598,
 	['GL_DSDT8_MAG8_INTENSITY8_NV'] = 0x870B,
 	['GL_DSDT8_MAG8_NV'] = 0x870A,
 	['GL_DSDT8_NV'] = 0x8709,
@@ -4079,7 +4585,9 @@ local glc= {
 	['GL_EDGE_FLAG_ARRAY_POINTER_EXT'] = 0x8093,
 	['GL_EDGE_FLAG_ARRAY_STRIDE'] = 0x808C,
 	['GL_EDGE_FLAG_ARRAY_STRIDE_EXT'] = 0x808C,
+	['GL_EFFECTIVE_RASTER_SAMPLES_EXT'] = 0x932C,
 	['GL_EIGHTH_BIT_ATI'] = 0x00000020,
+	['GL_ELEMENT_ADDRESS_COMMAND_NV'] = 0x0008,
 	['GL_ELEMENT_ARRAY_ADDRESS_NV'] = 0x8F29,
 	['GL_ELEMENT_ARRAY_APPLE'] = 0x8A0C,
 	['GL_ELEMENT_ARRAY_ATI'] = 0x8768,
@@ -4122,7 +4630,9 @@ local glc= {
 	['GL_EVAL_VERTEX_ATTRIB7_NV'] = 0x86CD,
 	['GL_EVAL_VERTEX_ATTRIB8_NV'] = 0x86CE,
 	['GL_EVAL_VERTEX_ATTRIB9_NV'] = 0x86CF,
+	['GL_EXCLUSION_KHR'] = 0x92A0,
 	['GL_EXCLUSION_NV'] = 0x92A0,
+	['GL_EXCLUSIVE_EXT'] = 0x8F11,
 	['GL_EXP'] = 0x0800,
 	['GL_EXP2'] = 0x0801,
 	['GL_EXPAND_NEGATE_NV'] = 0x8539,
@@ -4130,6 +4640,8 @@ local glc= {
 	['GL_EXTENSIONS'] = 0x1F03,
 	['GL_EXTERNAL_VIRTUAL_MEMORY_BUFFER_AMD'] = 0x9160,
 	['GL_EXT_422_pixels'] = 1,
+	['GL_EXT_EGL_image_storage'] = 1,
+	['GL_EXT_EGL_sync'] = 1,
 	['GL_EXT_abgr'] = 1,
 	['GL_EXT_bgra'] = 1,
 	['GL_EXT_bindable_uniform'] = 1,
@@ -4154,6 +4666,7 @@ local glc= {
 	['GL_EXT_draw_buffers2'] = 1,
 	['GL_EXT_draw_instanced'] = 1,
 	['GL_EXT_draw_range_elements'] = 1,
+	['GL_EXT_external_buffer'] = 1,
 	['GL_EXT_fog_coord'] = 1,
 	['GL_EXT_framebuffer_blit'] = 1,
 	['GL_EXT_framebuffer_multisample'] = 1,
@@ -4169,9 +4682,15 @@ local glc= {
 	['GL_EXT_index_material'] = 1,
 	['GL_EXT_index_texture'] = 1,
 	['GL_EXT_light_texture'] = 1,
+	['GL_EXT_memory_object'] = 1,
+	['GL_EXT_memory_object_fd'] = 1,
+	['GL_EXT_memory_object_win32'] = 1,
 	['GL_EXT_misc_attribute'] = 1,
 	['GL_EXT_multi_draw_arrays'] = 1,
 	['GL_EXT_multisample'] = 1,
+	['GL_EXT_multiview_tessellation_geometry_shader'] = 1,
+	['GL_EXT_multiview_texture_multisample'] = 1,
+	['GL_EXT_multiview_timer_query'] = 1,
 	['GL_EXT_packed_depth_stencil'] = 1,
 	['GL_EXT_packed_float'] = 1,
 	['GL_EXT_packed_pixels'] = 1,
@@ -4181,15 +4700,25 @@ local glc= {
 	['GL_EXT_pixel_transform_color_table'] = 1,
 	['GL_EXT_point_parameters'] = 1,
 	['GL_EXT_polygon_offset'] = 1,
+	['GL_EXT_polygon_offset_clamp'] = 1,
+	['GL_EXT_post_depth_coverage'] = 1,
 	['GL_EXT_provoking_vertex'] = 1,
+	['GL_EXT_raster_multisample'] = 1,
 	['GL_EXT_rescale_normal'] = 1,
 	['GL_EXT_secondary_color'] = 1,
+	['GL_EXT_semaphore'] = 1,
+	['GL_EXT_semaphore_fd'] = 1,
+	['GL_EXT_semaphore_win32'] = 1,
 	['GL_EXT_separate_shader_objects'] = 1,
 	['GL_EXT_separate_specular_color'] = 1,
+	['GL_EXT_shader_framebuffer_fetch'] = 1,
+	['GL_EXT_shader_framebuffer_fetch_non_coherent'] = 1,
+	['GL_EXT_shader_image_load_formatted'] = 1,
 	['GL_EXT_shader_image_load_store'] = 1,
 	['GL_EXT_shader_integer_mix'] = 1,
 	['GL_EXT_shadow_funcs'] = 1,
 	['GL_EXT_shared_texture_palette'] = 1,
+	['GL_EXT_sparse_texture2'] = 1,
 	['GL_EXT_stencil_clear_tag'] = 1,
 	['GL_EXT_stencil_two_side'] = 1,
 	['GL_EXT_stencil_wrap'] = 1,
@@ -4206,15 +4735,20 @@ local glc= {
 	['GL_EXT_texture_env_combine'] = 1,
 	['GL_EXT_texture_env_dot3'] = 1,
 	['GL_EXT_texture_filter_anisotropic'] = 1,
+	['GL_EXT_texture_filter_minmax'] = 1,
 	['GL_EXT_texture_integer'] = 1,
 	['GL_EXT_texture_lod_bias'] = 1,
 	['GL_EXT_texture_mirror_clamp'] = 1,
 	['GL_EXT_texture_object'] = 1,
 	['GL_EXT_texture_perturb_normal'] = 1,
 	['GL_EXT_texture_sRGB'] = 1,
+	['GL_EXT_texture_sRGB_R8'] = 1,
+	['GL_EXT_texture_sRGB_RG8'] = 1,
 	['GL_EXT_texture_sRGB_decode'] = 1,
+	['GL_EXT_texture_shadow_lod'] = 1,
 	['GL_EXT_texture_shared_exponent'] = 1,
 	['GL_EXT_texture_snorm'] = 1,
+	['GL_EXT_texture_storage'] = 1,
 	['GL_EXT_texture_swizzle'] = 1,
 	['GL_EXT_timer_query'] = 1,
 	['GL_EXT_transform_feedback'] = 1,
@@ -4223,10 +4757,13 @@ local glc= {
 	['GL_EXT_vertex_attrib_64bit'] = 1,
 	['GL_EXT_vertex_shader'] = 1,
 	['GL_EXT_vertex_weighting'] = 1,
+	['GL_EXT_win32_keyed_mutex'] = 1,
+	['GL_EXT_window_rectangles'] = 1,
 	['GL_EXT_x11_sync_object'] = 1,
 	['GL_EYE_DISTANCE_TO_LINE_SGIS'] = 0x81F2,
 	['GL_EYE_DISTANCE_TO_POINT_SGIS'] = 0x81F0,
 	['GL_EYE_LINEAR'] = 0x2400,
+	['GL_EYE_LINEAR_NV'] = 0x2400,
 	['GL_EYE_LINE_SGIS'] = 0x81F6,
 	['GL_EYE_PLANE'] = 0x2502,
 	['GL_EYE_PLANE_ABSOLUTE_NV'] = 0x855C,
@@ -4250,6 +4787,7 @@ local glc= {
 	['GL_FIELD_UPPER_NV'] = 0x9022,
 	['GL_FILE_NAME_NV'] = 0x9074,
 	['GL_FILL'] = 0x1B02,
+	['GL_FILL_RECTANGLE_NV'] = 0x933C,
 	['GL_FILTER'] = 0x829A,
 	['GL_FILTER4_SGIS'] = 0x8146,
 	['GL_FIRST_TO_REST_NV'] = 0x90AF,
@@ -4261,6 +4799,15 @@ local glc= {
 	['GL_FIXED_ONLY_ARB'] = 0x891D,
 	['GL_FLAT'] = 0x1D00,
 	['GL_FLOAT'] = 0x1406,
+	['GL_FLOAT16_MAT2_AMD'] = 0x91C5,
+	['GL_FLOAT16_MAT2x3_AMD'] = 0x91C8,
+	['GL_FLOAT16_MAT2x4_AMD'] = 0x91C9,
+	['GL_FLOAT16_MAT3_AMD'] = 0x91C6,
+	['GL_FLOAT16_MAT3x2_AMD'] = 0x91CA,
+	['GL_FLOAT16_MAT3x4_AMD'] = 0x91CB,
+	['GL_FLOAT16_MAT4_AMD'] = 0x91C7,
+	['GL_FLOAT16_MAT4x2_AMD'] = 0x91CC,
+	['GL_FLOAT16_MAT4x3_AMD'] = 0x91CD,
 	['GL_FLOAT16_NV'] = 0x8FF8,
 	['GL_FLOAT16_VEC2_NV'] = 0x8FF9,
 	['GL_FLOAT16_VEC3_NV'] = 0x8FFA,
@@ -4341,12 +4888,17 @@ local glc= {
 	['GL_FOG_START'] = 0x0B63,
 	['GL_FONT_ASCENDER_BIT_NV'] = 0x00200000,
 	['GL_FONT_DESCENDER_BIT_NV'] = 0x00400000,
+	['GL_FONT_GLYPHS_AVAILABLE_NV'] = 0x9368,
 	['GL_FONT_HAS_KERNING_BIT_NV'] = 0x10000000,
 	['GL_FONT_HEIGHT_BIT_NV'] = 0x00800000,
 	['GL_FONT_MAX_ADVANCE_HEIGHT_BIT_NV'] = 0x02000000,
 	['GL_FONT_MAX_ADVANCE_WIDTH_BIT_NV'] = 0x01000000,
+	['GL_FONT_NUM_GLYPH_INDICES_BIT_NV'] = 0x20000000,
+	['GL_FONT_TARGET_UNAVAILABLE_NV'] = 0x9369,
+	['GL_FONT_UNAVAILABLE_NV'] = 0x936A,
 	['GL_FONT_UNDERLINE_POSITION_BIT_NV'] = 0x04000000,
 	['GL_FONT_UNDERLINE_THICKNESS_BIT_NV'] = 0x08000000,
+	['GL_FONT_UNINTELLIGIBLE_NV'] = 0x936B,
 	['GL_FONT_UNITS_PER_EM_BIT_NV'] = 0x00100000,
 	['GL_FONT_X_MAX_BOUNDS_BIT_NV'] = 0x00040000,
 	['GL_FONT_X_MIN_BOUNDS_BIT_NV'] = 0x00010000,
@@ -4361,8 +4913,11 @@ local glc= {
 	['GL_FRAGMENT_COLOR_MATERIAL_FACE_SGIX'] = 0x8402,
 	['GL_FRAGMENT_COLOR_MATERIAL_PARAMETER_SGIX'] = 0x8403,
 	['GL_FRAGMENT_COLOR_MATERIAL_SGIX'] = 0x8401,
+	['GL_FRAGMENT_COVERAGE_COLOR_NV'] = 0x92DE,
+	['GL_FRAGMENT_COVERAGE_TO_COLOR_NV'] = 0x92DD,
 	['GL_FRAGMENT_DEPTH'] = 0x8452,
 	['GL_FRAGMENT_DEPTH_EXT'] = 0x8452,
+	['GL_FRAGMENT_INPUT_NV'] = 0x936D,
 	['GL_FRAGMENT_INTERPOLATION_OFFSET_BITS'] = 0x8E5D,
 	['GL_FRAGMENT_LIGHT0_SGIX'] = 0x840C,
 	['GL_FRAGMENT_LIGHT1_SGIX'] = 0x840D,
@@ -4390,6 +4945,9 @@ local glc= {
 	['GL_FRAGMENT_SHADER_BIT'] = 0x00000002,
 	['GL_FRAGMENT_SHADER_DERIVATIVE_HINT'] = 0x8B8B,
 	['GL_FRAGMENT_SHADER_DERIVATIVE_HINT_ARB'] = 0x8B8B,
+	['GL_FRAGMENT_SHADER_DISCARDS_SAMPLES_EXT'] = 0x8A52,
+	['GL_FRAGMENT_SHADER_INVOCATIONS'] = 0x82F4,
+	['GL_FRAGMENT_SHADER_INVOCATIONS_ARB'] = 0x82F4,
 	['GL_FRAGMENT_SUBROUTINE'] = 0x92EC,
 	['GL_FRAGMENT_SUBROUTINE_UNIFORM'] = 0x92F2,
 	['GL_FRAGMENT_TEXTURE'] = 0x829F,
@@ -4410,12 +4968,14 @@ local glc= {
 	['GL_FRAMEBUFFER_ATTACHMENT_RED_SIZE'] = 0x8212,
 	['GL_FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE'] = 0x8217,
 	['GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_3D_ZOFFSET_EXT'] = 0x8CD4,
+	['GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_BASE_VIEW_INDEX_OVR'] = 0x9632,
 	['GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE'] = 0x8CD3,
 	['GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE_EXT'] = 0x8CD3,
 	['GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER'] = 0x8CD4,
 	['GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER_EXT'] = 0x8CD4,
 	['GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL'] = 0x8CD2,
 	['GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL_EXT'] = 0x8CD2,
+	['GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_NUM_VIEWS_OVR'] = 0x9630,
 	['GL_FRAMEBUFFER_BARRIER_BIT'] = 0x00000400,
 	['GL_FRAMEBUFFER_BARRIER_BIT_EXT'] = 0x00000400,
 	['GL_FRAMEBUFFER_BINDING'] = 0x8CA6,
@@ -4430,6 +4990,8 @@ local glc= {
 	['GL_FRAMEBUFFER_DEFAULT_SAMPLES'] = 0x9313,
 	['GL_FRAMEBUFFER_DEFAULT_WIDTH'] = 0x9310,
 	['GL_FRAMEBUFFER_EXT'] = 0x8D40,
+	['GL_FRAMEBUFFER_FLIP_X_MESA'] = 0x8BBC,
+	['GL_FRAMEBUFFER_FLIP_Y_MESA'] = 0x8BBB,
 	['GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT'] = 0x8CD6,
 	['GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT_EXT'] = 0x8CD6,
 	['GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS_EXT'] = 0x8CD9,
@@ -4447,11 +5009,17 @@ local glc= {
 	['GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_EXT'] = 0x8D56,
 	['GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER'] = 0x8CDC,
 	['GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER_EXT'] = 0x8CDC,
+	['GL_FRAMEBUFFER_INCOMPLETE_VIEW_TARGETS_OVR'] = 0x9633,
+	['GL_FRAMEBUFFER_PROGRAMMABLE_SAMPLE_LOCATIONS_ARB'] = 0x9342,
+	['GL_FRAMEBUFFER_PROGRAMMABLE_SAMPLE_LOCATIONS_NV'] = 0x9342,
 	['GL_FRAMEBUFFER_RENDERABLE'] = 0x8289,
 	['GL_FRAMEBUFFER_RENDERABLE_LAYERED'] = 0x828A,
+	['GL_FRAMEBUFFER_SAMPLE_LOCATION_PIXEL_GRID_ARB'] = 0x9343,
+	['GL_FRAMEBUFFER_SAMPLE_LOCATION_PIXEL_GRID_NV'] = 0x9343,
 	['GL_FRAMEBUFFER_SRGB'] = 0x8DB9,
 	['GL_FRAMEBUFFER_SRGB_CAPABLE_EXT'] = 0x8DBA,
 	['GL_FRAMEBUFFER_SRGB_EXT'] = 0x8DB9,
+	['GL_FRAMEBUFFER_SWAP_XY_MESA'] = 0x8BBD,
 	['GL_FRAMEBUFFER_UNDEFINED'] = 0x8219,
 	['GL_FRAMEBUFFER_UNSUPPORTED'] = 0x8CDD,
 	['GL_FRAMEBUFFER_UNSUPPORTED_EXT'] = 0x8CDD,
@@ -4461,6 +5029,7 @@ local glc= {
 	['GL_FRONT'] = 0x0404,
 	['GL_FRONT_AND_BACK'] = 0x0408,
 	['GL_FRONT_FACE'] = 0x0B46,
+	['GL_FRONT_FACE_COMMAND_NV'] = 0x0012,
 	['GL_FRONT_LEFT'] = 0x0400,
 	['GL_FRONT_RIGHT'] = 0x0401,
 	['GL_FULL_RANGE_EXT'] = 0x87E1,
@@ -4492,6 +5061,8 @@ local glc= {
 	['GL_GEOMETRY_SHADER_BIT'] = 0x00000004,
 	['GL_GEOMETRY_SHADER_EXT'] = 0x8DD9,
 	['GL_GEOMETRY_SHADER_INVOCATIONS'] = 0x887F,
+	['GL_GEOMETRY_SHADER_PRIMITIVES_EMITTED'] = 0x82F3,
+	['GL_GEOMETRY_SHADER_PRIMITIVES_EMITTED_ARB'] = 0x82F3,
 	['GL_GEOMETRY_SUBROUTINE'] = 0x92EB,
 	['GL_GEOMETRY_SUBROUTINE_UNIFORM'] = 0x92F1,
 	['GL_GEOMETRY_TEXTURE'] = 0x829E,
@@ -4501,7 +5072,7 @@ local glc= {
 	['GL_GEQUAL'] = 0x0206,
 	['GL_GET_TEXTURE_IMAGE_FORMAT'] = 0x8291,
 	['GL_GET_TEXTURE_IMAGE_TYPE'] = 0x8292,
-	['GL_GLEXT_VERSION'] = 20131102,
+	['GL_GLEXT_VERSION'] = 20211115,
 	['GL_GLOBAL_ALPHA_FACTOR_SUN'] = 0x81DA,
 	['GL_GLOBAL_ALPHA_SUN'] = 0x81D9,
 	['GL_GLYPH_HAS_KERNING_BIT_NV'] = 0x100,
@@ -4514,6 +5085,11 @@ local glc= {
 	['GL_GLYPH_VERTICAL_BEARING_Y_BIT_NV'] = 0x40,
 	['GL_GLYPH_WIDTH_BIT_NV'] = 0x01,
 	['GL_GPU_ADDRESS_NV'] = 0x8F34,
+	['GL_GPU_MEMORY_INFO_CURRENT_AVAILABLE_VIDMEM_NVX'] = 0x9049,
+	['GL_GPU_MEMORY_INFO_DEDICATED_VIDMEM_NVX'] = 0x9047,
+	['GL_GPU_MEMORY_INFO_EVICTED_MEMORY_NVX'] = 0x904B,
+	['GL_GPU_MEMORY_INFO_EVICTION_COUNT_NVX'] = 0x904A,
+	['GL_GPU_MEMORY_INFO_TOTAL_AVAILABLE_MEMORY_NVX'] = 0x9048,
 	['GL_GREATER'] = 0x0204,
 	['GL_GREEN'] = 0x1904,
 	['GL_GREEN_BIAS'] = 0x0D19,
@@ -4523,9 +5099,11 @@ local glc= {
 	['GL_GREEN_INTEGER_EXT'] = 0x8D95,
 	['GL_GREEN_MAX_CLAMP_INGR'] = 0x8565,
 	['GL_GREEN_MIN_CLAMP_INGR'] = 0x8561,
+	['GL_GREEN_NV'] = 0x1904,
 	['GL_GREEN_SCALE'] = 0x0D18,
 	['GL_GREMEDY_frame_terminator'] = 1,
 	['GL_GREMEDY_string_marker'] = 1,
+	['GL_GUILTY_CONTEXT_RESET'] = 0x8253,
 	['GL_GUILTY_CONTEXT_RESET_ARB'] = 0x8253,
 	['GL_HALF_APPLE'] = 0x140B,
 	['GL_HALF_BIAS_NEGATE_NV'] = 0x853B,
@@ -4534,6 +5112,15 @@ local glc= {
 	['GL_HALF_FLOAT'] = 0x140B,
 	['GL_HALF_FLOAT_ARB'] = 0x140B,
 	['GL_HALF_FLOAT_NV'] = 0x140B,
+	['GL_HANDLE_TYPE_D3D11_IMAGE_EXT'] = 0x958B,
+	['GL_HANDLE_TYPE_D3D11_IMAGE_KMT_EXT'] = 0x958C,
+	['GL_HANDLE_TYPE_D3D12_FENCE_EXT'] = 0x9594,
+	['GL_HANDLE_TYPE_D3D12_RESOURCE_EXT'] = 0x958A,
+	['GL_HANDLE_TYPE_D3D12_TILEPOOL_EXT'] = 0x9589,
+	['GL_HANDLE_TYPE_OPAQUE_FD_EXT'] = 0x9586,
+	['GL_HANDLE_TYPE_OPAQUE_WIN32_EXT'] = 0x9587,
+	['GL_HANDLE_TYPE_OPAQUE_WIN32_KMT_EXT'] = 0x9588,
+	['GL_HARDLIGHT_KHR'] = 0x929B,
 	['GL_HARDLIGHT_NV'] = 0x929B,
 	['GL_HARDMIX_NV'] = 0x92A9,
 	['GL_HIGH_FLOAT'] = 0x8DF2,
@@ -4567,9 +5154,13 @@ local glc= {
 	['GL_HP_image_transform'] = 1,
 	['GL_HP_occlusion_test'] = 1,
 	['GL_HP_texture_lighting'] = 1,
+	['GL_HSL_COLOR_KHR'] = 0x92AF,
 	['GL_HSL_COLOR_NV'] = 0x92AF,
+	['GL_HSL_HUE_KHR'] = 0x92AD,
 	['GL_HSL_HUE_NV'] = 0x92AD,
+	['GL_HSL_LUMINOSITY_KHR'] = 0x92B0,
 	['GL_HSL_LUMINOSITY_NV'] = 0x92B0,
+	['GL_HSL_SATURATION_KHR'] = 0x92AE,
 	['GL_HSL_SATURATION_NV'] = 0x92AE,
 	['GL_IBM_cull_vertex'] = 1,
 	['GL_IBM_multimode_draw_arrays'] = 1,
@@ -4646,6 +5237,7 @@ local glc= {
 	['GL_IMPLEMENTATION_COLOR_READ_FORMAT_OES'] = 0x8B9B,
 	['GL_IMPLEMENTATION_COLOR_READ_TYPE'] = 0x8B9A,
 	['GL_IMPLEMENTATION_COLOR_READ_TYPE_OES'] = 0x8B9A,
+	['GL_INCLUSIVE_EXT'] = 0x8F10,
 	['GL_INCR'] = 0x1E02,
 	['GL_INCR_WRAP'] = 0x8507,
 	['GL_INCR_WRAP_EXT'] = 0x8507,
@@ -4683,6 +5275,7 @@ local glc= {
 	['GL_INGR_blend_func_separate'] = 1,
 	['GL_INGR_color_clamp'] = 1,
 	['GL_INGR_interlace_read'] = 1,
+	['GL_INNOCENT_CONTEXT_RESET'] = 0x8254,
 	['GL_INNOCENT_CONTEXT_RESET_ARB'] = 0x8254,
 	['GL_INSTRUMENT_BUFFER_POINTER_SGIX'] = 0x8180,
 	['GL_INSTRUMENT_MEASUREMENTS_SGIX'] = 0x8181,
@@ -4691,17 +5284,25 @@ local glc= {
 	['GL_INT16_VEC2_NV'] = 0x8FE5,
 	['GL_INT16_VEC3_NV'] = 0x8FE6,
 	['GL_INT16_VEC4_NV'] = 0x8FE7,
+	['GL_INT64_ARB'] = 0x140E,
 	['GL_INT64_NV'] = 0x140E,
+	['GL_INT64_VEC2_ARB'] = 0x8FE9,
 	['GL_INT64_VEC2_NV'] = 0x8FE9,
+	['GL_INT64_VEC3_ARB'] = 0x8FEA,
 	['GL_INT64_VEC3_NV'] = 0x8FEA,
+	['GL_INT64_VEC4_ARB'] = 0x8FEB,
 	['GL_INT64_VEC4_NV'] = 0x8FEB,
 	['GL_INT8_NV'] = 0x8FE0,
 	['GL_INT8_VEC2_NV'] = 0x8FE1,
 	['GL_INT8_VEC3_NV'] = 0x8FE2,
 	['GL_INT8_VEC4_NV'] = 0x8FE3,
+	['GL_INTEL_blackhole_render'] = 1,
+	['GL_INTEL_conservative_rasterization'] = 1,
 	['GL_INTEL_fragment_shader_ordering'] = 1,
+	['GL_INTEL_framebuffer_CMAA'] = 1,
 	['GL_INTEL_map_texture'] = 1,
 	['GL_INTEL_parallel_arrays'] = 1,
+	['GL_INTEL_performance_query'] = 1,
 	['GL_INTENSITY'] = 0x8049,
 	['GL_INTENSITY12'] = 0x804C,
 	['GL_INTENSITY12_EXT'] = 0x804C,
@@ -4827,9 +5428,18 @@ local glc= {
 	['GL_IUI_V2F_EXT'] = 0x81AD,
 	['GL_IUI_V3F_EXT'] = 0x81AE,
 	['GL_KEEP'] = 0x1E00,
+	['GL_KHR_blend_equation_advanced'] = 1,
+	['GL_KHR_blend_equation_advanced_coherent'] = 1,
+	['GL_KHR_context_flush_control'] = 1,
 	['GL_KHR_debug'] = 1,
+	['GL_KHR_no_error'] = 1,
+	['GL_KHR_parallel_shader_compile'] = 1,
+	['GL_KHR_robust_buffer_access_behavior'] = 1,
+	['GL_KHR_robustness'] = 1,
+	['GL_KHR_shader_subgroup'] = 1,
 	['GL_KHR_texture_compression_astc_hdr'] = 1,
 	['GL_KHR_texture_compression_astc_ldr'] = 1,
+	['GL_KHR_texture_compression_astc_sliced_3d'] = 1,
 	['GL_LARGE_CCW_ARC_TO_NV'] = 0x16,
 	['GL_LARGE_CW_ARC_TO_NV'] = 0x18,
 	['GL_LAST_VERTEX_CONVENTION'] = 0x8E4E,
@@ -4837,13 +5447,23 @@ local glc= {
 	['GL_LAST_VIDEO_CAPTURE_STATUS_NV'] = 0x9027,
 	['GL_LAYER_NV'] = 0x8DAA,
 	['GL_LAYER_PROVOKING_VERTEX'] = 0x825E,
+	['GL_LAYOUT_COLOR_ATTACHMENT_EXT'] = 0x958E,
 	['GL_LAYOUT_DEFAULT_INTEL'] = 0,
+	['GL_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_EXT'] = 0x9531,
+	['GL_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_EXT'] = 0x9530,
+	['GL_LAYOUT_DEPTH_STENCIL_ATTACHMENT_EXT'] = 0x958F,
+	['GL_LAYOUT_DEPTH_STENCIL_READ_ONLY_EXT'] = 0x9590,
+	['GL_LAYOUT_GENERAL_EXT'] = 0x958D,
 	['GL_LAYOUT_LINEAR_CPU_CACHED_INTEL'] = 2,
 	['GL_LAYOUT_LINEAR_INTEL'] = 1,
+	['GL_LAYOUT_SHADER_READ_ONLY_EXT'] = 0x9591,
+	['GL_LAYOUT_TRANSFER_DST_EXT'] = 0x9593,
+	['GL_LAYOUT_TRANSFER_SRC_EXT'] = 0x9592,
 	['GL_LEFT'] = 0x0406,
 	['GL_LEQUAL'] = 0x0203,
 	['GL_LERP_ATI'] = 0x8969,
 	['GL_LESS'] = 0x0201,
+	['GL_LGPU_SEPARATE_STORAGE_BIT_NVX'] = 0x0800,
 	['GL_LIGHT0'] = 0x4000,
 	['GL_LIGHT1'] = 0x4001,
 	['GL_LIGHT2'] = 0x4002,
@@ -4852,6 +5472,7 @@ local glc= {
 	['GL_LIGHT5'] = 0x4005,
 	['GL_LIGHT6'] = 0x4006,
 	['GL_LIGHT7'] = 0x4007,
+	['GL_LIGHTEN_KHR'] = 0x9298,
 	['GL_LIGHTEN_NV'] = 0x9298,
 	['GL_LIGHTING'] = 0x0B50,
 	['GL_LIGHTING_BIT'] = 0x00000040,
@@ -4878,6 +5499,7 @@ local glc= {
 	['GL_LINEAR_SHARPEN_ALPHA_SGIS'] = 0x80AE,
 	['GL_LINEAR_SHARPEN_COLOR_SGIS'] = 0x80AF,
 	['GL_LINEAR_SHARPEN_SGIS'] = 0x80AD,
+	['GL_LINEAR_TILING_EXT'] = 0x9585,
 	['GL_LINES'] = 0x0001,
 	['GL_LINES_ADJACENCY'] = 0x000A,
 	['GL_LINES_ADJACENCY_ARB'] = 0x000A,
@@ -4897,6 +5519,7 @@ local glc= {
 	['GL_LINE_TOKEN'] = 0x0702,
 	['GL_LINE_TO_NV'] = 0x04,
 	['GL_LINE_WIDTH'] = 0x0B21,
+	['GL_LINE_WIDTH_COMMAND_NV'] = 0x000D,
 	['GL_LINE_WIDTH_GRANULARITY'] = 0x0B23,
 	['GL_LINE_WIDTH_RANGE'] = 0x0B22,
 	['GL_LINK_STATUS'] = 0x8B82,
@@ -4915,12 +5538,14 @@ local glc= {
 	['GL_LOCATION_INDEX'] = 0x930F,
 	['GL_LOGIC_OP'] = 0x0BF1,
 	['GL_LOGIC_OP_MODE'] = 0x0BF0,
+	['GL_LOSE_CONTEXT_ON_RESET'] = 0x8252,
 	['GL_LOSE_CONTEXT_ON_RESET_ARB'] = 0x8252,
 	['GL_LOWER_LEFT'] = 0x8CA1,
 	['GL_LOW_FLOAT'] = 0x8DF0,
 	['GL_LOW_INT'] = 0x8DF3,
 	['GL_LO_BIAS_NV'] = 0x8715,
 	['GL_LO_SCALE_NV'] = 0x870F,
+	['GL_LUID_SIZE_EXT'] = 8,
 	['GL_LUMINANCE'] = 0x1909,
 	['GL_LUMINANCE12'] = 0x8041,
 	['GL_LUMINANCE12_ALPHA12'] = 0x8047,
@@ -4930,6 +5555,7 @@ local glc= {
 	['GL_LUMINANCE12_EXT'] = 0x8041,
 	['GL_LUMINANCE16'] = 0x8042,
 	['GL_LUMINANCE16F_ARB'] = 0x881E,
+	['GL_LUMINANCE16F_EXT'] = 0x881E,
 	['GL_LUMINANCE16I_EXT'] = 0x8D8C,
 	['GL_LUMINANCE16UI_EXT'] = 0x8D7A,
 	['GL_LUMINANCE16_ALPHA16'] = 0x8048,
@@ -4938,6 +5564,7 @@ local glc= {
 	['GL_LUMINANCE16_EXT'] = 0x8042,
 	['GL_LUMINANCE16_SNORM'] = 0x9019,
 	['GL_LUMINANCE32F_ARB'] = 0x8818,
+	['GL_LUMINANCE32F_EXT'] = 0x8818,
 	['GL_LUMINANCE32I_EXT'] = 0x8D86,
 	['GL_LUMINANCE32UI_EXT'] = 0x8D74,
 	['GL_LUMINANCE4'] = 0x803F,
@@ -4956,9 +5583,11 @@ local glc= {
 	['GL_LUMINANCE8_SNORM'] = 0x9015,
 	['GL_LUMINANCE_ALPHA'] = 0x190A,
 	['GL_LUMINANCE_ALPHA16F_ARB'] = 0x881F,
+	['GL_LUMINANCE_ALPHA16F_EXT'] = 0x881F,
 	['GL_LUMINANCE_ALPHA16I_EXT'] = 0x8D8D,
 	['GL_LUMINANCE_ALPHA16UI_EXT'] = 0x8D7B,
 	['GL_LUMINANCE_ALPHA32F_ARB'] = 0x8819,
+	['GL_LUMINANCE_ALPHA32F_EXT'] = 0x8819,
 	['GL_LUMINANCE_ALPHA32I_EXT'] = 0x8D87,
 	['GL_LUMINANCE_ALPHA32UI_EXT'] = 0x8D75,
 	['GL_LUMINANCE_ALPHA8I_EXT'] = 0x8D93,
@@ -5128,13 +5757,17 @@ local glc= {
 	['GL_MAX_CLIPMAP_VIRTUAL_DEPTH_SGIX'] = 0x8178,
 	['GL_MAX_CLIP_DISTANCES'] = 0x0D32,
 	['GL_MAX_CLIP_PLANES'] = 0x0D32,
+	['GL_MAX_COARSE_FRAGMENT_SAMPLES_NV'] = 0x955F,
 	['GL_MAX_COLOR_ATTACHMENTS'] = 0x8CDF,
 	['GL_MAX_COLOR_ATTACHMENTS_EXT'] = 0x8CDF,
+	['GL_MAX_COLOR_FRAMEBUFFER_SAMPLES_AMD'] = 0x91B3,
+	['GL_MAX_COLOR_FRAMEBUFFER_STORAGE_SAMPLES_AMD'] = 0x91B4,
 	['GL_MAX_COLOR_MATRIX_STACK_DEPTH'] = 0x80B3,
 	['GL_MAX_COLOR_MATRIX_STACK_DEPTH_SGI'] = 0x80B3,
 	['GL_MAX_COLOR_TEXTURE_SAMPLES'] = 0x910E,
 	['GL_MAX_COMBINED_ATOMIC_COUNTERS'] = 0x92D7,
 	['GL_MAX_COMBINED_ATOMIC_COUNTER_BUFFERS'] = 0x92D1,
+	['GL_MAX_COMBINED_CLIP_AND_CULL_DISTANCES'] = 0x82FA,
 	['GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS'] = 0x8266,
 	['GL_MAX_COMBINED_DIMENSIONS'] = 0x8282,
 	['GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS'] = 0x8A33,
@@ -5142,8 +5775,10 @@ local glc= {
 	['GL_MAX_COMBINED_IMAGE_UNIFORMS'] = 0x90CF,
 	['GL_MAX_COMBINED_IMAGE_UNITS_AND_FRAGMENT_OUTPUTS'] = 0x8F39,
 	['GL_MAX_COMBINED_IMAGE_UNITS_AND_FRAGMENT_OUTPUTS_EXT'] = 0x8F39,
+	['GL_MAX_COMBINED_MESH_UNIFORM_COMPONENTS_NV'] = 0x8E67,
 	['GL_MAX_COMBINED_SHADER_OUTPUT_RESOURCES'] = 0x8F39,
 	['GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS'] = 0x90DC,
+	['GL_MAX_COMBINED_TASK_UNIFORM_COMPONENTS_NV'] = 0x8E6F,
 	['GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS'] = 0x8E1E,
 	['GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS'] = 0x8E1F,
 	['GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS'] = 0x8B4D,
@@ -5172,6 +5807,7 @@ local glc= {
 	['GL_MAX_CUBE_MAP_TEXTURE_SIZE'] = 0x851C,
 	['GL_MAX_CUBE_MAP_TEXTURE_SIZE_ARB'] = 0x851C,
 	['GL_MAX_CUBE_MAP_TEXTURE_SIZE_EXT'] = 0x851C,
+	['GL_MAX_CULL_DISTANCES'] = 0x82F9,
 	['GL_MAX_DEBUG_GROUP_STACK_DEPTH'] = 0x826C,
 	['GL_MAX_DEBUG_LOGGED_MESSAGES'] = 0x9144,
 	['GL_MAX_DEBUG_LOGGED_MESSAGES_AMD'] = 0x9144,
@@ -5183,10 +5819,14 @@ local glc= {
 	['GL_MAX_DEEP_3D_TEXTURE_WIDTH_HEIGHT_NV'] = 0x90D0,
 	['GL_MAX_DEFORMATION_ORDER_SGIX'] = 0x8197,
 	['GL_MAX_DEPTH'] = 0x8280,
+	['GL_MAX_DEPTH_STENCIL_FRAMEBUFFER_SAMPLES_AMD'] = 0x91B5,
 	['GL_MAX_DEPTH_TEXTURE_SAMPLES'] = 0x910F,
+	['GL_MAX_DETACHED_BUFFERS_NV'] = 0x95AD,
+	['GL_MAX_DETACHED_TEXTURES_NV'] = 0x95AC,
 	['GL_MAX_DRAW_BUFFERS'] = 0x8824,
 	['GL_MAX_DRAW_BUFFERS_ARB'] = 0x8824,
 	['GL_MAX_DRAW_BUFFERS_ATI'] = 0x8824,
+	['GL_MAX_DRAW_MESH_TASKS_COUNT_NV'] = 0x953D,
 	['GL_MAX_DUAL_SOURCE_DRAW_BUFFERS'] = 0x88FC,
 	['GL_MAX_ELEMENTS_INDICES'] = 0x80E9,
 	['GL_MAX_ELEMENTS_INDICES_EXT'] = 0x80E9,
@@ -5250,10 +5890,24 @@ local glc= {
 	['GL_MAX_INTEGER_SAMPLES'] = 0x9110,
 	['GL_MAX_LABEL_LENGTH'] = 0x82E8,
 	['GL_MAX_LAYERS'] = 0x8281,
+	['GL_MAX_LGPU_GPUS_NVX'] = 0x92BA,
 	['GL_MAX_LIGHTS'] = 0x0D31,
 	['GL_MAX_LIST_NESTING'] = 0x0B31,
 	['GL_MAX_MAP_TESSELLATION_NV'] = 0x86D6,
 	['GL_MAX_MATRIX_PALETTE_STACK_DEPTH_ARB'] = 0x8841,
+	['GL_MAX_MESH_ATOMIC_COUNTERS_NV'] = 0x8E65,
+	['GL_MAX_MESH_ATOMIC_COUNTER_BUFFERS_NV'] = 0x8E64,
+	['GL_MAX_MESH_IMAGE_UNIFORMS_NV'] = 0x8E62,
+	['GL_MAX_MESH_OUTPUT_PRIMITIVES_NV'] = 0x9539,
+	['GL_MAX_MESH_OUTPUT_VERTICES_NV'] = 0x9538,
+	['GL_MAX_MESH_SHADER_STORAGE_BLOCKS_NV'] = 0x8E66,
+	['GL_MAX_MESH_TEXTURE_IMAGE_UNITS_NV'] = 0x8E61,
+	['GL_MAX_MESH_TOTAL_MEMORY_SIZE_NV'] = 0x9536,
+	['GL_MAX_MESH_UNIFORM_BLOCKS_NV'] = 0x8E60,
+	['GL_MAX_MESH_UNIFORM_COMPONENTS_NV'] = 0x8E63,
+	['GL_MAX_MESH_VIEWS_NV'] = 0x9557,
+	['GL_MAX_MESH_WORK_GROUP_INVOCATIONS_NV'] = 0x95A2,
+	['GL_MAX_MESH_WORK_GROUP_SIZE_NV'] = 0x953B,
 	['GL_MAX_MODELVIEW_STACK_DEPTH'] = 0x0D36,
 	['GL_MAX_MULTISAMPLE_COVERAGE_MODES_NV'] = 0x8E11,
 	['GL_MAX_NAME_LENGTH'] = 0x92F6,
@@ -5314,6 +5968,7 @@ local glc= {
 	['GL_MAX_PROGRAM_TEX_INSTRUCTIONS_ARB'] = 0x880C,
 	['GL_MAX_PROGRAM_TOTAL_OUTPUT_COMPONENTS_NV'] = 0x8C28,
 	['GL_MAX_PROJECTION_STACK_DEPTH'] = 0x0D38,
+	['GL_MAX_RASTER_SAMPLES_EXT'] = 0x9329,
 	['GL_MAX_RATIONAL_EVAL_ORDER_NV'] = 0x86D7,
 	['GL_MAX_RECTANGLE_TEXTURE_SIZE'] = 0x84F8,
 	['GL_MAX_RECTANGLE_TEXTURE_SIZE_ARB'] = 0x84F8,
@@ -5326,6 +5981,8 @@ local glc= {
 	['GL_MAX_SAMPLE_MASK_WORDS_NV'] = 0x8E59,
 	['GL_MAX_SERVER_WAIT_TIMEOUT'] = 0x9111,
 	['GL_MAX_SHADER_BUFFER_ADDRESS_NV'] = 0x8F35,
+	['GL_MAX_SHADER_COMPILER_THREADS_ARB'] = 0x91B0,
+	['GL_MAX_SHADER_COMPILER_THREADS_KHR'] = 0x91B0,
 	['GL_MAX_SHADER_STORAGE_BLOCK_SIZE'] = 0x90DE,
 	['GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS'] = 0x90DD,
 	['GL_MAX_SHININESS_NV'] = 0x8504,
@@ -5336,8 +5993,20 @@ local glc= {
 	['GL_MAX_SPARSE_TEXTURE_SIZE_AMD'] = 0x9198,
 	['GL_MAX_SPARSE_TEXTURE_SIZE_ARB'] = 0x9198,
 	['GL_MAX_SPOT_EXPONENT_NV'] = 0x8505,
+	['GL_MAX_SUBPIXEL_PRECISION_BIAS_BITS_NV'] = 0x9349,
 	['GL_MAX_SUBROUTINES'] = 0x8DE7,
 	['GL_MAX_SUBROUTINE_UNIFORM_LOCATIONS'] = 0x8DE8,
+	['GL_MAX_TASK_ATOMIC_COUNTERS_NV'] = 0x8E6D,
+	['GL_MAX_TASK_ATOMIC_COUNTER_BUFFERS_NV'] = 0x8E6C,
+	['GL_MAX_TASK_IMAGE_UNIFORMS_NV'] = 0x8E6A,
+	['GL_MAX_TASK_OUTPUT_COUNT_NV'] = 0x953A,
+	['GL_MAX_TASK_SHADER_STORAGE_BLOCKS_NV'] = 0x8E6E,
+	['GL_MAX_TASK_TEXTURE_IMAGE_UNITS_NV'] = 0x8E69,
+	['GL_MAX_TASK_TOTAL_MEMORY_SIZE_NV'] = 0x9537,
+	['GL_MAX_TASK_UNIFORM_BLOCKS_NV'] = 0x8E68,
+	['GL_MAX_TASK_UNIFORM_COMPONENTS_NV'] = 0x8E6B,
+	['GL_MAX_TASK_WORK_GROUP_INVOCATIONS_NV'] = 0x95A3,
+	['GL_MAX_TASK_WORK_GROUP_SIZE_NV'] = 0x953C,
 	['GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS'] = 0x92D3,
 	['GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS'] = 0x92CD,
 	['GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS'] = 0x90CB,
@@ -5370,11 +6039,13 @@ local glc= {
 	['GL_MAX_TEXTURE_IMAGE_UNITS_NV'] = 0x8872,
 	['GL_MAX_TEXTURE_LOD_BIAS'] = 0x84FD,
 	['GL_MAX_TEXTURE_LOD_BIAS_EXT'] = 0x84FD,
+	['GL_MAX_TEXTURE_MAX_ANISOTROPY'] = 0x84FF,
 	['GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT'] = 0x84FF,
 	['GL_MAX_TEXTURE_SIZE'] = 0x0D33,
 	['GL_MAX_TEXTURE_STACK_DEPTH'] = 0x0D39,
 	['GL_MAX_TEXTURE_UNITS'] = 0x84E2,
 	['GL_MAX_TEXTURE_UNITS_ARB'] = 0x84E2,
+	['GL_MAX_TIMELINE_SEMAPHORE_VALUE_DIFFERENCE_NV'] = 0x95B6,
 	['GL_MAX_TRACK_MATRICES_NV'] = 0x862F,
 	['GL_MAX_TRACK_MATRIX_STACK_DEPTH_NV'] = 0x862E,
 	['GL_MAX_TRANSFORM_FEEDBACK_BUFFERS'] = 0x8E70,
@@ -5426,14 +6097,35 @@ local glc= {
 	['GL_MAX_VERTEX_VARYING_COMPONENTS_EXT'] = 0x8DDE,
 	['GL_MAX_VIEWPORTS'] = 0x825B,
 	['GL_MAX_VIEWPORT_DIMS'] = 0x0D3A,
+	['GL_MAX_VIEWS_OVR'] = 0x9631,
 	['GL_MAX_WIDTH'] = 0x827E,
+	['GL_MAX_WINDOW_RECTANGLES_EXT'] = 0x8F14,
 	['GL_MEDIUM_FLOAT'] = 0x8DF1,
 	['GL_MEDIUM_INT'] = 0x8DF4,
+	['GL_MEMORY_ATTACHABLE_ALIGNMENT_NV'] = 0x95A6,
+	['GL_MEMORY_ATTACHABLE_NV'] = 0x95A8,
+	['GL_MEMORY_ATTACHABLE_SIZE_NV'] = 0x95A7,
 	['GL_MESAX_texture_stack'] = 1,
+	['GL_MESA_framebuffer_flip_x'] = 1,
+	['GL_MESA_framebuffer_flip_y'] = 1,
+	['GL_MESA_framebuffer_swap_xy'] = 1,
 	['GL_MESA_pack_invert'] = 1,
+	['GL_MESA_program_binary_formats'] = 1,
 	['GL_MESA_resize_buffers'] = 1,
+	['GL_MESA_shader_integer_functions'] = 1,
+	['GL_MESA_tile_raster_order'] = 1,
 	['GL_MESA_window_pos'] = 1,
 	['GL_MESA_ycbcr_texture'] = 1,
+	['GL_MESH_OUTPUT_PER_PRIMITIVE_GRANULARITY_NV'] = 0x9543,
+	['GL_MESH_OUTPUT_PER_VERTEX_GRANULARITY_NV'] = 0x92DF,
+	['GL_MESH_OUTPUT_TYPE_NV'] = 0x957B,
+	['GL_MESH_PRIMITIVES_OUT_NV'] = 0x957A,
+	['GL_MESH_SHADER_BIT_NV'] = 0x00000040,
+	['GL_MESH_SHADER_NV'] = 0x9559,
+	['GL_MESH_SUBROUTINE_NV'] = 0x957C,
+	['GL_MESH_SUBROUTINE_UNIFORM_NV'] = 0x957E,
+	['GL_MESH_VERTICES_OUT_NV'] = 0x9579,
+	['GL_MESH_WORK_GROUP_SIZE_NV'] = 0x953E,
 	['GL_MIN'] = 0x8007,
 	['GL_MINMAX'] = 0x802E,
 	['GL_MINMAX_EXT'] = 0x802E,
@@ -5458,7 +6150,6 @@ local glc= {
 	['GL_MIN_SAMPLE_SHADING_VALUE'] = 0x8C37,
 	['GL_MIN_SAMPLE_SHADING_VALUE_ARB'] = 0x8C37,
 	['GL_MIN_SPARSE_LEVEL_AMD'] = 0x919B,
-	['GL_MIN_SPARSE_LEVEL_ARB'] = 0x919B,
 	['GL_MIPMAP'] = 0x8293,
 	['GL_MIRRORED_REPEAT'] = 0x8370,
 	['GL_MIRRORED_REPEAT_ARB'] = 0x8370,
@@ -5471,6 +6162,8 @@ local glc= {
 	['GL_MIRROR_CLAMP_TO_EDGE_EXT'] = 0x8743,
 	['GL_MITER_REVERT_NV'] = 0x90A7,
 	['GL_MITER_TRUNCATE_NV'] = 0x90A8,
+	['GL_MIXED_DEPTH_SAMPLES_SUPPORTED_NV'] = 0x932F,
+	['GL_MIXED_STENCIL_SAMPLES_SUPPORTED_NV'] = 0x9330,
 	['GL_MODELVIEW'] = 0x1700,
 	['GL_MODELVIEW0_ARB'] = 0x1700,
 	['GL_MODELVIEW0_EXT'] = 0x1700,
@@ -5522,8 +6215,12 @@ local glc= {
 	['GL_MOVE_TO_RESETS_NV'] = 0x90B5,
 	['GL_MOV_ATI'] = 0x8961,
 	['GL_MULT'] = 0x0103,
+	['GL_MULTICAST_GPUS_NV'] = 0x92BA,
+	['GL_MULTICAST_PROGRAMMABLE_SAMPLE_LOCATION_NV'] = 0x9549,
+	['GL_MULTIPLY_KHR'] = 0x9294,
 	['GL_MULTIPLY_NV'] = 0x9294,
 	['GL_MULTISAMPLE'] = 0x809D,
+	['GL_MULTISAMPLES_NV'] = 0x9371,
 	['GL_MULTISAMPLE_3DFX'] = 0x86B2,
 	['GL_MULTISAMPLE_ARB'] = 0x809D,
 	['GL_MULTISAMPLE_BIT'] = 0x20000000,
@@ -5533,6 +6230,9 @@ local glc= {
 	['GL_MULTISAMPLE_COVERAGE_MODES_NV'] = 0x8E12,
 	['GL_MULTISAMPLE_EXT'] = 0x809D,
 	['GL_MULTISAMPLE_FILTER_HINT_NV'] = 0x8534,
+	['GL_MULTISAMPLE_LINE_WIDTH_GRANULARITY_ARB'] = 0x9382,
+	['GL_MULTISAMPLE_LINE_WIDTH_RANGE_ARB'] = 0x9381,
+	['GL_MULTISAMPLE_RASTERIZATION_ALLOWED_EXT'] = 0x932B,
 	['GL_MULTISAMPLE_SGIS'] = 0x809D,
 	['GL_MUL_ATI'] = 0x8964,
 	['GL_MVP_MATRIX_EXT'] = 0x87E3,
@@ -5552,6 +6252,7 @@ local glc= {
 	['GL_NEAREST_MIPMAP_NEAREST'] = 0x2700,
 	['GL_NEGATE_BIT_ATI'] = 0x00000004,
 	['GL_NEGATIVE_ONE_EXT'] = 0x87DF,
+	['GL_NEGATIVE_ONE_TO_ONE'] = 0x935E,
 	['GL_NEGATIVE_W_EXT'] = 0x87DC,
 	['GL_NEGATIVE_X_EXT'] = 0x87D9,
 	['GL_NEGATIVE_Y_EXT'] = 0x87DA,
@@ -5562,6 +6263,7 @@ local glc= {
 	['GL_NICEST'] = 0x1102,
 	['GL_NONE'] = 0,
 	['GL_NOOP'] = 0x1505,
+	['GL_NOP_COMMAND_NV'] = 0x0001,
 	['GL_NOR'] = 0x1508,
 	['GL_NORMALIZE'] = 0x0BA1,
 	['GL_NORMALIZED_RANGE_EXT'] = 0x87E0,
@@ -5588,11 +6290,13 @@ local glc= {
 	['GL_NORMAL_MAP_NV'] = 0x8511,
 	['GL_NOTEQUAL'] = 0x0205,
 	['GL_NO_ERROR'] = 0,
+	['GL_NO_RESET_NOTIFICATION'] = 0x8261,
 	['GL_NO_RESET_NOTIFICATION_ARB'] = 0x8261,
 	['GL_NUM_ACTIVE_VARIABLES'] = 0x9304,
 	['GL_NUM_COMPATIBLE_SUBROUTINES'] = 0x8E4A,
 	['GL_NUM_COMPRESSED_TEXTURE_FORMATS'] = 0x86A2,
 	['GL_NUM_COMPRESSED_TEXTURE_FORMATS_ARB'] = 0x86A2,
+	['GL_NUM_DEVICE_UUIDS_EXT'] = 0x9596,
 	['GL_NUM_EXTENSIONS'] = 0x821D,
 	['GL_NUM_FILL_STREAMS_NV'] = 0x8E29,
 	['GL_NUM_FRAGMENT_CONSTANTS_ATI'] = 0x896F,
@@ -5607,40 +6311,73 @@ local glc= {
 	['GL_NUM_SAMPLE_COUNTS'] = 0x9380,
 	['GL_NUM_SHADER_BINARY_FORMATS'] = 0x8DF9,
 	['GL_NUM_SHADING_LANGUAGE_VERSIONS'] = 0x82E9,
+	['GL_NUM_SPARSE_LEVELS_ARB'] = 0x91AA,
+	['GL_NUM_SPIR_V_EXTENSIONS'] = 0x9554,
+	['GL_NUM_SUPPORTED_MULTISAMPLE_MODES_AMD'] = 0x91B6,
+	['GL_NUM_TILING_TYPES_EXT'] = 0x9582,
 	['GL_NUM_VIDEO_CAPTURE_STREAMS_NV'] = 0x9024,
 	['GL_NUM_VIRTUAL_PAGE_SIZES_ARB'] = 0x91A8,
+	['GL_NUM_WINDOW_RECTANGLES_EXT'] = 0x8F15,
+	['GL_NVX_blend_equation_advanced_multi_draw_buffers'] = 1,
 	['GL_NVX_conditional_render'] = 1,
+	['GL_NVX_gpu_memory_info'] = 1,
+	['GL_NVX_gpu_multicast2'] = 1,
+	['GL_NVX_linked_gpu_multicast'] = 1,
+	['GL_NVX_progress_fence'] = 1,
+	['GL_NV_alpha_to_coverage_dither_control'] = 1,
 	['GL_NV_bindless_multi_draw_indirect'] = 1,
+	['GL_NV_bindless_multi_draw_indirect_count'] = 1,
 	['GL_NV_bindless_texture'] = 1,
 	['GL_NV_blend_equation_advanced'] = 1,
 	['GL_NV_blend_equation_advanced_coherent'] = 1,
+	['GL_NV_blend_minmax_factor'] = 1,
 	['GL_NV_blend_square'] = 1,
+	['GL_NV_clip_space_w_scaling'] = 1,
+	['GL_NV_command_list'] = 1,
 	['GL_NV_compute_program5'] = 1,
+	['GL_NV_compute_shader_derivatives'] = 1,
 	['GL_NV_conditional_render'] = 1,
+	['GL_NV_conservative_raster'] = 1,
+	['GL_NV_conservative_raster_dilate'] = 1,
+	['GL_NV_conservative_raster_pre_snap'] = 1,
+	['GL_NV_conservative_raster_pre_snap_triangles'] = 1,
+	['GL_NV_conservative_raster_underestimation'] = 1,
 	['GL_NV_copy_depth_to_color'] = 1,
 	['GL_NV_copy_image'] = 1,
 	['GL_NV_deep_texture3D'] = 1,
 	['GL_NV_depth_buffer_float'] = 1,
 	['GL_NV_depth_clamp'] = 1,
 	['GL_NV_draw_texture'] = 1,
+	['GL_NV_draw_vulkan_image'] = 1,
 	['GL_NV_evaluators'] = 1,
 	['GL_NV_explicit_multisample'] = 1,
 	['GL_NV_fence'] = 1,
+	['GL_NV_fill_rectangle'] = 1,
 	['GL_NV_float_buffer'] = 1,
 	['GL_NV_fog_distance'] = 1,
+	['GL_NV_fragment_coverage_to_color'] = 1,
 	['GL_NV_fragment_program'] = 1,
 	['GL_NV_fragment_program2'] = 1,
 	['GL_NV_fragment_program4'] = 1,
 	['GL_NV_fragment_program_option'] = 1,
+	['GL_NV_fragment_shader_barycentric'] = 1,
+	['GL_NV_fragment_shader_interlock'] = 1,
+	['GL_NV_framebuffer_mixed_samples'] = 1,
 	['GL_NV_framebuffer_multisample_coverage'] = 1,
 	['GL_NV_geometry_program4'] = 1,
 	['GL_NV_geometry_shader4'] = 1,
+	['GL_NV_geometry_shader_passthrough'] = 1,
+	['GL_NV_gpu_multicast'] = 1,
 	['GL_NV_gpu_program4'] = 1,
 	['GL_NV_gpu_program5'] = 1,
 	['GL_NV_gpu_program5_mem_extended'] = 1,
 	['GL_NV_gpu_shader5'] = 1,
 	['GL_NV_half_float'] = 1,
+	['GL_NV_internalformat_sample_query'] = 1,
 	['GL_NV_light_max_exponent'] = 1,
+	['GL_NV_memory_attachment'] = 1,
+	['GL_NV_memory_object_sparse'] = 1,
+	['GL_NV_mesh_shader'] = 1,
 	['GL_NV_multisample_coverage'] = 1,
 	['GL_NV_multisample_filter_hint'] = 1,
 	['GL_NV_occlusion_query'] = 1,
@@ -5648,17 +6385,35 @@ local glc= {
 	['GL_NV_parameter_buffer_object'] = 1,
 	['GL_NV_parameter_buffer_object2'] = 1,
 	['GL_NV_path_rendering'] = 1,
+	['GL_NV_path_rendering_shared_edge'] = 1,
 	['GL_NV_pixel_data_range'] = 1,
 	['GL_NV_point_sprite'] = 1,
 	['GL_NV_present_video'] = 1,
 	['GL_NV_primitive_restart'] = 1,
+	['GL_NV_primitive_shading_rate'] = 1,
+	['GL_NV_query_resource'] = 1,
+	['GL_NV_query_resource_tag'] = 1,
 	['GL_NV_register_combiners'] = 1,
 	['GL_NV_register_combiners2'] = 1,
+	['GL_NV_representative_fragment_test'] = 1,
+	['GL_NV_robustness_video_memory_purge'] = 1,
+	['GL_NV_sample_locations'] = 1,
+	['GL_NV_sample_mask_override_coverage'] = 1,
+	['GL_NV_scissor_exclusive'] = 1,
 	['GL_NV_shader_atomic_counters'] = 1,
 	['GL_NV_shader_atomic_float'] = 1,
+	['GL_NV_shader_atomic_float64'] = 1,
+	['GL_NV_shader_atomic_fp16_vector'] = 1,
+	['GL_NV_shader_atomic_int64'] = 1,
 	['GL_NV_shader_buffer_load'] = 1,
 	['GL_NV_shader_buffer_store'] = 1,
 	['GL_NV_shader_storage_buffer_object'] = 1,
+	['GL_NV_shader_subgroup_partitioned'] = 1,
+	['GL_NV_shader_texture_footprint'] = 1,
+	['GL_NV_shader_thread_group'] = 1,
+	['GL_NV_shader_thread_shuffle'] = 1,
+	['GL_NV_shading_rate_image'] = 1,
+	['GL_NV_stereo_view_rendering'] = 1,
 	['GL_NV_tessellation_program5'] = 1,
 	['GL_NV_texgen_emboss'] = 1,
 	['GL_NV_texgen_reflection'] = 1,
@@ -5668,12 +6423,16 @@ local glc= {
 	['GL_NV_texture_expand_normal'] = 1,
 	['GL_NV_texture_multisample'] = 1,
 	['GL_NV_texture_rectangle'] = 1,
+	['GL_NV_texture_rectangle_compressed'] = 1,
 	['GL_NV_texture_shader'] = 1,
 	['GL_NV_texture_shader2'] = 1,
 	['GL_NV_texture_shader3'] = 1,
+	['GL_NV_timeline_semaphore'] = 1,
 	['GL_NV_transform_feedback'] = 1,
 	['GL_NV_transform_feedback2'] = 1,
+	['GL_NV_uniform_buffer_unified_memory'] = 1,
 	['GL_NV_vdpau_interop'] = 1,
+	['GL_NV_vdpau_interop2'] = 1,
 	['GL_NV_vertex_array_range'] = 1,
 	['GL_NV_vertex_array_range2'] = 1,
 	['GL_NV_vertex_attrib_integer_64bit'] = 1,
@@ -5685,6 +6444,8 @@ local glc= {
 	['GL_NV_vertex_program3'] = 1,
 	['GL_NV_vertex_program4'] = 1,
 	['GL_NV_video_capture'] = 1,
+	['GL_NV_viewport_array2'] = 1,
+	['GL_NV_viewport_swizzle'] = 1,
 	['GL_OBJECT_ACTIVE_ATTRIBUTES_ARB'] = 0x8B89,
 	['GL_OBJECT_ACTIVE_ATTRIBUTE_MAX_LENGTH_ARB'] = 0x8B8A,
 	['GL_OBJECT_ACTIVE_UNIFORMS_ARB'] = 0x8B86,
@@ -5698,6 +6459,7 @@ local glc= {
 	['GL_OBJECT_DISTANCE_TO_POINT_SGIS'] = 0x81F1,
 	['GL_OBJECT_INFO_LOG_LENGTH_ARB'] = 0x8B84,
 	['GL_OBJECT_LINEAR'] = 0x2401,
+	['GL_OBJECT_LINEAR_NV'] = 0x2401,
 	['GL_OBJECT_LINE_SGIS'] = 0x81F7,
 	['GL_OBJECT_LINK_STATUS_ARB'] = 0x8B82,
 	['GL_OBJECT_PLANE'] = 0x2501,
@@ -5707,6 +6469,7 @@ local glc= {
 	['GL_OBJECT_TYPE'] = 0x9112,
 	['GL_OBJECT_TYPE_ARB'] = 0x8B4E,
 	['GL_OBJECT_VALIDATE_STATUS_ARB'] = 0x8B83,
+	['GL_OCCLUSION_QUERY_EVENT_MASK_AMD'] = 0x874F,
 	['GL_OCCLUSION_TEST_HP'] = 0x8165,
 	['GL_OCCLUSION_TEST_RESULT_HP'] = 0x8166,
 	['GL_OES_byte_coordinates'] = 1,
@@ -5768,6 +6531,7 @@ local glc= {
 	['GL_OPERAND2_RGB_EXT'] = 0x8592,
 	['GL_OPERAND3_ALPHA_NV'] = 0x859B,
 	['GL_OPERAND3_RGB_NV'] = 0x8593,
+	['GL_OPTIMAL_TILING_EXT'] = 0x9584,
 	['GL_OP_ADD_EXT'] = 0x8787,
 	['GL_OP_CLAMP_EXT'] = 0x878E,
 	['GL_OP_CROSS_PRODUCT_EXT'] = 0x8797,
@@ -5833,7 +6597,10 @@ local glc= {
 	['GL_OUTPUT_TEXTURE_COORD9_EXT'] = 0x87A6,
 	['GL_OUTPUT_VERTEX_EXT'] = 0x879A,
 	['GL_OUT_OF_MEMORY'] = 0x0505,
+	['GL_OVERLAY_KHR'] = 0x9296,
 	['GL_OVERLAY_NV'] = 0x9296,
+	['GL_OVR_multiview'] = 1,
+	['GL_OVR_multiview2'] = 1,
 	['GL_PACK_ALIGNMENT'] = 0x0D05,
 	['GL_PACK_CMYK_HINT_EXT'] = 0x800E,
 	['GL_PACK_COMPRESSED_BLOCK_DEPTH'] = 0x912D,
@@ -5846,7 +6613,7 @@ local glc= {
 	['GL_PACK_INVERT_MESA'] = 0x8758,
 	['GL_PACK_LSB_FIRST'] = 0x0D01,
 	['GL_PACK_RESAMPLE_OML'] = 0x8984,
-	['GL_PACK_RESAMPLE_SGIX'] = 0x842C,
+	['GL_PACK_RESAMPLE_SGIX'] = 0x842E,
 	['GL_PACK_ROW_BYTES_APPLE'] = 0x8A15,
 	['GL_PACK_ROW_LENGTH'] = 0x0D02,
 	['GL_PACK_SKIP_IMAGES'] = 0x806B,
@@ -5867,7 +6634,9 @@ local glc= {
 	['GL_PALETTE8_RGBA4_OES'] = 0x8B98,
 	['GL_PALETTE8_RGBA8_OES'] = 0x8B96,
 	['GL_PARALLEL_ARRAYS_INTEL'] = 0x83F4,
+	['GL_PARAMETER_BUFFER'] = 0x80EE,
 	['GL_PARAMETER_BUFFER_ARB'] = 0x80EE,
+	['GL_PARAMETER_BUFFER_BINDING'] = 0x80EF,
 	['GL_PARAMETER_BUFFER_BINDING_ARB'] = 0x80EF,
 	['GL_PARTIAL_SUCCESS_NV'] = 0x902E,
 	['GL_PASS_THROUGH_NV'] = 0x86E6,
@@ -5901,8 +6670,16 @@ local glc= {
 	['GL_PATH_INITIAL_DASH_CAP_NV'] = 0x907C,
 	['GL_PATH_INITIAL_END_CAP_NV'] = 0x9077,
 	['GL_PATH_JOIN_STYLE_NV'] = 0x9079,
+	['GL_PATH_MAX_MODELVIEW_STACK_DEPTH_NV'] = 0x0D36,
+	['GL_PATH_MAX_PROJECTION_STACK_DEPTH_NV'] = 0x0D38,
 	['GL_PATH_MITER_LIMIT_NV'] = 0x907A,
+	['GL_PATH_MODELVIEW_MATRIX_NV'] = 0x0BA6,
+	['GL_PATH_MODELVIEW_NV'] = 0x1700,
+	['GL_PATH_MODELVIEW_STACK_DEPTH_NV'] = 0x0BA3,
 	['GL_PATH_OBJECT_BOUNDING_BOX_NV'] = 0x908A,
+	['GL_PATH_PROJECTION_MATRIX_NV'] = 0x0BA7,
+	['GL_PATH_PROJECTION_NV'] = 0x1701,
+	['GL_PATH_PROJECTION_STACK_DEPTH_NV'] = 0x0BA4,
 	['GL_PATH_STENCIL_DEPTH_OFFSET_FACTOR_NV'] = 0x90BD,
 	['GL_PATH_STENCIL_DEPTH_OFFSET_UNITS_NV'] = 0x90BE,
 	['GL_PATH_STENCIL_FUNC_NV'] = 0x90B7,
@@ -5914,19 +6691,45 @@ local glc= {
 	['GL_PATH_STROKE_WIDTH_NV'] = 0x9075,
 	['GL_PATH_TERMINAL_DASH_CAP_NV'] = 0x907D,
 	['GL_PATH_TERMINAL_END_CAP_NV'] = 0x9078,
+	['GL_PATH_TRANSPOSE_MODELVIEW_MATRIX_NV'] = 0x84E3,
+	['GL_PATH_TRANSPOSE_PROJECTION_MATRIX_NV'] = 0x84E4,
 	['GL_PERCENTAGE_AMD'] = 0x8BC3,
 	['GL_PERFMON_RESULT_AMD'] = 0x8BC6,
 	['GL_PERFMON_RESULT_AVAILABLE_AMD'] = 0x8BC4,
 	['GL_PERFMON_RESULT_SIZE_AMD'] = 0x8BC5,
 	['GL_PERFORMANCE_MONITOR_AMD'] = 0x9152,
+	['GL_PERFQUERY_COUNTER_DATA_BOOL32_INTEL'] = 0x94FC,
+	['GL_PERFQUERY_COUNTER_DATA_DOUBLE_INTEL'] = 0x94FB,
+	['GL_PERFQUERY_COUNTER_DATA_FLOAT_INTEL'] = 0x94FA,
+	['GL_PERFQUERY_COUNTER_DATA_UINT32_INTEL'] = 0x94F8,
+	['GL_PERFQUERY_COUNTER_DATA_UINT64_INTEL'] = 0x94F9,
+	['GL_PERFQUERY_COUNTER_DESC_LENGTH_MAX_INTEL'] = 0x94FF,
+	['GL_PERFQUERY_COUNTER_DURATION_NORM_INTEL'] = 0x94F1,
+	['GL_PERFQUERY_COUNTER_DURATION_RAW_INTEL'] = 0x94F2,
+	['GL_PERFQUERY_COUNTER_EVENT_INTEL'] = 0x94F0,
+	['GL_PERFQUERY_COUNTER_NAME_LENGTH_MAX_INTEL'] = 0x94FE,
+	['GL_PERFQUERY_COUNTER_RAW_INTEL'] = 0x94F4,
+	['GL_PERFQUERY_COUNTER_THROUGHPUT_INTEL'] = 0x94F3,
+	['GL_PERFQUERY_COUNTER_TIMESTAMP_INTEL'] = 0x94F5,
+	['GL_PERFQUERY_DONOT_FLUSH_INTEL'] = 0x83F9,
+	['GL_PERFQUERY_FLUSH_INTEL'] = 0x83FA,
+	['GL_PERFQUERY_GLOBAL_CONTEXT_INTEL'] = 0x00000001,
+	['GL_PERFQUERY_GPA_EXTENDED_COUNTERS_INTEL'] = 0x9500,
+	['GL_PERFQUERY_QUERY_NAME_LENGTH_MAX_INTEL'] = 0x94FD,
+	['GL_PERFQUERY_SINGLE_CONTEXT_INTEL'] = 0x00000000,
+	['GL_PERFQUERY_WAIT_INTEL'] = 0x83FB,
 	['GL_PERSPECTIVE_CORRECTION_HINT'] = 0x0C50,
 	['GL_PERTURB_EXT'] = 0x85AE,
+	['GL_PER_GPU_STORAGE_BIT_NV'] = 0x0800,
+	['GL_PER_GPU_STORAGE_NV'] = 0x9548,
 	['GL_PER_STAGE_CONSTANTS_NV'] = 0x8535,
 	['GL_PGI_misc_hints'] = 1,
 	['GL_PGI_vertex_hints'] = 1,
 	['GL_PHONG_HINT_WIN'] = 0x80EB,
 	['GL_PHONG_WIN'] = 0x80EA,
 	['GL_PINLIGHT_NV'] = 0x92A8,
+	['GL_PIXELS_PER_SAMPLE_PATTERN_X_AMD'] = 0x91AE,
+	['GL_PIXELS_PER_SAMPLE_PATTERN_Y_AMD'] = 0x91AF,
 	['GL_PIXEL_BUFFER_BARRIER_BIT'] = 0x00000080,
 	['GL_PIXEL_BUFFER_BARRIER_BIT_EXT'] = 0x00000080,
 	['GL_PIXEL_COUNTER_BITS_NV'] = 0x8864,
@@ -6032,6 +6835,9 @@ local glc= {
 	['GL_POLYGON_BIT'] = 0x00000008,
 	['GL_POLYGON_MODE'] = 0x0B40,
 	['GL_POLYGON_OFFSET_BIAS_EXT'] = 0x8039,
+	['GL_POLYGON_OFFSET_CLAMP'] = 0x8E1B,
+	['GL_POLYGON_OFFSET_CLAMP_EXT'] = 0x8E1B,
+	['GL_POLYGON_OFFSET_COMMAND_NV'] = 0x000E,
 	['GL_POLYGON_OFFSET_EXT'] = 0x8037,
 	['GL_POLYGON_OFFSET_FACTOR'] = 0x8038,
 	['GL_POLYGON_OFFSET_FACTOR_EXT'] = 0x8038,
@@ -6101,6 +6907,9 @@ local glc= {
 	['GL_PRIMITIVES_GENERATED'] = 0x8C87,
 	['GL_PRIMITIVES_GENERATED_EXT'] = 0x8C87,
 	['GL_PRIMITIVES_GENERATED_NV'] = 0x8C87,
+	['GL_PRIMITIVES_SUBMITTED'] = 0x82EF,
+	['GL_PRIMITIVES_SUBMITTED_ARB'] = 0x82EF,
+	['GL_PRIMITIVE_BOUNDING_BOX_ARB'] = 0x92BE,
 	['GL_PRIMITIVE_ID_NV'] = 0x8C7C,
 	['GL_PRIMITIVE_RESTART'] = 0x8F9D,
 	['GL_PRIMITIVE_RESTART_FIXED_INDEX'] = 0x8D69,
@@ -6109,11 +6918,16 @@ local glc= {
 	['GL_PRIMITIVE_RESTART_INDEX_NV'] = 0x8559,
 	['GL_PRIMITIVE_RESTART_NV'] = 0x8558,
 	['GL_PROGRAM'] = 0x82E2,
+	['GL_PROGRAMMABLE_SAMPLE_LOCATION_ARB'] = 0x9341,
+	['GL_PROGRAMMABLE_SAMPLE_LOCATION_NV'] = 0x9341,
+	['GL_PROGRAMMABLE_SAMPLE_LOCATION_TABLE_SIZE_ARB'] = 0x9340,
+	['GL_PROGRAMMABLE_SAMPLE_LOCATION_TABLE_SIZE_NV'] = 0x9340,
 	['GL_PROGRAM_ADDRESS_REGISTERS_ARB'] = 0x88B0,
 	['GL_PROGRAM_ALU_INSTRUCTIONS_ARB'] = 0x8805,
 	['GL_PROGRAM_ATTRIBS_ARB'] = 0x88AC,
 	['GL_PROGRAM_ATTRIB_COMPONENTS_NV'] = 0x8906,
 	['GL_PROGRAM_BINARY_FORMATS'] = 0x87FF,
+	['GL_PROGRAM_BINARY_FORMAT_MESA'] = 0x875F,
 	['GL_PROGRAM_BINARY_LENGTH'] = 0x8741,
 	['GL_PROGRAM_BINARY_RETRIEVABLE_HINT'] = 0x8257,
 	['GL_PROGRAM_BINDING_ARB'] = 0x8677,
@@ -6161,6 +6975,7 @@ local glc= {
 	['GL_PROJECTION'] = 0x1701,
 	['GL_PROJECTION_MATRIX'] = 0x0BA7,
 	['GL_PROJECTION_STACK_DEPTH'] = 0x0BA4,
+	['GL_PROTECTED_MEMORY_OBJECT_EXT'] = 0x959B,
 	['GL_PROVOKING_VERTEX'] = 0x8E4F,
 	['GL_PROVOKING_VERTEX_EXT'] = 0x8E4F,
 	['GL_PROXY_COLOR_TABLE'] = 0x80D3,
@@ -6197,6 +7012,7 @@ local glc= {
 	['GL_PROXY_TEXTURE_RECTANGLE_ARB'] = 0x84F7,
 	['GL_PROXY_TEXTURE_RECTANGLE_NV'] = 0x84F7,
 	['GL_PURGEABLE_APPLE'] = 0x8A1D,
+	['GL_PURGED_CONTEXT_RESET_NV'] = 0x92BB,
 	['GL_Q'] = 0x2003,
 	['GL_QUADRATIC_ATTENUATION'] = 0x1209,
 	['GL_QUADRATIC_CURVE_TO_NV'] = 0x0A,
@@ -6214,34 +7030,51 @@ local glc= {
 	['GL_QUAD_TEXTURE_SELECT_SGIS'] = 0x8125,
 	['GL_QUARTER_BIT_ATI'] = 0x00000010,
 	['GL_QUERY'] = 0x82E3,
+	['GL_QUERY_ALL_EVENT_BITS_AMD'] = 0xFFFFFFFF,
 	['GL_QUERY_BUFFER'] = 0x9192,
 	['GL_QUERY_BUFFER_AMD'] = 0x9192,
 	['GL_QUERY_BUFFER_BARRIER_BIT'] = 0x00008000,
 	['GL_QUERY_BUFFER_BINDING'] = 0x9193,
 	['GL_QUERY_BUFFER_BINDING_AMD'] = 0x9193,
 	['GL_QUERY_BY_REGION_NO_WAIT'] = 0x8E16,
+	['GL_QUERY_BY_REGION_NO_WAIT_INVERTED'] = 0x8E1A,
 	['GL_QUERY_BY_REGION_NO_WAIT_NV'] = 0x8E16,
 	['GL_QUERY_BY_REGION_WAIT'] = 0x8E15,
+	['GL_QUERY_BY_REGION_WAIT_INVERTED'] = 0x8E19,
 	['GL_QUERY_BY_REGION_WAIT_NV'] = 0x8E15,
 	['GL_QUERY_COUNTER_BITS'] = 0x8864,
 	['GL_QUERY_COUNTER_BITS_ARB'] = 0x8864,
+	['GL_QUERY_DEPTH_BOUNDS_FAIL_EVENT_BIT_AMD'] = 0x00000008,
+	['GL_QUERY_DEPTH_FAIL_EVENT_BIT_AMD'] = 0x00000002,
+	['GL_QUERY_DEPTH_PASS_EVENT_BIT_AMD'] = 0x00000001,
 	['GL_QUERY_NO_WAIT'] = 0x8E14,
+	['GL_QUERY_NO_WAIT_INVERTED'] = 0x8E18,
 	['GL_QUERY_NO_WAIT_NV'] = 0x8E14,
 	['GL_QUERY_OBJECT_AMD'] = 0x9153,
 	['GL_QUERY_OBJECT_EXT'] = 0x9153,
+	['GL_QUERY_RESOURCE_BUFFEROBJECT_NV'] = 0x9547,
+	['GL_QUERY_RESOURCE_MEMTYPE_VIDMEM_NV'] = 0x9542,
+	['GL_QUERY_RESOURCE_RENDERBUFFER_NV'] = 0x9546,
+	['GL_QUERY_RESOURCE_SYS_RESERVED_NV'] = 0x9544,
+	['GL_QUERY_RESOURCE_TEXTURE_NV'] = 0x9545,
+	['GL_QUERY_RESOURCE_TYPE_VIDMEM_ALLOC_NV'] = 0x9540,
 	['GL_QUERY_RESULT'] = 0x8866,
 	['GL_QUERY_RESULT_ARB'] = 0x8866,
 	['GL_QUERY_RESULT_AVAILABLE'] = 0x8867,
 	['GL_QUERY_RESULT_AVAILABLE_ARB'] = 0x8867,
 	['GL_QUERY_RESULT_NO_WAIT'] = 0x9194,
 	['GL_QUERY_RESULT_NO_WAIT_AMD'] = 0x9194,
+	['GL_QUERY_STENCIL_FAIL_EVENT_BIT_AMD'] = 0x00000004,
+	['GL_QUERY_TARGET'] = 0x82EA,
 	['GL_QUERY_WAIT'] = 0x8E13,
+	['GL_QUERY_WAIT_INVERTED'] = 0x8E17,
 	['GL_QUERY_WAIT_NV'] = 0x8E13,
 	['GL_R'] = 0x2002,
 	['GL_R11F_G11F_B10F'] = 0x8C3A,
 	['GL_R11F_G11F_B10F_EXT'] = 0x8C3A,
 	['GL_R16'] = 0x822A,
 	['GL_R16F'] = 0x822D,
+	['GL_R16F_EXT'] = 0x822D,
 	['GL_R16I'] = 0x8233,
 	['GL_R16UI'] = 0x8234,
 	['GL_R16_SNORM'] = 0x8F98,
@@ -6254,17 +7087,22 @@ local glc= {
 	['GL_R1UI_T2F_V3F_SUN'] = 0x85C9,
 	['GL_R1UI_V3F_SUN'] = 0x85C4,
 	['GL_R32F'] = 0x822E,
+	['GL_R32F_EXT'] = 0x822E,
 	['GL_R32I'] = 0x8235,
 	['GL_R32UI'] = 0x8236,
 	['GL_R3_G3_B2'] = 0x2A10,
 	['GL_R8'] = 0x8229,
 	['GL_R8I'] = 0x8231,
 	['GL_R8UI'] = 0x8232,
+	['GL_R8_EXT'] = 0x8229,
 	['GL_R8_SNORM'] = 0x8F94,
 	['GL_RASTERIZER_DISCARD'] = 0x8C89,
 	['GL_RASTERIZER_DISCARD_EXT'] = 0x8C89,
 	['GL_RASTERIZER_DISCARD_NV'] = 0x8C89,
+	['GL_RASTER_FIXED_SAMPLE_LOCATIONS_EXT'] = 0x932A,
+	['GL_RASTER_MULTISAMPLE_EXT'] = 0x9327,
 	['GL_RASTER_POSITION_UNCLIPPED_IBM'] = 0x19262,
+	['GL_RASTER_SAMPLES_EXT'] = 0x9328,
 	['GL_READ_BUFFER'] = 0x0C02,
 	['GL_READ_FRAMEBUFFER'] = 0x8CA8,
 	['GL_READ_FRAMEBUFFER_BINDING'] = 0x8CAA,
@@ -6292,11 +7130,14 @@ local glc= {
 	['GL_RED_INTEGER_EXT'] = 0x8D94,
 	['GL_RED_MAX_CLAMP_INGR'] = 0x8564,
 	['GL_RED_MIN_CLAMP_INGR'] = 0x8560,
+	['GL_RED_NV'] = 0x1903,
 	['GL_RED_SCALE'] = 0x0D14,
 	['GL_RED_SNORM'] = 0x8F90,
 	['GL_REFERENCED_BY_COMPUTE_SHADER'] = 0x930B,
 	['GL_REFERENCED_BY_FRAGMENT_SHADER'] = 0x930A,
 	['GL_REFERENCED_BY_GEOMETRY_SHADER'] = 0x9309,
+	['GL_REFERENCED_BY_MESH_SHADER_NV'] = 0x95A0,
+	['GL_REFERENCED_BY_TASK_SHADER_NV'] = 0x95A1,
 	['GL_REFERENCED_BY_TESS_CONTROL_SHADER'] = 0x9307,
 	['GL_REFERENCED_BY_TESS_EVALUATION_SHADER'] = 0x9308,
 	['GL_REFERENCED_BY_VERTEX_SHADER'] = 0x9306,
@@ -6340,6 +7181,7 @@ local glc= {
 	['GL_REG_8_ATI'] = 0x8929,
 	['GL_REG_9_ATI'] = 0x892A,
 	['GL_RELATIVE_ARC_TO_NV'] = 0xFF,
+	['GL_RELATIVE_CONIC_CURVE_TO_NV'] = 0x1B,
 	['GL_RELATIVE_CUBIC_CURVE_TO_NV'] = 0x0D,
 	['GL_RELATIVE_HORIZONTAL_LINE_TO_NV'] = 0x07,
 	['GL_RELATIVE_LARGE_CCW_ARC_TO_NV'] = 0x17,
@@ -6347,6 +7189,11 @@ local glc= {
 	['GL_RELATIVE_LINE_TO_NV'] = 0x05,
 	['GL_RELATIVE_MOVE_TO_NV'] = 0x03,
 	['GL_RELATIVE_QUADRATIC_CURVE_TO_NV'] = 0x0B,
+	['GL_RELATIVE_RECT_NV'] = 0xF7,
+	['GL_RELATIVE_ROUNDED_RECT2_NV'] = 0xEB,
+	['GL_RELATIVE_ROUNDED_RECT4_NV'] = 0xED,
+	['GL_RELATIVE_ROUNDED_RECT8_NV'] = 0xEF,
+	['GL_RELATIVE_ROUNDED_RECT_NV'] = 0xE9,
 	['GL_RELATIVE_SMALL_CCW_ARC_TO_NV'] = 0x13,
 	['GL_RELATIVE_SMALL_CW_ARC_TO_NV'] = 0x15,
 	['GL_RELATIVE_SMOOTH_CUBIC_CURVE_TO_NV'] = 0x11,
@@ -6379,9 +7226,11 @@ local glc= {
 	['GL_RENDERBUFFER_SAMPLES_EXT'] = 0x8CAB,
 	['GL_RENDERBUFFER_STENCIL_SIZE'] = 0x8D55,
 	['GL_RENDERBUFFER_STENCIL_SIZE_EXT'] = 0x8D55,
+	['GL_RENDERBUFFER_STORAGE_SAMPLES_AMD'] = 0x91B2,
 	['GL_RENDERBUFFER_WIDTH'] = 0x8D42,
 	['GL_RENDERBUFFER_WIDTH_EXT'] = 0x8D42,
 	['GL_RENDERER'] = 0x1F01,
+	['GL_RENDER_GPU_MASK_NV'] = 0x9558,
 	['GL_RENDER_MODE'] = 0x0C40,
 	['GL_REND_screen_coordinates'] = 1,
 	['GL_REPEAT'] = 0x2901,
@@ -6397,15 +7246,17 @@ local glc= {
 	['GL_REPLACE_VALUE_AMD'] = 0x874B,
 	['GL_REPLICATE_BORDER'] = 0x8153,
 	['GL_REPLICATE_BORDER_HP'] = 0x8153,
+	['GL_REPRESENTATIVE_FRAGMENT_TEST_NV'] = 0x937F,
 	['GL_RESAMPLE_AVERAGE_OML'] = 0x8988,
 	['GL_RESAMPLE_DECIMATE_OML'] = 0x8989,
 	['GL_RESAMPLE_DECIMATE_SGIX'] = 0x8430,
 	['GL_RESAMPLE_REPLICATE_OML'] = 0x8986,
-	['GL_RESAMPLE_REPLICATE_SGIX'] = 0x842E,
+	['GL_RESAMPLE_REPLICATE_SGIX'] = 0x8433,
 	['GL_RESAMPLE_ZERO_FILL_OML'] = 0x8987,
-	['GL_RESAMPLE_ZERO_FILL_SGIX'] = 0x842F,
+	['GL_RESAMPLE_ZERO_FILL_SGIX'] = 0x8434,
 	['GL_RESCALE_NORMAL'] = 0x803A,
 	['GL_RESCALE_NORMAL_EXT'] = 0x803A,
+	['GL_RESET_NOTIFICATION_STRATEGY'] = 0x8256,
 	['GL_RESET_NOTIFICATION_STRATEGY_ARB'] = 0x8256,
 	['GL_RESTART_PATH_NV'] = 0xF0,
 	['GL_RESTART_SUN'] = 0x0001,
@@ -6414,15 +7265,18 @@ local glc= {
 	['GL_RG'] = 0x8227,
 	['GL_RG16'] = 0x822C,
 	['GL_RG16F'] = 0x822F,
+	['GL_RG16F_EXT'] = 0x822F,
 	['GL_RG16I'] = 0x8239,
 	['GL_RG16UI'] = 0x823A,
 	['GL_RG16_SNORM'] = 0x8F99,
 	['GL_RG32F'] = 0x8230,
+	['GL_RG32F_EXT'] = 0x8230,
 	['GL_RG32I'] = 0x823B,
 	['GL_RG32UI'] = 0x823C,
 	['GL_RG8'] = 0x822B,
 	['GL_RG8I'] = 0x8237,
 	['GL_RG8UI'] = 0x8238,
+	['GL_RG8_EXT'] = 0x822B,
 	['GL_RG8_SNORM'] = 0x8F95,
 	['GL_RGB'] = 0x1907,
 	['GL_RGB10'] = 0x8052,
@@ -6435,6 +7289,7 @@ local glc= {
 	['GL_RGB16'] = 0x8054,
 	['GL_RGB16F'] = 0x881B,
 	['GL_RGB16F_ARB'] = 0x881B,
+	['GL_RGB16F_EXT'] = 0x881B,
 	['GL_RGB16I'] = 0x8D89,
 	['GL_RGB16I_EXT'] = 0x8D89,
 	['GL_RGB16UI'] = 0x8D77,
@@ -6444,6 +7299,7 @@ local glc= {
 	['GL_RGB2_EXT'] = 0x804E,
 	['GL_RGB32F'] = 0x8815,
 	['GL_RGB32F_ARB'] = 0x8815,
+	['GL_RGB32F_EXT'] = 0x8815,
 	['GL_RGB32I'] = 0x8D83,
 	['GL_RGB32I_EXT'] = 0x8D83,
 	['GL_RGB32UI'] = 0x8D71,
@@ -6471,6 +7327,7 @@ local glc= {
 	['GL_RGBA16'] = 0x805B,
 	['GL_RGBA16F'] = 0x881A,
 	['GL_RGBA16F_ARB'] = 0x881A,
+	['GL_RGBA16F_EXT'] = 0x881A,
 	['GL_RGBA16I'] = 0x8D88,
 	['GL_RGBA16I_EXT'] = 0x8D88,
 	['GL_RGBA16UI'] = 0x8D76,
@@ -6481,6 +7338,7 @@ local glc= {
 	['GL_RGBA2_EXT'] = 0x8055,
 	['GL_RGBA32F'] = 0x8814,
 	['GL_RGBA32F_ARB'] = 0x8814,
+	['GL_RGBA32F_EXT'] = 0x8814,
 	['GL_RGBA32I'] = 0x8D82,
 	['GL_RGBA32I_EXT'] = 0x8D82,
 	['GL_RGBA32UI'] = 0x8D70,
@@ -6527,6 +7385,10 @@ local glc= {
 	['GL_RG_INTEGER'] = 0x8228,
 	['GL_RG_SNORM'] = 0x8F91,
 	['GL_RIGHT'] = 0x0407,
+	['GL_ROUNDED_RECT2_NV'] = 0xEA,
+	['GL_ROUNDED_RECT4_NV'] = 0xEC,
+	['GL_ROUNDED_RECT8_NV'] = 0xEE,
+	['GL_ROUNDED_RECT_NV'] = 0xE8,
 	['GL_ROUND_NV'] = 0x90A4,
 	['GL_S'] = 0x2000,
 	['GL_S3_s3tc'] = 1,
@@ -6595,6 +7457,14 @@ local glc= {
 	['GL_SAMPLE_COVERAGE_INVERT_ARB'] = 0x80AB,
 	['GL_SAMPLE_COVERAGE_VALUE'] = 0x80AA,
 	['GL_SAMPLE_COVERAGE_VALUE_ARB'] = 0x80AA,
+	['GL_SAMPLE_LOCATION_ARB'] = 0x8E50,
+	['GL_SAMPLE_LOCATION_NV'] = 0x8E50,
+	['GL_SAMPLE_LOCATION_PIXEL_GRID_HEIGHT_ARB'] = 0x933F,
+	['GL_SAMPLE_LOCATION_PIXEL_GRID_HEIGHT_NV'] = 0x933F,
+	['GL_SAMPLE_LOCATION_PIXEL_GRID_WIDTH_ARB'] = 0x933E,
+	['GL_SAMPLE_LOCATION_PIXEL_GRID_WIDTH_NV'] = 0x933E,
+	['GL_SAMPLE_LOCATION_SUBPIXEL_BITS_ARB'] = 0x933D,
+	['GL_SAMPLE_LOCATION_SUBPIXEL_BITS_NV'] = 0x933D,
 	['GL_SAMPLE_MASK'] = 0x8E51,
 	['GL_SAMPLE_MASK_EXT'] = 0x80A0,
 	['GL_SAMPLE_MASK_INVERT_EXT'] = 0x80AB,
@@ -6621,8 +7491,12 @@ local glc= {
 	['GL_SCALE_BY_TWO_NV'] = 0x853E,
 	['GL_SCISSOR_BIT'] = 0x00080000,
 	['GL_SCISSOR_BOX'] = 0x0C10,
+	['GL_SCISSOR_BOX_EXCLUSIVE_NV'] = 0x9556,
+	['GL_SCISSOR_COMMAND_NV'] = 0x0011,
 	['GL_SCISSOR_TEST'] = 0x0C11,
+	['GL_SCISSOR_TEST_EXCLUSIVE_NV'] = 0x9555,
 	['GL_SCREEN_COORDINATES_REND'] = 0x8490,
+	['GL_SCREEN_KHR'] = 0x9295,
 	['GL_SCREEN_NV'] = 0x9295,
 	['GL_SECONDARY_COLOR_ARRAY'] = 0x845E,
 	['GL_SECONDARY_COLOR_ARRAY_ADDRESS_NV'] = 0x8F27,
@@ -6645,6 +7519,9 @@ local glc= {
 	['GL_SELECT'] = 0x1C02,
 	['GL_SELECTION_BUFFER_POINTER'] = 0x0DF3,
 	['GL_SELECTION_BUFFER_SIZE'] = 0x0DF4,
+	['GL_SEMAPHORE_TYPE_BINARY_NV'] = 0x95B4,
+	['GL_SEMAPHORE_TYPE_NV'] = 0x95B3,
+	['GL_SEMAPHORE_TYPE_TIMELINE_NV'] = 0x95B5,
 	['GL_SEPARABLE_2D'] = 0x8012,
 	['GL_SEPARABLE_2D_EXT'] = 0x8012,
 	['GL_SEPARATE_ATTRIBS'] = 0x8C8D,
@@ -6712,6 +7589,8 @@ local glc= {
 	['GL_SGI_texture_color_table'] = 1,
 	['GL_SHADER'] = 0x82E1,
 	['GL_SHADER_BINARY_FORMATS'] = 0x8DF8,
+	['GL_SHADER_BINARY_FORMAT_SPIR_V'] = 0x9551,
+	['GL_SHADER_BINARY_FORMAT_SPIR_V_ARB'] = 0x9551,
 	['GL_SHADER_COMPILER'] = 0x8DFA,
 	['GL_SHADER_CONSISTENT_NV'] = 0x86DD,
 	['GL_SHADER_GLOBAL_ACCESS_BARRIER_BIT_NV'] = 0x00000010,
@@ -6736,8 +7615,31 @@ local glc= {
 	['GL_SHADE_MODEL'] = 0x0B54,
 	['GL_SHADING_LANGUAGE_VERSION'] = 0x8B8C,
 	['GL_SHADING_LANGUAGE_VERSION_ARB'] = 0x8B8C,
+	['GL_SHADING_RATE_16_INVOCATIONS_PER_PIXEL_NV'] = 0x956F,
+	['GL_SHADING_RATE_1_INVOCATION_PER_1X2_PIXELS_NV'] = 0x9566,
+	['GL_SHADING_RATE_1_INVOCATION_PER_2X1_PIXELS_NV'] = 0x9567,
+	['GL_SHADING_RATE_1_INVOCATION_PER_2X2_PIXELS_NV'] = 0x9568,
+	['GL_SHADING_RATE_1_INVOCATION_PER_2X4_PIXELS_NV'] = 0x9569,
+	['GL_SHADING_RATE_1_INVOCATION_PER_4X2_PIXELS_NV'] = 0x956A,
+	['GL_SHADING_RATE_1_INVOCATION_PER_4X4_PIXELS_NV'] = 0x956B,
+	['GL_SHADING_RATE_1_INVOCATION_PER_PIXEL_NV'] = 0x9565,
+	['GL_SHADING_RATE_2_INVOCATIONS_PER_PIXEL_NV'] = 0x956C,
+	['GL_SHADING_RATE_4_INVOCATIONS_PER_PIXEL_NV'] = 0x956D,
+	['GL_SHADING_RATE_8_INVOCATIONS_PER_PIXEL_NV'] = 0x956E,
+	['GL_SHADING_RATE_IMAGE_BINDING_NV'] = 0x955B,
+	['GL_SHADING_RATE_IMAGE_NV'] = 0x9563,
+	['GL_SHADING_RATE_IMAGE_PALETTE_COUNT_NV'] = 0x95B2,
+	['GL_SHADING_RATE_IMAGE_PALETTE_SIZE_NV'] = 0x955E,
+	['GL_SHADING_RATE_IMAGE_PER_PRIMITIVE_NV'] = 0x95B1,
+	['GL_SHADING_RATE_IMAGE_TEXEL_HEIGHT_NV'] = 0x955D,
+	['GL_SHADING_RATE_IMAGE_TEXEL_WIDTH_NV'] = 0x955C,
+	['GL_SHADING_RATE_NO_INVOCATIONS_NV'] = 0x9564,
+	['GL_SHADING_RATE_SAMPLE_ORDER_DEFAULT_NV'] = 0x95AE,
+	['GL_SHADING_RATE_SAMPLE_ORDER_PIXEL_MAJOR_NV'] = 0x95AF,
+	['GL_SHADING_RATE_SAMPLE_ORDER_SAMPLE_MAJOR_NV'] = 0x95B0,
 	['GL_SHADOW_AMBIENT_SGIX'] = 0x80BF,
 	['GL_SHADOW_ATTENUATION_EXT'] = 0x834E,
+	['GL_SHARED_EDGE_NV'] = 0xC0,
 	['GL_SHARED_TEXTURE_PALETTE_EXT'] = 0x81FB,
 	['GL_SHARPEN_TEXTURE_FUNC_POINTS_SGIS'] = 0x80B0,
 	['GL_SHININESS'] = 0x1601,
@@ -6793,6 +7695,8 @@ local glc= {
 	['GL_SMOOTH_POINT_SIZE_GRANULARITY'] = 0x0B13,
 	['GL_SMOOTH_POINT_SIZE_RANGE'] = 0x0B12,
 	['GL_SMOOTH_QUADRATIC_CURVE_TO_NV'] = 0x0E,
+	['GL_SM_COUNT_NV'] = 0x933B,
+	['GL_SOFTLIGHT_KHR'] = 0x929C,
 	['GL_SOFTLIGHT_NV'] = 0x929C,
 	['GL_SOURCE0_ALPHA'] = 0x8588,
 	['GL_SOURCE0_ALPHA_ARB'] = 0x8588,
@@ -6817,9 +7721,14 @@ local glc= {
 	['GL_SPARE0_NV'] = 0x852E,
 	['GL_SPARE0_PLUS_SECONDARY_COLOR_NV'] = 0x8532,
 	['GL_SPARE1_NV'] = 0x852F,
+	['GL_SPARSE_BUFFER_PAGE_SIZE_ARB'] = 0x82F8,
+	['GL_SPARSE_STORAGE_BIT_ARB'] = 0x0400,
 	['GL_SPARSE_TEXTURE_FULL_ARRAY_CUBE_MIPMAPS_ARB'] = 0x91A9,
 	['GL_SPECULAR'] = 0x1202,
 	['GL_SPHERE_MAP'] = 0x2402,
+	['GL_SPIR_V_BINARY'] = 0x9552,
+	['GL_SPIR_V_BINARY_ARB'] = 0x9552,
+	['GL_SPIR_V_EXTENSIONS'] = 0x9553,
 	['GL_SPOT_CUTOFF'] = 0x1206,
 	['GL_SPOT_DIRECTION'] = 0x1204,
 	['GL_SPOT_EXPONENT'] = 0x1205,
@@ -6831,6 +7740,7 @@ local glc= {
 	['GL_SPRITE_SGIX'] = 0x8148,
 	['GL_SPRITE_TRANSLATION_SGIX'] = 0x814B,
 	['GL_SQUARE_NV'] = 0x90A3,
+	['GL_SR8_EXT'] = 0x8FBD,
 	['GL_SRC0_ALPHA'] = 0x8588,
 	['GL_SRC0_RGB'] = 0x8580,
 	['GL_SRC1_ALPHA'] = 0x8589,
@@ -6846,6 +7756,7 @@ local glc= {
 	['GL_SRC_NV'] = 0x9286,
 	['GL_SRC_OUT_NV'] = 0x928C,
 	['GL_SRC_OVER_NV'] = 0x9288,
+	['GL_SRG8_EXT'] = 0x8FBE,
 	['GL_SRGB'] = 0x8C40,
 	['GL_SRGB8'] = 0x8C41,
 	['GL_SRGB8_ALPHA8'] = 0x8C43,
@@ -6859,6 +7770,7 @@ local glc= {
 	['GL_SRGB_WRITE'] = 0x8298,
 	['GL_STACK_OVERFLOW'] = 0x0503,
 	['GL_STACK_UNDERFLOW'] = 0x0504,
+	['GL_STANDARD_FONT_FORMAT_NV'] = 0x936C,
 	['GL_STANDARD_FONT_NAME_NV'] = 0x9072,
 	['GL_STATIC_ATI'] = 0x8760,
 	['GL_STATIC_COPY'] = 0x88E6,
@@ -6903,7 +7815,9 @@ local glc= {
 	['GL_STENCIL_PASS_DEPTH_FAIL'] = 0x0B95,
 	['GL_STENCIL_PASS_DEPTH_PASS'] = 0x0B96,
 	['GL_STENCIL_REF'] = 0x0B97,
+	['GL_STENCIL_REF_COMMAND_NV'] = 0x000C,
 	['GL_STENCIL_RENDERABLE'] = 0x8288,
+	['GL_STENCIL_SAMPLES_NV'] = 0x932E,
 	['GL_STENCIL_TAG_BITS_EXT'] = 0x88F2,
 	['GL_STENCIL_TEST'] = 0x0B90,
 	['GL_STENCIL_TEST_TWO_SIDE_EXT'] = 0x8910,
@@ -6918,12 +7832,28 @@ local glc= {
 	['GL_STREAM_COPY_ARB'] = 0x88E2,
 	['GL_STREAM_DRAW'] = 0x88E0,
 	['GL_STREAM_DRAW_ARB'] = 0x88E0,
+	['GL_STREAM_RASTERIZATION_AMD'] = 0x91A0,
 	['GL_STREAM_READ'] = 0x88E1,
 	['GL_STREAM_READ_ARB'] = 0x88E1,
 	['GL_STRICT_DEPTHFUNC_HINT_PGI'] = 0x1A216,
 	['GL_STRICT_LIGHTING_HINT_PGI'] = 0x1A217,
 	['GL_STRICT_SCISSOR_HINT_PGI'] = 0x1A218,
+	['GL_SUBGROUP_FEATURE_ARITHMETIC_BIT_KHR'] = 0x00000004,
+	['GL_SUBGROUP_FEATURE_BALLOT_BIT_KHR'] = 0x00000008,
+	['GL_SUBGROUP_FEATURE_BASIC_BIT_KHR'] = 0x00000001,
+	['GL_SUBGROUP_FEATURE_CLUSTERED_BIT_KHR'] = 0x00000040,
+	['GL_SUBGROUP_FEATURE_PARTITIONED_BIT_NV'] = 0x00000100,
+	['GL_SUBGROUP_FEATURE_QUAD_BIT_KHR'] = 0x00000080,
+	['GL_SUBGROUP_FEATURE_SHUFFLE_BIT_KHR'] = 0x00000010,
+	['GL_SUBGROUP_FEATURE_SHUFFLE_RELATIVE_BIT_KHR'] = 0x00000020,
+	['GL_SUBGROUP_FEATURE_VOTE_BIT_KHR'] = 0x00000002,
+	['GL_SUBGROUP_QUAD_ALL_STAGES_KHR'] = 0x9535,
+	['GL_SUBGROUP_SIZE_KHR'] = 0x9532,
+	['GL_SUBGROUP_SUPPORTED_FEATURES_KHR'] = 0x9534,
+	['GL_SUBGROUP_SUPPORTED_STAGES_KHR'] = 0x9533,
 	['GL_SUBPIXEL_BITS'] = 0x0D50,
+	['GL_SUBPIXEL_PRECISION_BIAS_X_BITS_NV'] = 0x9347,
+	['GL_SUBPIXEL_PRECISION_BIAS_Y_BITS_NV'] = 0x9348,
 	['GL_SUBSAMPLE_DISTANCE_AMD'] = 0x883F,
 	['GL_SUBTRACT'] = 0x84E7,
 	['GL_SUBTRACT_ARB'] = 0x84E7,
@@ -6936,6 +7866,9 @@ local glc= {
 	['GL_SUN_slice_accum'] = 1,
 	['GL_SUN_triangle_list'] = 1,
 	['GL_SUN_vertex'] = 1,
+	['GL_SUPERSAMPLE_SCALE_X_NV'] = 0x9372,
+	['GL_SUPERSAMPLE_SCALE_Y_NV'] = 0x9373,
+	['GL_SUPPORTED_MULTISAMPLE_MODES_AMD'] = 0x91B7,
 	['GL_SURFACE_MAPPED_NV'] = 0x8700,
 	['GL_SURFACE_REGISTERED_NV'] = 0x86FD,
 	['GL_SURFACE_STATE_NV'] = 0x86EB,
@@ -6973,6 +7906,12 @@ local glc= {
 	['GL_TANGENT_ARRAY_POINTER_EXT'] = 0x8442,
 	['GL_TANGENT_ARRAY_STRIDE_EXT'] = 0x843F,
 	['GL_TANGENT_ARRAY_TYPE_EXT'] = 0x843E,
+	['GL_TASK_SHADER_BIT_NV'] = 0x00000080,
+	['GL_TASK_SHADER_NV'] = 0x955A,
+	['GL_TASK_SUBROUTINE_NV'] = 0x957D,
+	['GL_TASK_SUBROUTINE_UNIFORM_NV'] = 0x957F,
+	['GL_TASK_WORK_GROUP_SIZE_NV'] = 0x953F,
+	['GL_TERMINATE_SEQUENCE_COMMAND_NV'] = 0x0000,
 	['GL_TESSELLATION_FACTOR_AMD'] = 0x9005,
 	['GL_TESSELLATION_MODE_AMD'] = 0x9004,
 	['GL_TESS_CONTROL_OUTPUT_VERTICES'] = 0x8E75,
@@ -6980,6 +7919,8 @@ local glc= {
 	['GL_TESS_CONTROL_PROGRAM_PARAMETER_BUFFER_NV'] = 0x8C74,
 	['GL_TESS_CONTROL_SHADER'] = 0x8E88,
 	['GL_TESS_CONTROL_SHADER_BIT'] = 0x00000008,
+	['GL_TESS_CONTROL_SHADER_PATCHES'] = 0x82F1,
+	['GL_TESS_CONTROL_SHADER_PATCHES_ARB'] = 0x82F1,
 	['GL_TESS_CONTROL_SUBROUTINE'] = 0x92E9,
 	['GL_TESS_CONTROL_SUBROUTINE_UNIFORM'] = 0x92EF,
 	['GL_TESS_CONTROL_TEXTURE'] = 0x829C,
@@ -6987,6 +7928,8 @@ local glc= {
 	['GL_TESS_EVALUATION_PROGRAM_PARAMETER_BUFFER_NV'] = 0x8C75,
 	['GL_TESS_EVALUATION_SHADER'] = 0x8E87,
 	['GL_TESS_EVALUATION_SHADER_BIT'] = 0x00000010,
+	['GL_TESS_EVALUATION_SHADER_INVOCATIONS'] = 0x82F2,
+	['GL_TESS_EVALUATION_SHADER_INVOCATIONS_ARB'] = 0x82F2,
 	['GL_TESS_EVALUATION_SUBROUTINE'] = 0x92EA,
 	['GL_TESS_EVALUATION_SUBROUTINE_UNIFORM'] = 0x92F0,
 	['GL_TESS_EVALUATION_TEXTURE'] = 0x829D,
@@ -7241,6 +8184,7 @@ local glc= {
 	['GL_TEXTURE_IMAGE_FORMAT'] = 0x828F,
 	['GL_TEXTURE_IMAGE_TYPE'] = 0x8290,
 	['GL_TEXTURE_IMMUTABLE_FORMAT'] = 0x912F,
+	['GL_TEXTURE_IMMUTABLE_FORMAT_EXT'] = 0x912F,
 	['GL_TEXTURE_IMMUTABLE_LEVELS'] = 0x82DF,
 	['GL_TEXTURE_INTENSITY_SIZE'] = 0x8061,
 	['GL_TEXTURE_INTENSITY_SIZE_EXT'] = 0x8061,
@@ -7265,6 +8209,7 @@ local glc= {
 	['GL_TEXTURE_MATERIAL_FACE_EXT'] = 0x8351,
 	['GL_TEXTURE_MATERIAL_PARAMETER_EXT'] = 0x8352,
 	['GL_TEXTURE_MATRIX'] = 0x0BA8,
+	['GL_TEXTURE_MAX_ANISOTROPY'] = 0x84FE,
 	['GL_TEXTURE_MAX_ANISOTROPY_EXT'] = 0x84FE,
 	['GL_TEXTURE_MAX_CLAMP_R_SGIX'] = 0x836B,
 	['GL_TEXTURE_MAX_CLAMP_S_SGIX'] = 0x8369,
@@ -7288,6 +8233,8 @@ local glc= {
 	['GL_TEXTURE_RECTANGLE'] = 0x84F5,
 	['GL_TEXTURE_RECTANGLE_ARB'] = 0x84F5,
 	['GL_TEXTURE_RECTANGLE_NV'] = 0x84F5,
+	['GL_TEXTURE_REDUCTION_MODE_ARB'] = 0x9366,
+	['GL_TEXTURE_REDUCTION_MODE_EXT'] = 0x9366,
 	['GL_TEXTURE_RED_SIZE'] = 0x805C,
 	['GL_TEXTURE_RED_SIZE_EXT'] = 0x805C,
 	['GL_TEXTURE_RED_TYPE'] = 0x8C10,
@@ -7318,6 +8265,8 @@ local glc= {
 	['GL_TEXTURE_SWIZZLE_RGBA'] = 0x8E46,
 	['GL_TEXTURE_SWIZZLE_RGBA_EXT'] = 0x8E46,
 	['GL_TEXTURE_SWIZZLE_R_EXT'] = 0x8E42,
+	['GL_TEXTURE_TARGET'] = 0x1006,
+	['GL_TEXTURE_TILING_EXT'] = 0x9580,
 	['GL_TEXTURE_TOO_LARGE_EXT'] = 0x8065,
 	['GL_TEXTURE_UNSIGNED_REMAP_MODE_NV'] = 0x888F,
 	['GL_TEXTURE_UPDATE_BARRIER_BIT'] = 0x00000100,
@@ -7334,6 +8283,11 @@ local glc= {
 	['GL_TEXTURE_WRAP_S'] = 0x2802,
 	['GL_TEXTURE_WRAP_T'] = 0x2803,
 	['GL_TEXT_FRAGMENT_SHADER_ATI'] = 0x8200,
+	['GL_TILE_RASTER_ORDER_FIXED_MESA'] = 0x8BB8,
+	['GL_TILE_RASTER_ORDER_INCREASING_X_MESA'] = 0x8BB9,
+	['GL_TILE_RASTER_ORDER_INCREASING_Y_MESA'] = 0x8BBA,
+	['GL_TILING_TYPES_EXT'] = 0x9583,
+	['GL_TIMELINE_SEMAPHORE_VALUE_NV'] = 0x9595,
 	['GL_TIMEOUT_EXPIRED'] = 0x911B,
 	['GL_TIMESTAMP'] = 0x8E28,
 	['GL_TIME_ELAPSED'] = 0x88BF,
@@ -7372,11 +8326,15 @@ local glc= {
 	['GL_TRANSFORM_FEEDBACK_BUFFER_START_NV'] = 0x8C84,
 	['GL_TRANSFORM_FEEDBACK_BUFFER_STRIDE'] = 0x934C,
 	['GL_TRANSFORM_FEEDBACK_NV'] = 0x8E22,
+	['GL_TRANSFORM_FEEDBACK_OVERFLOW'] = 0x82EC,
+	['GL_TRANSFORM_FEEDBACK_OVERFLOW_ARB'] = 0x82EC,
 	['GL_TRANSFORM_FEEDBACK_PAUSED'] = 0x8E23,
 	['GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN'] = 0x8C88,
 	['GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN_EXT'] = 0x8C88,
 	['GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN_NV'] = 0x8C88,
 	['GL_TRANSFORM_FEEDBACK_RECORD_NV'] = 0x8C86,
+	['GL_TRANSFORM_FEEDBACK_STREAM_OVERFLOW'] = 0x82ED,
+	['GL_TRANSFORM_FEEDBACK_STREAM_OVERFLOW_ARB'] = 0x82ED,
 	['GL_TRANSFORM_FEEDBACK_VARYING'] = 0x92F4,
 	['GL_TRANSFORM_FEEDBACK_VARYINGS'] = 0x8C83,
 	['GL_TRANSFORM_FEEDBACK_VARYINGS_EXT'] = 0x8C83,
@@ -7419,6 +8377,7 @@ local glc= {
 	['GL_UNDEFINED_APPLE'] = 0x8A1C,
 	['GL_UNDEFINED_VERTEX'] = 0x8260,
 	['GL_UNIFORM'] = 0x92E1,
+	['GL_UNIFORM_ADDRESS_COMMAND_NV'] = 0x000A,
 	['GL_UNIFORM_ARRAY_STRIDE'] = 0x8A3C,
 	['GL_UNIFORM_ATOMIC_COUNTER_BUFFER_INDEX'] = 0x92DA,
 	['GL_UNIFORM_BARRIER_BIT'] = 0x00000004,
@@ -7433,22 +8392,28 @@ local glc= {
 	['GL_UNIFORM_BLOCK_REFERENCED_BY_COMPUTE_SHADER'] = 0x90EC,
 	['GL_UNIFORM_BLOCK_REFERENCED_BY_FRAGMENT_SHADER'] = 0x8A46,
 	['GL_UNIFORM_BLOCK_REFERENCED_BY_GEOMETRY_SHADER'] = 0x8A45,
+	['GL_UNIFORM_BLOCK_REFERENCED_BY_MESH_SHADER_NV'] = 0x959C,
+	['GL_UNIFORM_BLOCK_REFERENCED_BY_TASK_SHADER_NV'] = 0x959D,
 	['GL_UNIFORM_BLOCK_REFERENCED_BY_TESS_CONTROL_SHADER'] = 0x84F0,
 	['GL_UNIFORM_BLOCK_REFERENCED_BY_TESS_EVALUATION_SHADER'] = 0x84F1,
 	['GL_UNIFORM_BLOCK_REFERENCED_BY_VERTEX_SHADER'] = 0x8A44,
 	['GL_UNIFORM_BUFFER'] = 0x8A11,
+	['GL_UNIFORM_BUFFER_ADDRESS_NV'] = 0x936F,
 	['GL_UNIFORM_BUFFER_BINDING'] = 0x8A28,
 	['GL_UNIFORM_BUFFER_BINDING_EXT'] = 0x8DEF,
 	['GL_UNIFORM_BUFFER_EXT'] = 0x8DEE,
+	['GL_UNIFORM_BUFFER_LENGTH_NV'] = 0x9370,
 	['GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT'] = 0x8A34,
 	['GL_UNIFORM_BUFFER_SIZE'] = 0x8A2A,
 	['GL_UNIFORM_BUFFER_START'] = 0x8A29,
+	['GL_UNIFORM_BUFFER_UNIFIED_NV'] = 0x936E,
 	['GL_UNIFORM_IS_ROW_MAJOR'] = 0x8A3E,
 	['GL_UNIFORM_MATRIX_STRIDE'] = 0x8A3D,
 	['GL_UNIFORM_NAME_LENGTH'] = 0x8A39,
 	['GL_UNIFORM_OFFSET'] = 0x8A3B,
 	['GL_UNIFORM_SIZE'] = 0x8A38,
 	['GL_UNIFORM_TYPE'] = 0x8A37,
+	['GL_UNKNOWN_CONTEXT_RESET'] = 0x8255,
 	['GL_UNKNOWN_CONTEXT_RESET_ARB'] = 0x8255,
 	['GL_UNPACK_ALIGNMENT'] = 0x0CF5,
 	['GL_UNPACK_CLIENT_STORAGE_APPLE'] = 0x85B2,
@@ -7463,7 +8428,7 @@ local glc= {
 	['GL_UNPACK_IMAGE_HEIGHT_EXT'] = 0x806E,
 	['GL_UNPACK_LSB_FIRST'] = 0x0CF1,
 	['GL_UNPACK_RESAMPLE_OML'] = 0x8985,
-	['GL_UNPACK_RESAMPLE_SGIX'] = 0x842D,
+	['GL_UNPACK_RESAMPLE_SGIX'] = 0x842F,
 	['GL_UNPACK_ROW_BYTES_APPLE'] = 0x8A16,
 	['GL_UNPACK_ROW_LENGTH'] = 0x0CF2,
 	['GL_UNPACK_SKIP_IMAGES'] = 0x806D,
@@ -7487,8 +8452,11 @@ local glc= {
 	['GL_UNSIGNED_INT64_AMD'] = 0x8BC2,
 	['GL_UNSIGNED_INT64_ARB'] = 0x140F,
 	['GL_UNSIGNED_INT64_NV'] = 0x140F,
+	['GL_UNSIGNED_INT64_VEC2_ARB'] = 0x8FF5,
 	['GL_UNSIGNED_INT64_VEC2_NV'] = 0x8FF5,
+	['GL_UNSIGNED_INT64_VEC3_ARB'] = 0x8FF6,
 	['GL_UNSIGNED_INT64_VEC3_NV'] = 0x8FF6,
+	['GL_UNSIGNED_INT64_VEC4_ARB'] = 0x8FF7,
 	['GL_UNSIGNED_INT64_VEC4_NV'] = 0x8FF7,
 	['GL_UNSIGNED_INT8_NV'] = 0x8FEC,
 	['GL_UNSIGNED_INT8_VEC2_NV'] = 0x8FED,
@@ -7576,10 +8544,12 @@ local glc= {
 	['GL_UNSIGNED_SHORT_8_8_MESA'] = 0x85BA,
 	['GL_UNSIGNED_SHORT_8_8_REV_APPLE'] = 0x85BB,
 	['GL_UNSIGNED_SHORT_8_8_REV_MESA'] = 0x85BB,
+	['GL_UPLOAD_GPU_MASK_NVX'] = 0x954A,
 	['GL_UPPER_LEFT'] = 0x8CA2,
 	['GL_USE_MISSING_GLYPH_NV'] = 0x90AA,
 	['GL_UTF16_NV'] = 0x909B,
 	['GL_UTF8_NV'] = 0x909A,
+	['GL_UUID_SIZE_EXT'] = 16,
 	['GL_V2F'] = 0x2A20,
 	['GL_V3F'] = 0x2A21,
 	['GL_VALIDATE_STATUS'] = 0x8B83,
@@ -7617,6 +8587,8 @@ local glc= {
 	['GL_VERSION_4_2'] = 1,
 	['GL_VERSION_4_3'] = 1,
 	['GL_VERSION_4_4'] = 1,
+	['GL_VERSION_4_5'] = 1,
+	['GL_VERSION_4_6'] = 1,
 	['GL_VERTEX23_BIT_PGI'] = 0x00000004,
 	['GL_VERTEX4_BIT_PGI'] = 0x00000008,
 	['GL_VERTEX_ARRAY'] = 0x8074,
@@ -7703,6 +8675,7 @@ local glc= {
 	['GL_VERTEX_ATTRIB_MAP2_ORDER_APPLE'] = 0x8A08,
 	['GL_VERTEX_ATTRIB_MAP2_SIZE_APPLE'] = 0x8A06,
 	['GL_VERTEX_ATTRIB_RELATIVE_OFFSET'] = 0x82D5,
+	['GL_VERTEX_BINDING_BUFFER'] = 0x8F4F,
 	['GL_VERTEX_BINDING_DIVISOR'] = 0x82D6,
 	['GL_VERTEX_BINDING_OFFSET'] = 0x82D7,
 	['GL_VERTEX_BINDING_STRIDE'] = 0x82D8,
@@ -7731,6 +8704,8 @@ local glc= {
 	['GL_VERTEX_SHADER_EXT'] = 0x8780,
 	['GL_VERTEX_SHADER_INSTRUCTIONS_EXT'] = 0x87CF,
 	['GL_VERTEX_SHADER_INVARIANTS_EXT'] = 0x87D1,
+	['GL_VERTEX_SHADER_INVOCATIONS'] = 0x82F0,
+	['GL_VERTEX_SHADER_INVOCATIONS_ARB'] = 0x82F0,
 	['GL_VERTEX_SHADER_LOCALS_EXT'] = 0x87D3,
 	['GL_VERTEX_SHADER_LOCAL_CONSTANTS_EXT'] = 0x87D2,
 	['GL_VERTEX_SHADER_OPTIMIZED_EXT'] = 0x87D4,
@@ -7755,6 +8730,8 @@ local glc= {
 	['GL_VERTEX_WEIGHT_ARRAY_STRIDE_EXT'] = 0x850F,
 	['GL_VERTEX_WEIGHT_ARRAY_TYPE_EXT'] = 0x850E,
 	['GL_VERTICAL_LINE_TO_NV'] = 0x08,
+	['GL_VERTICES_SUBMITTED'] = 0x82EE,
+	['GL_VERTICES_SUBMITTED_ARB'] = 0x82EE,
 	['GL_VIBRANCE_BIAS_NV'] = 0x8719,
 	['GL_VIBRANCE_SCALE_NV'] = 0x8713,
 	['GL_VIDEO_BUFFER_BINDING_NV'] = 0x9021,
@@ -7774,8 +8751,24 @@ local glc= {
 	['GL_VIEWPORT'] = 0x0BA2,
 	['GL_VIEWPORT_BIT'] = 0x00000800,
 	['GL_VIEWPORT_BOUNDS_RANGE'] = 0x825D,
+	['GL_VIEWPORT_COMMAND_NV'] = 0x0010,
 	['GL_VIEWPORT_INDEX_PROVOKING_VERTEX'] = 0x825F,
+	['GL_VIEWPORT_POSITION_W_SCALE_NV'] = 0x937C,
+	['GL_VIEWPORT_POSITION_W_SCALE_X_COEFF_NV'] = 0x937D,
+	['GL_VIEWPORT_POSITION_W_SCALE_Y_COEFF_NV'] = 0x937E,
 	['GL_VIEWPORT_SUBPIXEL_BITS'] = 0x825C,
+	['GL_VIEWPORT_SWIZZLE_NEGATIVE_W_NV'] = 0x9357,
+	['GL_VIEWPORT_SWIZZLE_NEGATIVE_X_NV'] = 0x9351,
+	['GL_VIEWPORT_SWIZZLE_NEGATIVE_Y_NV'] = 0x9353,
+	['GL_VIEWPORT_SWIZZLE_NEGATIVE_Z_NV'] = 0x9355,
+	['GL_VIEWPORT_SWIZZLE_POSITIVE_W_NV'] = 0x9356,
+	['GL_VIEWPORT_SWIZZLE_POSITIVE_X_NV'] = 0x9350,
+	['GL_VIEWPORT_SWIZZLE_POSITIVE_Y_NV'] = 0x9352,
+	['GL_VIEWPORT_SWIZZLE_POSITIVE_Z_NV'] = 0x9354,
+	['GL_VIEWPORT_SWIZZLE_W_NV'] = 0x935B,
+	['GL_VIEWPORT_SWIZZLE_X_NV'] = 0x9358,
+	['GL_VIEWPORT_SWIZZLE_Y_NV'] = 0x9359,
+	['GL_VIEWPORT_SWIZZLE_Z_NV'] = 0x935A,
 	['GL_VIEW_CLASS_128_BITS'] = 0x82C4,
 	['GL_VIEW_CLASS_16_BITS'] = 0x82CA,
 	['GL_VIEW_CLASS_24_BITS'] = 0x82C9,
@@ -7784,8 +8777,27 @@ local glc= {
 	['GL_VIEW_CLASS_64_BITS'] = 0x82C6,
 	['GL_VIEW_CLASS_8_BITS'] = 0x82CB,
 	['GL_VIEW_CLASS_96_BITS'] = 0x82C5,
+	['GL_VIEW_CLASS_ASTC_10x10_RGBA'] = 0x9393,
+	['GL_VIEW_CLASS_ASTC_10x5_RGBA'] = 0x9390,
+	['GL_VIEW_CLASS_ASTC_10x6_RGBA'] = 0x9391,
+	['GL_VIEW_CLASS_ASTC_10x8_RGBA'] = 0x9392,
+	['GL_VIEW_CLASS_ASTC_12x10_RGBA'] = 0x9394,
+	['GL_VIEW_CLASS_ASTC_12x12_RGBA'] = 0x9395,
+	['GL_VIEW_CLASS_ASTC_4x4_RGBA'] = 0x9388,
+	['GL_VIEW_CLASS_ASTC_5x4_RGBA'] = 0x9389,
+	['GL_VIEW_CLASS_ASTC_5x5_RGBA'] = 0x938A,
+	['GL_VIEW_CLASS_ASTC_6x5_RGBA'] = 0x938B,
+	['GL_VIEW_CLASS_ASTC_6x6_RGBA'] = 0x938C,
+	['GL_VIEW_CLASS_ASTC_8x5_RGBA'] = 0x938D,
+	['GL_VIEW_CLASS_ASTC_8x6_RGBA'] = 0x938E,
+	['GL_VIEW_CLASS_ASTC_8x8_RGBA'] = 0x938F,
 	['GL_VIEW_CLASS_BPTC_FLOAT'] = 0x82D3,
 	['GL_VIEW_CLASS_BPTC_UNORM'] = 0x82D2,
+	['GL_VIEW_CLASS_EAC_R11'] = 0x9383,
+	['GL_VIEW_CLASS_EAC_RG11'] = 0x9384,
+	['GL_VIEW_CLASS_ETC2_EAC_RGBA'] = 0x9387,
+	['GL_VIEW_CLASS_ETC2_RGB'] = 0x9385,
+	['GL_VIEW_CLASS_ETC2_RGBA'] = 0x9386,
 	['GL_VIEW_CLASS_RGTC1_RED'] = 0x82D0,
 	['GL_VIEW_CLASS_RGTC2_RG'] = 0x82D1,
 	['GL_VIEW_CLASS_S3TC_DXT1_RGB'] = 0x82CC,
@@ -7803,6 +8815,10 @@ local glc= {
 	['GL_VIVIDLIGHT_NV'] = 0x92A6,
 	['GL_VOLATILE_APPLE'] = 0x8A1A,
 	['GL_WAIT_FAILED'] = 0x911D,
+	['GL_WARPS_PER_SM_NV'] = 0x933A,
+	['GL_WARP_SIZE_NV'] = 0x9339,
+	['GL_WEIGHTED_AVERAGE_ARB'] = 0x9367,
+	['GL_WEIGHTED_AVERAGE_EXT'] = 0x9367,
 	['GL_WEIGHT_ARRAY_ARB'] = 0x86AD,
 	['GL_WEIGHT_ARRAY_BUFFER_BINDING'] = 0x889E,
 	['GL_WEIGHT_ARRAY_BUFFER_BINDING_ARB'] = 0x889E,
@@ -7812,6 +8828,8 @@ local glc= {
 	['GL_WEIGHT_ARRAY_TYPE_ARB'] = 0x86A9,
 	['GL_WEIGHT_SUM_UNITY_ARB'] = 0x86A6,
 	['GL_WIDE_LINE_HINT_PGI'] = 0x1A222,
+	['GL_WINDOW_RECTANGLE_EXT'] = 0x8F12,
+	['GL_WINDOW_RECTANGLE_MODE_EXT'] = 0x8F13,
 	['GL_WIN_draw_range_elements'] = 1,
 	['GL_WIN_phong_shading'] = 1,
 	['GL_WIN_specular_fog'] = 1,
@@ -7825,6 +8843,7 @@ local glc= {
 	['GL_WRITE_PIXEL_DATA_RANGE_POINTER_NV'] = 0x887C,
 	['GL_W_EXT'] = 0x87D8,
 	['GL_XOR'] = 0x1506,
+	['GL_XOR_NV'] = 0x1506,
 	['GL_X_EXT'] = 0x87D5,
 	['GL_YCBAYCR8A_4224_NV'] = 0x9032,
 	['GL_YCBCR_422_APPLE'] = 0x85B9,
@@ -7842,10 +8861,14 @@ local glc= {
 	['GL_Z6Y10Z6CB10Z6Y10Z6CR10_422_NV'] = 0x9033,
 	['GL_ZERO'] = 0,
 	['GL_ZERO_EXT'] = 0x87DD,
+	['GL_ZERO_TO_ONE'] = 0x935F,
 	['GL_ZOOM_X'] = 0x0D16,
 	['GL_ZOOM_Y'] = 0x0D17,
 	['GL_Z_EXT'] = 0x87D7,
-	['__glext_h_'] = 1,
+	['KHRONOS_MAX_ENUM'] = 0x7FFFFFFF,
+	['KHRONOS_SUPPORT_FLOAT'] = 1,
+	['KHRONOS_SUPPORT_INT64'] = 1,
+	['__gl_glext_h_'] = 1,
 }
 local ffi = require "ffi"
 local jit = require "jit"

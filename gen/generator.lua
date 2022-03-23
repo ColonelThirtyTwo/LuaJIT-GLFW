@@ -148,17 +148,19 @@ hfile:close()
 save_data("./glfw.lua",glfwstr,hstrfile)
 
 --now gl
-local pipe,err = io.popen([[gcc -E -dD -I ./ ./headers.h]],"r")
+local pipe,err = io.popen([[gcc -E -dD -DKHRONOS_USE_INTPTR_T -I. ./headers.h]],"r") 
 if not pipe then
     error("could not execute gcc "..err)
 end
 local cdefs = {}
 local defines = {}
-for line in location(pipe,{"gl.-"},defines) do
+for line in location(pipe,{"gl.-","khrplatform"},defines) do
     local line = strip(line)
 	line = line:gsub('__attribute__%(%(visibility%("default"%)%)%) ', '')
 	line = line:gsub("__attribute__%(%(__stdcall__%)%) ", '')
 	line = line:gsub("__attribute__%(%(dllimport%)%) ", '')
+	line = line:gsub("%( %*","%(%*")
+	line = line:gsub("typedef khronos_ssize_t","typedef ssize_t")
 	table.insert(cdefs,line)
 end
 pipe:close()
