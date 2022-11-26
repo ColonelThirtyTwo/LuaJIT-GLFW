@@ -11,8 +11,8 @@ add_subdirectory(GLFW EXCLUDE_FROM_ALL)
 add_custom_target(glfw_ffi ALL)
 add_dependencies(glfw_ffi glfw)
 
-#install(TARGETS glfw DESTINATION ${CMAKE_BINARY_DIR}"/installglfw")
+
 install(TARGETS glfw RUNTIME DESTINATION ${LUAJIT_BIN}
 					LIBRARY DESTINATION ${LUAJIT_BIN}
 )
-INSTALL(FILES glfw.lua gl.lua DESTINATION ${LUAJIT_BIN}/lua)
+INSTALL(FILES glfw.lua DESTINATION ${LUAJIT_BIN}/lua)
