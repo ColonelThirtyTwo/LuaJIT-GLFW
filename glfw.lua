@@ -4,26 +4,26 @@ typedef void (*GLFWvkproc)(void);
 typedef struct GLFWmonitor GLFWmonitor;
 typedef struct GLFWwindow GLFWwindow;
 typedef struct GLFWcursor GLFWcursor;
-typedef void (* GLFWerrorfun)(int,const char*);
-typedef void (* GLFWwindowposfun)(GLFWwindow*,int,int);
-typedef void (* GLFWwindowsizefun)(GLFWwindow*,int,int);
-typedef void (* GLFWwindowclosefun)(GLFWwindow*);
-typedef void (* GLFWwindowrefreshfun)(GLFWwindow*);
-typedef void (* GLFWwindowfocusfun)(GLFWwindow*,int);
-typedef void (* GLFWwindowiconifyfun)(GLFWwindow*,int);
-typedef void (* GLFWwindowmaximizefun)(GLFWwindow*,int);
-typedef void (* GLFWframebuffersizefun)(GLFWwindow*,int,int);
-typedef void (* GLFWwindowcontentscalefun)(GLFWwindow*,float,float);
-typedef void (* GLFWmousebuttonfun)(GLFWwindow*,int,int,int);
-typedef void (* GLFWcursorposfun)(GLFWwindow*,double,double);
-typedef void (* GLFWcursorenterfun)(GLFWwindow*,int);
-typedef void (* GLFWscrollfun)(GLFWwindow*,double,double);
-typedef void (* GLFWkeyfun)(GLFWwindow*,int,int,int,int);
-typedef void (* GLFWcharfun)(GLFWwindow*,unsigned int);
-typedef void (* GLFWcharmodsfun)(GLFWwindow*,unsigned int,int);
-typedef void (* GLFWdropfun)(GLFWwindow*,int,const char*[]);
-typedef void (* GLFWmonitorfun)(GLFWmonitor*,int);
-typedef void (* GLFWjoystickfun)(int,int);
+typedef void (* GLFWerrorfun)(int error_code, const char* description);
+typedef void (* GLFWwindowposfun)(GLFWwindow* window, int xpos, int ypos);
+typedef void (* GLFWwindowsizefun)(GLFWwindow* window, int width, int height);
+typedef void (* GLFWwindowclosefun)(GLFWwindow* window);
+typedef void (* GLFWwindowrefreshfun)(GLFWwindow* window);
+typedef void (* GLFWwindowfocusfun)(GLFWwindow* window, int focused);
+typedef void (* GLFWwindowiconifyfun)(GLFWwindow* window, int iconified);
+typedef void (* GLFWwindowmaximizefun)(GLFWwindow* window, int maximized);
+typedef void (* GLFWframebuffersizefun)(GLFWwindow* window, int width, int height);
+typedef void (* GLFWwindowcontentscalefun)(GLFWwindow* window, float xscale, float yscale);
+typedef void (* GLFWmousebuttonfun)(GLFWwindow* window, int button, int action, int mods);
+typedef void (* GLFWcursorposfun)(GLFWwindow* window, double xpos, double ypos);
+typedef void (* GLFWcursorenterfun)(GLFWwindow* window, int entered);
+typedef void (* GLFWscrollfun)(GLFWwindow* window, double xoffset, double yoffset);
+typedef void (* GLFWkeyfun)(GLFWwindow* window, int key, int scancode, int action, int mods);
+typedef void (* GLFWcharfun)(GLFWwindow* window, unsigned int codepoint);
+typedef void (* GLFWcharmodsfun)(GLFWwindow* window, unsigned int codepoint, int mods);
+typedef void (* GLFWdropfun)(GLFWwindow* window, int path_count, const char* paths[]);
+typedef void (* GLFWmonitorfun)(GLFWmonitor* monitor, int event);
+typedef void (* GLFWjoystickfun)(int jid, int event);
 typedef struct GLFWvidmode
 {
 int width;
@@ -173,14 +173,6 @@ local glfwc= {
 	['GLFW_ACCUM_GREEN_BITS'] = 0x00021008,
 	['GLFW_ACCUM_RED_BITS'] = 0x00021007,
 	['GLFW_ALPHA_BITS'] = 0x00021004,
-	['GLFW_ANGLE_PLATFORM_TYPE'] = 0x00050002,
-	['GLFW_ANGLE_PLATFORM_TYPE_D3D11'] = 0x00037005,
-	['GLFW_ANGLE_PLATFORM_TYPE_D3D9'] = 0x00037004,
-	['GLFW_ANGLE_PLATFORM_TYPE_METAL'] = 0x00037008,
-	['GLFW_ANGLE_PLATFORM_TYPE_NONE'] = 0x00037001,
-	['GLFW_ANGLE_PLATFORM_TYPE_OPENGL'] = 0x00037002,
-	['GLFW_ANGLE_PLATFORM_TYPE_OPENGLES'] = 0x00037003,
-	['GLFW_ANGLE_PLATFORM_TYPE_VULKAN'] = 0x00037007,
 	['GLFW_ANY_RELEASE_BEHAVIOR'] = 0,
 	['GLFW_API_UNAVAILABLE'] = 0x00010006,
 	['GLFW_ARROW_CURSOR'] = 0x00036001,
@@ -196,7 +188,6 @@ local glfwc= {
 	['GLFW_COCOA_RETINA_FRAMEBUFFER'] = 0x00023001,
 	['GLFW_CONNECTED'] = 0x00040001,
 	['GLFW_CONTEXT_CREATION_API'] = 0x0002200B,
-	['GLFW_CONTEXT_DEBUG'] = 0x00022007,
 	['GLFW_CONTEXT_NO_ERROR'] = 0x0002200A,
 	['GLFW_CONTEXT_RELEASE_BEHAVIOR'] = 0x00022009,
 	['GLFW_CONTEXT_REVISION'] = 0x00022004,
@@ -208,7 +199,6 @@ local glfwc= {
 	['GLFW_CURSOR_DISABLED'] = 0x00034003,
 	['GLFW_CURSOR_HIDDEN'] = 0x00034002,
 	['GLFW_CURSOR_NORMAL'] = 0x00034001,
-	['GLFW_CURSOR_UNAVAILABLE'] = 0x0001000B,
 	['GLFW_DECORATED'] = 0x00020005,
 	['GLFW_DEPTH_BITS'] = 0x00021005,
 	['GLFW_DISCONNECTED'] = 0x00040002,
@@ -216,8 +206,6 @@ local glfwc= {
 	['GLFW_DOUBLEBUFFER'] = 0x00021010,
 	['GLFW_EGL_CONTEXT_API'] = 0x00036002,
 	['GLFW_FALSE'] = 0,
-	['GLFW_FEATURE_UNAVAILABLE'] = 0x0001000C,
-	['GLFW_FEATURE_UNIMPLEMENTED'] = 0x0001000D,
 	['GLFW_FLOATING'] = 0x00020007,
 	['GLFW_FOCUSED'] = 0x00020001,
 	['GLFW_FOCUS_ON_SHOW'] = 0x0002000C,
@@ -423,9 +411,7 @@ local glfwc= {
 	['GLFW_MOUSE_BUTTON_LEFT'] = 0,
 	['GLFW_MOUSE_BUTTON_MIDDLE'] = 2,
 	['GLFW_MOUSE_BUTTON_RIGHT'] = 1,
-	['GLFW_MOUSE_PASSTHROUGH'] = 0x0002000D,
 	['GLFW_NATIVE_CONTEXT_API'] = 0x00036001,
-	['GLFW_NOT_ALLOWED_CURSOR'] = 0x0003600A,
 	['GLFW_NOT_INITIALIZED'] = 0x00010001,
 	['GLFW_NO_API'] = 0,
 	['GLFW_NO_CURRENT_CONTEXT'] = 0x00010002,
@@ -444,7 +430,6 @@ local glfwc= {
 	['GLFW_OSMESA_CONTEXT_API'] = 0x00036003,
 	['GLFW_OUT_OF_MEMORY'] = 0x00010005,
 	['GLFW_PLATFORM_ERROR'] = 0x00010008,
-	['GLFW_POINTING_HAND_CURSOR'] = 0x00036004,
 	['GLFW_PRESS'] = 1,
 	['GLFW_RAW_MOUSE_MOTION'] = 0x00033005,
 	['GLFW_RED_BITS'] = 0x00021001,
@@ -454,11 +439,6 @@ local glfwc= {
 	['GLFW_RELEASE_BEHAVIOR_NONE'] = 0x00035002,
 	['GLFW_REPEAT'] = 2,
 	['GLFW_RESIZABLE'] = 0x00020003,
-	['GLFW_RESIZE_ALL_CURSOR'] = 0x00036009,
-	['GLFW_RESIZE_EW_CURSOR'] = 0x00036005,
-	['GLFW_RESIZE_NESW_CURSOR'] = 0x00036008,
-	['GLFW_RESIZE_NS_CURSOR'] = 0x00036006,
-	['GLFW_RESIZE_NWSE_CURSOR'] = 0x00036007,
 	['GLFW_SAMPLES'] = 0x0002100D,
 	['GLFW_SCALE_TO_MONITOR'] = 0x0002200C,
 	['GLFW_SRGB_CAPABLE'] = 0x0002100E,
@@ -469,12 +449,11 @@ local glfwc= {
 	['GLFW_TRANSPARENT_FRAMEBUFFER'] = 0x0002000A,
 	['GLFW_TRUE'] = 1,
 	['GLFW_VERSION_MAJOR'] = 3,
-	['GLFW_VERSION_MINOR'] = 4,
-	['GLFW_VERSION_REVISION'] = 0,
+	['GLFW_VERSION_MINOR'] = 3,
+	['GLFW_VERSION_REVISION'] = 8,
 	['GLFW_VERSION_UNAVAILABLE'] = 0x00010007,
 	['GLFW_VISIBLE'] = 0x00020004,
 	['GLFW_VRESIZE_CURSOR'] = 0x00036006,
-	['GLFW_WIN32_KEYBOARD_MENU'] = 0x00025001,
 	['GLFW_X11_CLASS_NAME'] = 0x00024001,
 	['GLFW_X11_INSTANCE_NAME'] = 0x00024002,
 }
