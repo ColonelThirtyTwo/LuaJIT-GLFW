@@ -1,43 +1,23 @@
 
-assert(glc, "luajit-glfw was not built properly.")
+
 local ffi = require "ffi"
 local jit = require "jit"
-
+ffi.cdef(cdecl)
 local Lib = {}
 
-setmetatable(glc, {__index=function(self, k) error("Unknown GL constant: "..k) end})
+setmetatable(glfwc, {__index=function(self, k) error("Unknown GL constant: "..k) end})
 
 -- Load and export libraries
-local gl, glu, glfw
+local glfw
 if ffi.os == "Windows" then
-	gl = ffi.load("opengl32")
-	glu = ffi.load("glu32")
 	glfw = ffi.load("glfw3")
 else
-	gl = ffi.load("GL")
-	glu = ffi.load("GLU")
 	glfw = ffi.load("glfw.so.3")
 end
 
-Lib.gl = gl
-Lib.glc = glc
-Lib.glu = glu
+Lib.glfwc = glfwc
 Lib.glfw = glfw
 
--- Export a metatable for automatically loading extension functions
-Lib.glext = setmetatable({}, {
-	__index = function(self, k)
-		local ok, typ = pcall(ffi.typeof, string.format("PFN%sPROC", string.upper(k)))
-		if not ok then error("Couldn't find pointer type for "..k.." (are you accessing the right function?)",2) end
-	
-		local ptr = ffi.cast(typ, glfw.glfwGetProcAddress(k))
-		if ptr == nil then error("Unable to load function: "..k, 2) end
-		
-		rawset(Lib.glext, k, ptr)
-		
-		return ptr
-	end,
-})
 
 -- TODO: The docs say that `lib.foo()` is faster than `local foo = lib.foo; foo()`, but is the overhead of a closure
 -- worth it?
@@ -76,13 +56,9 @@ Lib.joystickPresent    = wrap(glfw, "glfwJoystickPresent")
 Lib.setTime            = wrap(glfw, "glfwSetTime")
 Lib.swapInterval       = wrap(glfw, "glfwSwapInterval")
 Lib.terminate          = wrap(glfw, "glfwTerminate")
+Lib.setErrorCallback   = wrap(glfw, "glfwSetErrorCallback")
 
 -- Functions with special Lua code
-
--- Shortcut for localizing libraries
-function Lib.libraries()
-	return Lib.gl, Lib.glc, Lib.glu, Lib.glfw, Lib.glext
-end
 
 -- Throws an error on failure
 function Lib.init()
@@ -164,7 +140,7 @@ local Window_t = ffi.typeof("GLFWwindow")
 Lib.Window = Window_t
 
 function Window:__new(w, h, title, monitor, share)
-	local window = glfw.glfwCreateWindow(w,h,title,monitor,share)
+	local window = glfw.glfwCreateWindow(w,h,title or "",monitor,share)
 	if window == nil then error("glfwCreateWindow failed", 2) end
 	return window
 end
@@ -204,10 +180,11 @@ Window.swapBuffers                = wrap(glfw, "glfwSwapBuffers")
 
 -- Functions with special Lua code
 
--- Errors on zero
+-- Returns attrib value as an int
 function Window:getAttrib(attrib)
 	local v = glfw.glfwGetWindowAttrib(self, attrib)
-	if v == 0 then error("glfwGetWindowAttrib failed", 2) end
+	--if v == 0 then error("glfwGetWindowAttrib failed", 2) end
+	-- 0 is a valid return for certain attribs
 	return v
 end
 
